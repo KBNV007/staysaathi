@@ -50,7 +50,7 @@ Guests: ${form.guests}`
       <section className="max-w-6xl mx-auto px-6 py-16 text-center">
         <div className="mb-10 rounded-3xl overflow-hidden shadow-xl">
           <img
-            src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1400&q=80"
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=80"
             alt="India Travel"
             className="w-full h-80 object-cover"
           />
