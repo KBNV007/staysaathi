@@ -1,6 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function App() {
+  const whatsappNumber = '918450972317'
+
+  const images = [
+    "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=1600&q=80"
+  ]
+
+  const [currentImage, setCurrentImage] = useState(0)
+
   const [form, setForm] = useState({
     destination: '',
     checkin: '',
@@ -8,7 +20,13 @@ export default function App() {
     guests: ''
   })
 
-  const whatsappNumber = '918450972317'
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length)
+    }, 3000)
+
+    return () => clearInterval(timer)
+  }, [])
 
   const handleChange = (e) => {
     setForm({
@@ -60,9 +78,9 @@ Guests: ${form.guests}`
       <section className="max-w-6xl mx-auto px-6 py-16 text-center">
         <div className="mb-10 rounded-3xl overflow-hidden shadow-xl">
           <img
-            src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80"
-            alt="Himachal Mountains"
-            className="w-full h-80 object-cover"
+            src={images[currentImage]}
+            alt="Mountain Stay"
+            className="w-full h-96 object-cover transition-all duration-700"
           />
         </div>
 
