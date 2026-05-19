@@ -137,7 +137,18 @@ Guests: ${form.guests}`
         </div>
       </section>
 
-      <section className="bg-gray-50 py-16 px-6">
+      <section className="max-w-5xl mx-auto py-16 px-6 text-center">
+  <h3 className="text-3xl font-bold mb-6">
+    About StaySaathi
+  </h3>
+
+  <p className="text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
+    StaySaathi helps Indian travellers find suitable hotel stays with
+    personal human assistance — just like asking a trusted friend.
+    Whether it’s a family holiday, pilgrimage, business trip, wedding,
+    or urgent stay, we help you find options quickly over WhatsApp.
+  </p>
+</section>
         <h3 className="text-3xl font-bold text-center mb-8">
           Frequently Asked Questions
         </h3>
