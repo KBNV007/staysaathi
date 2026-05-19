@@ -66,14 +66,13 @@ Guests: ${form.guests}`
           />
         </div>
 
-        <h2 className="text-5xl font-bold mb-6">
-          Tell us where you want to stay. We’ll find and book it for you.
-        </h2>
+        <h2 className="text-5xl font-bold mb-6 leading-tight">
+  Find the right hotel in India — with real human help on WhatsApp
+</h2>
 
-        <p className="text-lg text-gray-600 mb-8">
-          Human-assisted hotel booking for families, business trips,
-          pilgrimages, weddings, and urgent stays across India.
-        </p>
+<p className="text-lg text-gray-600 mb-8 max-w-3xl mx-auto">
+  Family trips • Pilgrimages • Business travel • Weddings • Urgent stays
+</p>
 
         <div className="grid md:grid-cols-4 gap-4">
           <input
