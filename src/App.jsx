@@ -3,16 +3,15 @@ import { useState, useEffect } from 'react';
 export default function App() {
   const whatsappNumber = '918450972317';
 
-  const [language, setLanguage] = useState('en'); // 'en' or 'hi'
-
+  const [language, setLanguage] = useState('en');
   const t = (en, hi) => language === 'en' ? en : hi;
 
   const luxuryImages = [
-    "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80", // Luxury resort
-    "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1600&q=80", // Mountain luxury
-    "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1600&q=80", // Beach villa
-    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1600&q=80", // Desert luxury
-    "https://images.unsplash.com/photo-1542314831-068cd1ad952d?auto=format&fit=crop&w=1600&q=80"  // Palace hotel
+    "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1600&q=80",
+    "https://images.unsplash.com/photo-1542314831-068cd1ad952d?auto=format&fit=crop&w=1600&q=80"
   ];
 
   const [currentImage, setCurrentImage] = useState(0);
@@ -29,7 +28,6 @@ export default function App() {
     travelType: 'all'
   });
 
-  // Carousel
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % luxuryImages.length);
@@ -38,8 +36,7 @@ export default function App() {
   }, []);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setForm(prev => ({ ...prev, [name]: value }));
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleAdultsChildren = (type, value) => {
@@ -48,13 +45,11 @@ export default function App() {
     } else {
       const newChildren = parseInt(value) || 0;
       let newAges = [...form.childAges];
-      
       if (newChildren > form.childAges.length) {
         newAges = [...newAges, ...Array(newChildren - form.childAges.length).fill(5)];
       } else {
         newAges = newAges.slice(0, newChildren);
       }
-      
       setForm(prev => ({ ...prev, children: newChildren, childAges: newAges }));
     }
   };
@@ -83,18 +78,25 @@ export default function App() {
       `📅 Till: ${form.toDate || 'Flexible'}\n` +
       `👨‍👩‍👧 Adults: ${form.adults}\n` +
       `👦 ${childInfo}\n` +
-      `💰 Budget: ₹${form.budgetPerDay || 'Not specified'} per room/day\n` +
-      `🏷️ Type: ${form.travelType.toUpperCase()}\n\n` +
-      `Please suggest best luxury/comfort options.`;
+      `💰 Budget: ₹${form.budgetPerDay || 'Not specified'} per room/day\n\n` +
+      `Please suggest best options.`;
 
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
-
     setTimeout(() => setIsSubmitting(false), 1200);
   };
 
+  const popularDestinations = [
+    { name: "Goa", emoji: "🏖️", desc: t("Beaches & Vibes", "समुद्र तट") },
+    { name: "Jaipur", emoji: "🏰", desc: t("Royal Heritage", "शाही विरासत") },
+    { name: "Manali", emoji: "🏔️", desc: t("Mountains", "पहाड़") },
+    { name: "Udaipur", emoji: "🪷", desc: t("Lakes & Romance", "झीलें") },
+    { name: "Kerala", emoji: "🌴", desc: t("Backwaters", "बैकवाटर") },
+    { name: "Leh Ladakh", emoji: "⛰️", desc: t("Adventure", "साहस") },
+  ];
+
   return (
-    <div className="min-h-screen bg-zinc-50 text-gray-900 font-sans">
-      {/* Premium Header */}
+    <div className="min-h-screen bg-zinc-50 text-gray-900">
+      {/* Header */}
       <header className="sticky top-0 bg-white border-b z-50">
         <div className="max-w-7xl mx-auto px-6 py-5 flex justify-between items-center">
           <div className="flex items-center gap-3">
@@ -137,23 +139,26 @@ export default function App() {
             {t("Discover Luxury Stays in India", "भारत में लग्जरी ठहराव की खोज करें")}
           </h2>
           <p className="text-white/90 text-xl md:text-2xl mb-10">
-            {t("Real human help • Personalized • Trusted", "सच्ची मानवीय मदद • व्यक्तिगत • भरोसेमंद")}
+            {t("Curated • Personalized • Human Assisted", "क्यूरेटेड • पर्सनलाइज्ड • मानवीय सहायता")}
           </p>
-          
-          <button
-            onClick={() => document.getElementById('booking-form').scrollIntoView({ behavior: 'smooth' })}
-            className="bg-white text-black px-10 py-4 rounded-2xl text-lg font-medium hover:bg-amber-100 transition"
-          >
-            {t("Get Personalized Options", "व्यक्तिगत विकल्प प्राप्त करें")}
-          </button>
         </div>
       </section>
 
+      {/* Trust Bar */}
+      <div className="bg-white py-4 border-b">
+        <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-10 gap-y-3 text-sm font-medium text-gray-600">
+          <div>✅ Curated Booking</div>
+          <div>✅ Personalized Matching</div>
+          <div>✅ Pay Directly to Property</div>
+          <div>✅ Real Human Assistance</div>
+        </div>
+      </div>
+
       {/* Booking Form */}
-      <section id="booking-form" className="max-w-5xl mx-auto px-6 -mt-12 relative z-20">
+      <section id="booking-form" className="max-w-5xl mx-auto px-6 py-16">
         <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
+          {/* Form content - same as previous premium version */}
           <div className="grid md:grid-cols-2 gap-8">
-            {/* Left Side */}
             <div>
               <h3 className="text-3xl font-semibold mb-8">{t("Tell us your requirements", "अपनी जरूरतें बताएं")}</h3>
               
@@ -162,82 +167,54 @@ export default function App() {
                 value={form.destination}
                 onChange={handleChange}
                 placeholder={t("Destination (City / Area)", "गंतव्य (शहर / क्षेत्र)")}
-                className="w-full border border-gray-300 focus:border-amber-500 rounded-2xl p-4 text-lg mb-6 focus:outline-none"
+                className="w-full border border-gray-300 focus:border-amber-500 rounded-2xl p-4 text-lg mb-6"
               />
 
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div>
                   <label className="block text-sm text-gray-500 mb-1.5">From</label>
-                  <input
-                    type="date"
-                    name="fromDate"
-                    value={form.fromDate}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 rounded-2xl p-4 focus:outline-none focus:border-amber-500"
-                  />
+                  <input type="date" name="fromDate" value={form.fromDate} onChange={handleChange} className="w-full border border-gray-300 rounded-2xl p-4" />
                 </div>
                 <div>
                   <label className="block text-sm text-gray-500 mb-1.5">Till</label>
-                  <input
-                    type="date"
-                    name="toDate"
-                    value={form.toDate}
-                    onChange={handleChange}
-                    className="w-full border border-gray-300 rounded-2xl p-4 focus:outline-none focus:border-amber-500"
-                  />
+                  <input type="date" name="toDate" value={form.toDate} onChange={handleChange} className="w-full border border-gray-300 rounded-2xl p-4" />
                 </div>
               </div>
 
-              <div className="mb-6">
+              <div>
                 <label className="block text-sm text-gray-500 mb-2">Budget per room per day</label>
                 <input
                   name="budgetPerDay"
                   value={form.budgetPerDay}
                   onChange={handleChange}
                   placeholder="₹8000 - ₹15000"
-                  className="w-full border border-gray-300 rounded-2xl p-4 focus:outline-none focus:border-amber-500"
+                  className="w-full border border-gray-300 rounded-2xl p-4"
                 />
               </div>
             </div>
 
-            {/* Right Side */}
             <div>
               <div className="mb-6">
                 <label className="block text-sm text-gray-500 mb-2">Adults</label>
-                <select 
-                  value={form.adults}
-                  onChange={(e) => handleAdultsChildren('adults', e.target.value)}
-                  className="w-full border border-gray-300 rounded-2xl p-4 focus:outline-none focus:border-amber-500"
-                >
+                <select value={form.adults} onChange={(e) => handleAdultsChildren('adults', e.target.value)} className="w-full border border-gray-300 rounded-2xl p-4">
                   {[1,2,3,4,5,6].map(n => <option key={n} value={n}>{n}</option>)}
                 </select>
               </div>
 
               <div className="mb-6">
                 <label className="block text-sm text-gray-500 mb-2">Children</label>
-                <select 
-                  value={form.children}
-                  onChange={(e) => handleAdultsChildren('children', e.target.value)}
-                  className="w-full border border-gray-300 rounded-2xl p-4 focus:outline-none focus:border-amber-500"
-                >
+                <select value={form.children} onChange={(e) => handleAdultsChildren('children', e.target.value)} className="w-full border border-gray-300 rounded-2xl p-4">
                   {[0,1,2,3,4].map(n => <option key={n} value={n}>{n}</option>)}
                 </select>
               </div>
 
               {form.children > 0 && (
-                <div className="mb-8">
+                <div>
                   <p className="text-sm text-gray-500 mb-3">Children's Ages</p>
                   <div className="grid grid-cols-3 gap-3">
                     {form.childAges.map((age, i) => (
-                      <select
-                        key={i}
-                        value={age}
-                        onChange={(e) => updateChildAge(i, e.target.value)}
-                        className="border border-gray-300 rounded-2xl p-3 focus:outline-none focus:border-amber-500"
-                      >
-                        {[...Array(18)].map((_, idx) => (
-                          <option key={idx} value={idx+1}>{idx+1} yrs</option>
-                        ))}
+                      <select key={i} value={age} onChange={(e) => updateChildAge(i, e.target.value)} className="border border-gray-300 rounded-2xl p-3">
+                        {[...Array(18)].map((_, idx) => <option key={idx} value={idx+1}>{idx+1} yrs</option>)}
                       </select>
                     ))}
                   </div>
@@ -249,51 +226,70 @@ export default function App() {
           <button
             onClick={handleWhatsApp}
             disabled={isSubmitting}
-            className="w-full mt-8 bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-700 hover:to-yellow-700 text-white py-5 rounded-2xl text-xl font-medium transition disabled:opacity-80"
+            className="w-full mt-10 bg-gradient-to-r from-amber-600 to-yellow-600 text-white py-5 rounded-2xl text-xl font-medium hover:from-amber-700 hover:to-yellow-700 transition"
           >
-            {isSubmitting 
-              ? t("Opening WhatsApp...", "व्हाट्सएप खुल रहा है...") 
-              : t("Get Luxury Hotel Options on WhatsApp", "व्हाट्सएप पर लग्जरी होटल विकल्प प्राप्त करें")}
+            {isSubmitting ? t("Opening WhatsApp...", "व्हाट्सएप खुल रहा है...") : t("Get Personalized Hotel Options on WhatsApp", "व्हाट्सएप पर पर्सनलाइज्ड होटल विकल्प प्राप्त करें")}
           </button>
         </div>
       </section>
 
-      {/* Travel Types */}
-      <section className="max-w-7xl mx-auto px-6 py-20">
-        <h3 className="text-center text-4xl font-semibold mb-12">{t("Choose Your Vibe", "अपना मूड चुनें")}</h3>
-        <div className="grid md:grid-cols-3 gap-8">
-          {['Mountains', 'Sea', 'Desert'].map((type) => (
-            <div 
-              key={type}
-              onClick={() => setForm(prev => ({...prev, travelType: type.toLowerCase()}))}
-              className={`group rounded-3xl overflow-hidden shadow-lg cursor-pointer transition hover:scale-105 ${form.travelType === type.toLowerCase() ? 'ring-4 ring-amber-500' : ''}`}
+      {/* Popular Destinations */}
+      <section className="max-w-7xl mx-auto px-6 py-20 bg-white">
+        <h3 className="text-center text-4xl font-semibold mb-4">{t("Popular Destinations", "लोकप्रिय गंतव्य")}</h3>
+        <p className="text-center text-gray-600 mb-12">{t("Loved by Indian travellers", "भारतीय यात्रियों द्वारा पसंद की गई जगहें")}</p>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {popularDestinations.map((dest, i) => (
+            <div
+              key={i}
+              onClick={() => setForm(prev => ({ ...prev, destination: dest.name }))}
+              className="bg-zinc-50 hover:bg-white border border-transparent hover:border-amber-200 rounded-3xl p-6 cursor-pointer transition-all"
             >
-              <div className="h-72 bg-cover bg-center" 
-                   style={{backgroundImage: `url(${type === 'Mountains' ? luxuryImages[1] : type === 'Sea' ? luxuryImages[2] : luxuryImages[3]})`}} />
-              <div className="p-6 bg-white">
-                <h4 className="text-2xl font-semibold">{type}</h4>
-                <p className="text-gray-600 mt-2">
-                  {type === 'Mountains' && t("Peaceful hill stations & luxury resorts", "शांत पहाड़ी स्टेशन और लग्जरी रिसॉर्ट")}
-                  {type === 'Sea' && t("Beachfront hotels & coastal retreats", "बीचफ्रंट होटल और तटीय रिट्रीट")}
-                  {type === 'Desert' && t("Royal palaces & desert camps", "शाही महल और मरुस्थल कैंप")}
-                </p>
-              </div>
+              <div className="text-5xl mb-4">{dest.emoji}</div>
+              <h4 className="text-2xl font-semibold">{dest.name}</h4>
+              <p className="text-amber-600 mt-1">{dest.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* About, FAQ, Footer sections can be added similarly with premium styling */}
+      {/* FAQ */}
+      <section className="max-w-4xl mx-auto px-6 py-20">
+        <h3 className="text-4xl font-semibold text-center mb-12">{t("Frequently Asked Questions", "अक्सर पूछे जाने वाले सवाल")}</h3>
+        
+        <div className="space-y-6">
+          <div className="bg-white p-8 rounded-3xl shadow">
+            <strong>{t("How does payment work?", "पेमेंट कैसे काम करता है?")}</strong>
+            <p className="mt-3 text-gray-600">{t("You pay directly to the hotel or official booking provider. StaySaathi never holds your money.", "आप सीधे होटल को पेमेंट करते हैं। StaySaathi आपके पैसे नहीं रखता।")}</p>
+          </div>
 
+          <div className="bg-white p-8 rounded-3xl shadow">
+            <strong>{t("Is StaySaathi a hotel or booking website?", "StaySaathi होटल है या बुकिंग वेबसाइट?")}</strong>
+            <p className="mt-3 text-gray-600">{t("No. We are a personal hotel booking assistance service. We help you find the right stay like a trusted friend.", "नहीं। हम पर्सनल होटल बुकिंग सहायता सेवा हैं।")}</p>
+          </div>
+
+          <div className="bg-white p-8 rounded-3xl shadow">
+            <strong>{t("Can I really book via WhatsApp?", "क्या सच में WhatsApp पर बुकिंग हो सकती है?")}</strong>
+            <p className="mt-3 text-gray-600">{t("Yes! WhatsApp is our main and fastest channel for assistance.", "हाँ! WhatsApp हमारा मुख्य और सबसे तेज़ चैनल है।")}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
       <footer className="bg-zinc-900 text-white py-16 px-6">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex justify-center items-center gap-3 mb-6">
             <div className="w-8 h-8 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-2xl flex items-center justify-center text-white font-bold">S</div>
             <span className="text-3xl font-serif">StaySaathi</span>
           </div>
-          <p className="text-amber-400">📞 +91 84509 72317</p>
-          <p className="mt-2 opacity-75">Assistance: 9 AM – 10 PM IST</p>
-          <p className="text-sm opacity-60 mt-8">Payments are made directly to hotels • StaySaathi is a personal assistance service</p>
+          
+          <p className="opacity-75">
+            {t("Assistance Hours: 9 AM – 9 PM IST", "सहायता समय: सुबह 9 बजे – रात 9 बजे IST")}
+          </p>
+          
+          <p className="text-sm opacity-60 mt-8">
+            Curated & Personalized Hotel Assistance • Pay Directly to Property
+          </p>
         </div>
       </footer>
     </div>
