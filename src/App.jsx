@@ -6,12 +6,13 @@ export default function App() {
   const [language, setLanguage] = useState('en');
   const t = (en, hi) => language === 'en' ? en : hi;
 
+  // Reliable Hero Images
   const luxuryImages = [
-    "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1600&q=80",
-    "https://images.unsplash.com/photo-1542314831-068cd1ad952d?auto=format&fit=crop&w=1600&q=80"
+    "https://picsum.photos/id/1015/1600/900",
+    "https://picsum.photos/id/1016/1600/900",
+    "https://picsum.photos/id/133/1600/900",
+    "https://picsum.photos/id/201/1600/900",
+    "https://picsum.photos/id/251/1600/900"
   ];
 
   const [currentImage, setCurrentImage] = useState(0);
@@ -27,7 +28,6 @@ export default function App() {
     budgetPerDay: '',
   });
 
-  // Carousel
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % luxuryImages.length);
@@ -85,13 +85,14 @@ export default function App() {
     setTimeout(() => setIsSubmitting(false), 1200);
   };
 
+  // Reliable Destination Images
   const popularDestinations = [
-    { name: "Goa", emoji: "🏖️", desc: t("Beaches & Vibes", "समुद्र तट"), image: "https://images.unsplash.com/photo-1512343872881-5d9e2c1c2f6f?auto=format&fit=crop&w=800&q=80" },
-    { name: "Jaipur", emoji: "🏰", desc: t("Royal Heritage", "शाही विरासत"), image: "https://images.unsplash.com/photo-1599669454699-248893623440?auto=format&fit=crop&w=800&q=80" },
-    { name: "Manali", emoji: "🏔️", desc: t("Mountains", "पहाड़"), image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80" },
-    { name: "Udaipur", emoji: "🪷", desc: t("Lakes & Romance", "झीलें"), image: "https://images.unsplash.com/photo-1580130684518-8b6d2e4c6f3a?auto=format&fit=crop&w=800&q=80" },
-    { name: "Kerala", emoji: "🌴", desc: t("Backwaters", "बैकवाटर"), image: "https://images.unsplash.com/photo-1602216056096-3b6e9c0d4b8f?auto=format&fit=crop&w=800&q=80" },
-    { name: "Leh Ladakh", emoji: "⛰️", desc: t("Adventure", "साहस"), image: "https://images.unsplash.com/photo-1622290291469-4f1c9c8e8b2a?auto=format&fit=crop&w=800&q=80" },
+    { name: "Goa", emoji: "🏖️", desc: t("Beaches & Vibes", "समुद्र तट"), image: "https://picsum.photos/id/1015/800/600" },
+    { name: "Jaipur", emoji: "🏰", desc: t("Royal Heritage", "शाही विरासत"), image: "https://picsum.photos/id/133/800/600" },
+    { name: "Manali", emoji: "🏔️", desc: t("Mountains", "पहाड़"), image: "https://picsum.photos/id/1016/800/600" },
+    { name: "Udaipur", emoji: "🪷", desc: t("Lakes & Romance", "झीलें"), image: "https://picsum.photos/id/201/800/600" },
+    { name: "Kerala", emoji: "🌴", desc: t("Backwaters", "बैकवाटर"), image: "https://picsum.photos/id/251/800/600" },
+    { name: "Leh Ladakh", emoji: "⛰️", desc: t("Adventure", "साहस"), image: "https://picsum.photos/id/367/800/600" },
   ];
 
   return (
@@ -125,7 +126,7 @@ export default function App() {
         </div>
       </header>
 
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <img
           src={luxuryImages[currentImage]}
@@ -161,13 +162,9 @@ export default function App() {
             <div>
               <h3 className="text-3xl font-semibold mb-8">{t("Tell us your requirements", "अपनी जरूरतें बताएं")}</h3>
               
-              <input
-                name="destination"
-                value={form.destination}
-                onChange={handleChange}
+              <input name="destination" value={form.destination} onChange={handleChange}
                 placeholder={t("Destination (City / Area)", "गंतव्य (शहर / क्षेत्र)")}
-                className="w-full border border-gray-300 focus:border-amber-500 rounded-2xl p-4 text-lg mb-6"
-              />
+                className="w-full border border-gray-300 focus:border-amber-500 rounded-2xl p-4 text-lg mb-6" />
 
               <div className="grid grid-cols-2 gap-4 mb-6">
                 <div>
@@ -182,13 +179,9 @@ export default function App() {
 
               <div>
                 <label className="block text-sm text-gray-500 mb-2">Budget per room per day</label>
-                <input
-                  name="budgetPerDay"
-                  value={form.budgetPerDay}
-                  onChange={handleChange}
+                <input name="budgetPerDay" value={form.budgetPerDay} onChange={handleChange}
                   placeholder="₹8000 - ₹15000"
-                  className="w-full border border-gray-300 rounded-2xl p-4"
-                />
+                  className="w-full border border-gray-300 rounded-2xl p-4" />
               </div>
             </div>
 
@@ -232,7 +225,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Popular Destinations with Images */}
+      {/* Popular Destinations */}
       <section className="max-w-7xl mx-auto px-6 py-20">
         <h3 className="text-center text-4xl font-semibold mb-4">{t("Popular Destinations", "लोकप्रिय गंतव्य")}</h3>
         <p className="text-center text-gray-600 mb-12">{t("Loved by Indian travellers", "भारतीय यात्रियों द्वारा पसंद की गई जगहें")}</p>
@@ -266,19 +259,18 @@ export default function App() {
       {/* FAQ */}
       <section className="max-w-4xl mx-auto px-6 py-20">
         <h3 className="text-4xl font-semibold text-center mb-12">{t("Frequently Asked Questions", "अक्सर पूछे जाने वाले सवाल")}</h3>
-        
         <div className="space-y-6">
           <div className="bg-white p-8 rounded-3xl shadow">
             <strong>{t("How does payment work?", "पेमेंट कैसे काम करता है?")}</strong>
-            <p className="mt-3 text-gray-600">{t("You pay directly to the hotel or official booking provider.", "आप सीधे होटल को भुगतान करते हैं।")}</p>
+            <p className="mt-3 text-gray-600">You pay directly to the hotel or official booking provider.</p>
           </div>
           <div className="bg-white p-8 rounded-3xl shadow">
             <strong>{t("Is StaySaathi a hotel?", "StaySaathi होटल है?")}</strong>
-            <p className="mt-3 text-gray-600">{t("No. We are a personal hotel booking assistance service.", "नहीं। हम व्यक्तिगत होटल बुकिंग सहायता सेवा हैं।")}</p>
+            <p className="mt-3 text-gray-600">No. We are a personal hotel booking assistance service.</p>
           </div>
           <div className="bg-white p-8 rounded-3xl shadow">
             <strong>{t("Can I book via WhatsApp?", "क्या WhatsApp पर बुकिंग हो सकती है?")}</strong>
-            <p className="mt-3 text-gray-600">{t("Yes! WhatsApp is our fastest assistance channel.", "हाँ! WhatsApp हमारा सबसे तेज़ चैनल है।")}</p>
+            <p className="mt-3 text-gray-600">Yes! WhatsApp is our fastest assistance channel.</p>
           </div>
         </div>
       </section>
@@ -290,11 +282,7 @@ export default function App() {
             <div className="w-8 h-8 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-2xl flex items-center justify-center text-white font-bold">S</div>
             <span className="text-3xl font-serif">StaySaathi</span>
           </div>
-          
-          <p className="opacity-75">
-            {t("Assistance Hours: 9 AM – 9 PM IST", "सहायता समय: सुबह 9 बजे – रात 9 बजे IST")}
-          </p>
-          
+          <p className="opacity-75">Assistance Hours: 9 AM – 9 PM IST</p>
           <p className="text-sm opacity-60 mt-8">
             Curated & Personalized Hotel Assistance • Pay Directly to Property
           </p>
