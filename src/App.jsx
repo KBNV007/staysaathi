@@ -6,7 +6,6 @@ export default function App() {
   const [language, setLanguage] = useState('en');
   const t = (en, hi) => language === 'en' ? en : hi;
 
-  // NEW Luxury Hero Images (Different from destinations)
   const luxuryImages = [
     "https://picsum.photos/id/1015/1600/900",
     "https://picsum.photos/id/133/1600/900",
@@ -125,14 +124,14 @@ export default function App() {
         </div>
       </header>
 
-      {/* Hero Section - Updated Luxury Images */}
+      {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <img
           src={luxuryImages[currentImage]}
           alt="Luxury Stay"
           className="absolute inset-0 w-full h-full object-cover transition-all duration-1000"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
         
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           <h2 className="text-white text-5xl md:text-6xl font-serif font-medium leading-tight mb-6">
@@ -144,18 +143,8 @@ export default function App() {
         </div>
       </section>
 
-      {/* Trust Bar */}
-      <div className="bg-white py-4 border-b">
-        <div className="max-w-7xl mx-auto px-6 flex flex-wrap justify-center gap-x-10 gap-y-3 text-sm font-medium text-gray-600">
-          <div>✅ Curated Booking</div>
-          <div>✅ Personalized Matching</div>
-          <div>✅ Pay Directly to Property</div>
-          <div>✅ Real Human Assistance</div>
-        </div>
-      </div>
-
-      {/* Booking Form */}
-      <section id="booking-form" className="max-w-5xl mx-auto px-6 py-16">
+      {/* Booking Form - Overlapping 1/4th into Hero Image */}
+      <section id="booking-form" className="max-w-5xl mx-auto px-6 -mt-28 md:-mt-32 relative z-20">
         <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
           <div className="grid md:grid-cols-2 gap-8">
             <div>
@@ -224,27 +213,21 @@ export default function App() {
         </div>
       </section>
 
-      {/* Popular Destinations - Unchanged */}
+      {/* Rest of the sections (Popular Destinations, FAQ, Footer) remain unchanged */}
+      {/* ... [Popular Destinations, FAQ, Footer - same as previous version] ... */}
+
+      {/* Popular Destinations */}
       <section className="max-w-7xl mx-auto px-6 py-20">
         <h3 className="text-center text-4xl font-semibold mb-4">{t("Popular Destinations", "लोकप्रिय गंतव्य")}</h3>
         <p className="text-center text-gray-600 mb-12">{t("Loved by Indian travellers", "भारतीय यात्रियों द्वारा पसंद की गई जगहें")}</p>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {popularDestinations.map((dest, i) => (
-            <div
-              key={i}
-              onClick={() => setForm(prev => ({ ...prev, destination: dest.name }))}
-              className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
-            >
+            <div key={i} onClick={() => setForm(prev => ({ ...prev, destination: dest.name }))}
+              className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer">
               <div className="relative h-64">
-                <img 
-                  src={dest.image} 
-                  alt={dest.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute top-4 right-4 bg-white/90 text-3xl w-12 h-12 flex items-center justify-center rounded-2xl shadow">
-                  {dest.emoji}
-                </div>
+                <img src={dest.image} alt={dest.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute top-4 right-4 bg-white/90 text-3xl w-12 h-12 flex items-center justify-center rounded-2xl shadow">{dest.emoji}</div>
               </div>
               <div className="p-6">
                 <h4 className="text-2xl font-semibold mb-1">{dest.name}</h4>
@@ -255,7 +238,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* FAQ & Footer - Same as before */}
       <section className="max-w-4xl mx-auto px-6 py-20">
         <h3 className="text-4xl font-semibold text-center mb-12">{t("Frequently Asked Questions", "अक्सर पूछे जाने वाले सवाल")}</h3>
         <div className="space-y-6">
@@ -274,7 +257,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="bg-zinc-900 text-white py-16 px-6">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex justify-center items-center gap-3 mb-6">
