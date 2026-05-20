@@ -86,12 +86,12 @@ export default function App() {
   };
 
   const popularDestinations = [
-    { name: "Goa", emoji: "🏖️", desc: t("Beaches & Vibes", "समुद्र तट") },
-    { name: "Jaipur", emoji: "🏰", desc: t("Royal Heritage", "शाही विरासत") },
-    { name: "Manali", emoji: "🏔️", desc: t("Mountains", "पहाड़") },
-    { name: "Udaipur", emoji: "🪷", desc: t("Lakes & Romance", "झीलें") },
-    { name: "Kerala", emoji: "🌴", desc: t("Backwaters", "बैकवाटर") },
-    { name: "Leh Ladakh", emoji: "⛰️", desc: t("Adventure", "साहस") },
+    { name: "Goa", emoji: "🏖️", desc: t("Beaches & Vibes", "समुद्र तट"), image: "https://images.unsplash.com/photo-1512343872881-5d9e2c1c2f6f?auto=format&fit=crop&w=800&q=80" },
+    { name: "Jaipur", emoji: "🏰", desc: t("Royal Heritage", "शाही विरासत"), image: "https://images.unsplash.com/photo-1599669454699-248893623440?auto=format&fit=crop&w=800&q=80" },
+    { name: "Manali", emoji: "🏔️", desc: t("Mountains", "पहाड़"), image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80" },
+    { name: "Udaipur", emoji: "🪷", desc: t("Lakes & Romance", "झीलें"), image: "https://images.unsplash.com/photo-1580130684518-8b6d2e4c6f3a?auto=format&fit=crop&w=800&q=80" },
+    { name: "Kerala", emoji: "🌴", desc: t("Backwaters", "बैकवाटर"), image: "https://images.unsplash.com/photo-1593693409044-8a8c5c2e5c2e?auto=format&fit=crop&w=800&q=80" },
+    { name: "Leh Ladakh", emoji: "⛰️", desc: t("Adventure", "साहस"), image: "https://images.unsplash.com/photo-1622290291469-4f1c9c8e8b2a?auto=format&fit=crop&w=800&q=80" },
   ];
 
   return (
@@ -125,7 +125,7 @@ export default function App() {
         </div>
       </header>
 
-      {/* Luxury Hero */}
+      {/* Hero */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <img
           src={luxuryImages[currentImage]}
@@ -157,7 +157,6 @@ export default function App() {
       {/* Booking Form */}
       <section id="booking-form" className="max-w-5xl mx-auto px-6 py-16">
         <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12">
-          {/* Form content - same as previous premium version */}
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h3 className="text-3xl font-semibold mb-8">{t("Tell us your requirements", "अपनी जरूरतें बताएं")}</h3>
@@ -233,21 +232,32 @@ export default function App() {
         </div>
       </section>
 
-      {/* Popular Destinations */}
-      <section className="max-w-7xl mx-auto px-6 py-20 bg-white">
+      {/* Popular Destinations with Images */}
+      <section className="max-w-7xl mx-auto px-6 py-20">
         <h3 className="text-center text-4xl font-semibold mb-4">{t("Popular Destinations", "लोकप्रिय गंतव्य")}</h3>
         <p className="text-center text-gray-600 mb-12">{t("Loved by Indian travellers", "भारतीय यात्रियों द्वारा पसंद की गई जगहें")}</p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {popularDestinations.map((dest, i) => (
             <div
               key={i}
               onClick={() => setForm(prev => ({ ...prev, destination: dest.name }))}
-              className="bg-zinc-50 hover:bg-white border border-transparent hover:border-amber-200 rounded-3xl p-6 cursor-pointer transition-all"
+              className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer"
             >
-              <div className="text-5xl mb-4">{dest.emoji}</div>
-              <h4 className="text-2xl font-semibold">{dest.name}</h4>
-              <p className="text-amber-600 mt-1">{dest.desc}</p>
+              <div className="relative h-64">
+                <img 
+                  src={dest.image} 
+                  alt={dest.name}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute top-4 right-4 bg-white/90 text-3xl w-12 h-12 flex items-center justify-center rounded-2xl shadow">
+                  {dest.emoji}
+                </div>
+              </div>
+              <div className="p-6">
+                <h4 className="text-2xl font-semibold mb-1">{dest.name}</h4>
+                <p className="text-amber-600 font-medium">{dest.desc}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -260,22 +270,20 @@ export default function App() {
         <div className="space-y-6">
           <div className="bg-white p-8 rounded-3xl shadow">
             <strong>{t("How does payment work?", "पेमेंट कैसे काम करता है?")}</strong>
-            <p className="mt-3 text-gray-600">{t("You pay directly to the hotel or official booking provider. StaySaathi never holds your money.", "आप सीधे होटल को पेमेंट करते हैं। StaySaathi आपके पैसे नहीं रखता।")}</p>
+            <p className="mt-3 text-gray-600">{t("You pay directly to the hotel or official booking provider.", "आप सीधे होटल को भुगतान करते हैं।")}</p>
           </div>
-
           <div className="bg-white p-8 rounded-3xl shadow">
-            <strong>{t("Is StaySaathi a hotel or booking website?", "StaySaathi होटल है या बुकिंग वेबसाइट?")}</strong>
-            <p className="mt-3 text-gray-600">{t("No. We are a personal hotel booking assistance service. We help you find the right stay like a trusted friend.", "नहीं। हम पर्सनल होटल बुकिंग सहायता सेवा हैं।")}</p>
+            <strong>{t("Is StaySaathi a hotel?", "StaySaathi होटल है?")}</strong>
+            <p className="mt-3 text-gray-600">{t("No. We are a personal hotel booking assistance service.", "नहीं। हम व्यक्तिगत होटल बुकिंग सहायता सेवा हैं।")}</p>
           </div>
-
           <div className="bg-white p-8 rounded-3xl shadow">
-            <strong>{t("Can I really book via WhatsApp?", "क्या सच में WhatsApp पर बुकिंग हो सकती है?")}</strong>
-            <p className="mt-3 text-gray-600">{t("Yes! WhatsApp is our main and fastest channel for assistance.", "हाँ! WhatsApp हमारा मुख्य और सबसे तेज़ चैनल है।")}</p>
+            <strong>{t("Can I book via WhatsApp?", "क्या WhatsApp पर बुकिंग हो सकती है?")}</strong>
+            <p className="mt-3 text-gray-600">{t("Yes! WhatsApp is our fastest assistance channel.", "हाँ! WhatsApp हमारा सबसे तेज़ चैनल है।")}</p>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
+      {/* Footer - Phone number removed */}
       <footer className="bg-zinc-900 text-white py-16 px-6">
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex justify-center items-center gap-3 mb-6">
