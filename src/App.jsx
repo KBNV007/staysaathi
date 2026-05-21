@@ -7,11 +7,11 @@ export default function App() {
   const t = (en, hi) => language === 'en' ? en : hi;
 
   const luxuryImages = [
-    "https://picsum.photos/id/1015/1600/900",
-    "https://picsum.photos/id/133/1600/900",
-    "https://picsum.photos/id/201/1600/900",
-    "https://picsum.photos/id/251/1600/900",
-    "https://picsum.photos/id/367/1600/900"
+    "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2000&auto=format&fit=crop", // Luxury resort pool
+    "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2000&auto=format&fit=crop", // Luxury hotel room
+    "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?q=80&w=2000&auto=format&fit=crop", // Luxury villa balcony
+    "https://images.unsplash.com/photo-1571896349842-33c89424de2d?q=80&w=2000&auto=format&fit=crop", // Luxury suite
+    "https://images.unsplash.com/photo-1613490493576-7fde63acd811?q=80&w=2000&auto=format&fit=crop"  // Luxury beach resort
   ];
 
   const [currentImage, setCurrentImage] = useState(0);
