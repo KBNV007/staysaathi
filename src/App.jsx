@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function App() {
   const whatsappNumber = '918826492707';
@@ -25,31 +25,14 @@ export default function App() {
     adults: 2,
     children: 0,
     childAges: [],
-    budgetPerDay: 8000, // Converted to number slider default value
+    budgetPerDay: 8000, 
   });
-
-  // Live Notification Ticker Mock Data
-  const tickerItems = [
-    { textEn: "Amit K. requested a 3-Night Luxury Villa in Goa for 4 Adults", textHi: "अमित के. ने गोवा में 4 वयस्कों के लिए 3-रातों के लग्जरी विला की पूछताछ की" },
-    { textEn: "Pooja S. enquired about Private Pool Resorts in Rishikesh", textHi: "पूजा एस. ने ऋषिकेश में प्राइवेट पूल रिसॉर्ट्स के बारे में पूछताछ की" },
-    { textEn: "Vikram R. requested a Heritage Haveli Stay in Jaipur", textHi: "विक्रम आर. ने जयपुर में हेरिटेज हवेली स्टे की पूछताछ की" },
-    { textEn: "Ananya M. booked a Premium Family Suite in Kerala", textHi: "अनन्या एम. ने केरल में प्रीमियम फैमिली सूट बुक किया" }
-  ];
-  const [tickerIndex, setTickerIndex] = useState(0);
 
   useEffect(() => {
     const bgTimer = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % luxuryImages.length);
     }, 4500);
-
-    const tickerTimer = setInterval(() => {
-      setTickerIndex((prev) => (prev + 1) % tickerItems.length);
-    }, 4000);
-
-    return () => {
-      clearInterval(bgTimer);
-      clearInterval(tickerTimer);
-    };
+    return () => clearInterval(bgTimer);
   }, []);
 
   const handleChange = (e) => {
@@ -109,30 +92,47 @@ export default function App() {
     setTimeout(() => setIsSubmitting(false), 1200);
   };
 
-  // Curated Lifestyle Themes
-  const travelThemes = [
-    { titleEn: "Private Pool Villas", titleHi: "प्राइवेट पूल विला", descEn: "Seclusion & ultimate comfort", descHi: "एकांत और बेहतरीन आराम", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80", tag: "Villas" },
-    { titleEn: "Heritage Palaces", titleHi: "हेरिटेज पैलेस", descEn: "Live like royal Indian kings", descHi: "शाही राजाओं की तरह रहें", img: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=600&q=80", tag: "Heritage" },
-    { titleEn: "Pet-Friendly Luxury", titleHi: "पेट-फ्रेंडली लग्जरी", descEn: "Don't leave your best saathi behind", descHi: "अपने पालतू जानवर को पीछे न छोड़ें", img: "https://images.unsplash.com/photo-1541599540903-216a46ca1df0?auto=format&fit=crop&w=600&q=80", tag: "Pet Friendly" },
-    { titleEn: "Experiential Glamping", titleHi: "अनुभवात्मक ग्लैम्पिंग", descEn: "Nature meets 5-star comfort", descHi: "प्रकृति और 5-स्टार आराम", img: "https://images.unsplash.com/photo-1533577116850-9cc662db0010?auto=format&fit=crop&w=600&q=80", tag: "Glamping" }
+  // Tier-2 & Tier-3 Friendly Core Assurances
+  const familyAssurances = [
+    {
+      icon: "🥗",
+      titleEn: "Pure Veg & Jain Dining",
+      titleHi: "शुद्ध शाकाहारी और जैन भोजन",
+      descEn: "We filter hotels with pure vegetarian kitchens or highly-rated family restaurants located right nearby.",
+      descHi: "हम ऐसे होटल चुनते हैं जहाँ शुद्ध शाकाहारी रसोई हो या पास में शुद्ध भोजन के शानदार विकल्प मौजूद हों।"
+    },
+    {
+      icon: "👵",
+      titleEn: "Senior Citizen Friendly",
+      titleHi: "बुजुर्गों के अनुकूल सुविधाएं",
+      descEn: "Assured lift accessibility, minimal walking distance options, and quick extra-bed setups for grandparents.",
+      descHi: "लिफ्ट की पक्की व्यवस्था, सीढ़ियों से बचाव और बुजुर्गों के आराम के लिए आसान रूम अरेंजमेंट्स।"
+    },
+    {
+      icon: "👨‍👩‍👧‍👦",
+      titleEn: "Joint Family & Group Stays",
+      titleHi: "संयुक्त परिवार और ग्रुप बुकिंग",
+      descEn: "Perfect connected rooms, adjacent layouts, and special direct group discounts for family reunions or celebrations.",
+      descHi: "बड़े परिवारों के लिए एक साथ पास-पास कमरे, उत्सवों के लिए विशेष कस्टमाइज़्ड ग्रुप रेट्स।"
+    }
   ];
 
   // Dynamic Perks Engine
   const getPerksByBudget = (budget) => {
     if (budget < 6000) {
       return {
-        tier: t("Boutique Premium Stay", "बुटीक प्रीमियम स्टे"),
-        perks: [t("3★/4★ Curated Properties", "3★/4★ क्यूरेटेड प्रॉपर्टीज"), t("Complimentary Breakfast", "मुफ़्त नाश्ता"), t("Vetted Cleanliness Audits", "स्वच्छता ऑडिट पास")]
+        tier: t("Boutique Premium Stay", "प्रीमियम बजट स्टे"),
+        perks: [t("3★/4★ Family Vetted Properties", "परिवार के लिए जांची-परखी 3★/4★ होटल"), t("Complimentary Hot Breakfast", "गर्म और स्वादिष्ट मुफ़्त नाश्ता"), t("Highly Clean & Safe Bathrooms", "साफ-सुथरे और सुरक्षित वॉशरूम्स")]
       };
     } else if (budget < 12000) {
       return {
-        tier: t("Elite Premium Resort", "एलीट प्रीमियम रिसॉर्ट"),
-        perks: [t("High-rated 4★ / 5★ Resorts", "हाई-रेटेड 4★ / 5★ रिसॉर्ट्स"), t("Free Room Upgrade (Subj to availability)", "फ्री रूम अपग्रेड की संभावना"), t("Early Check-in Privileges", "अर्ली चेक-इन की सुविधा"), t("Dedicated Saathi Concierge", "समर्पित साथी कंसीयज")]
+        tier: t("Elite Premium Resort", "प्रीमियम फैमिली रिसॉर्ट"),
+        perks: [t("High-rated 4★ / 5★ Resorts", "शानदार 4★ / 5★ रिसॉर्ट्स और होटल्स"), t("Free Room Upgrade (Subject to vacancy)", "कमरे के अपग्रेड होने की पूरी संभावना"), t("Early Check-in Priority for Families", "परिवारों के लिए जल्दी चेक-इन प्राथमिकता"), t("Direct Assistant Support", "समर्पित साथी फोन गाइड सहायता")]
       };
     } else {
       return {
-        tier: t("Ultra-Luxury & Palaces", "अल्ट्रा-लग्जरी और पैलेस"),
-        perks: [t("Iconic 5★ Luxury Brands & Villas", "प्रतिष्ठित 5★ लग्जरी ब्रांड्स और विला"), t("Private Plunge Pool / Infinity Pool Access", "प्राइवेट प्लंज पूल / इन्फिनिटी पूल"), t("Curated Chef-led Meals Included", "शेफ-लेड भोजन शामिल"), t("VIP On-Property Welcomes", "वीआईपी ऑन-प्रॉपर्टी स्वागत")]
+        tier: t("Ultra-Luxury & Palaces", "अति-लग्जरी और पैलेस"),
+        perks: [t("Iconic 5★ Luxury Brands & Villas", "मशहूर 5★ लग्जरी ब्रांड्स और राजसी विला"), t("Private Plunge Pool / Infinity Pool Access", "प्राइवेट पूल और बच्चों के अनुकूल वॉटर प्ले एरिया"), t("Curated Fresh Meals Included", "ताजा और कस्टमाइज़्ड भोजन व्यवस्था शामिल"), t("VIP Welcome & Luggage Handling", "वीआईपी सत्कार और सामान ले जाने की खास सुविधा")]
       };
     }
   };
@@ -140,12 +140,12 @@ export default function App() {
   const currentPerkPackage = getPerksByBudget(form.budgetPerDay);
 
   const popularDestinations = [
-    { name: "Goa", emoji: "🏖️", desc: t("Beaches & Vibes", "समुद्र तट"), image: "https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?auto=format&fit=crop&w=800&q=80" },
-    { name: "Jaipur", emoji: "🏰", desc: t("Royal Heritage", "शाही विरासत"), image: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80" },
-    { name: "Manali", emoji: "🏔️", desc: t("Mountains", "पहाड़"), image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80" },
-    { name: "Rishikesh", emoji: "🪷", desc: t("Yoga & Adventure", "योग और साहस"), image: "https://images.unsplash.com/photo-1603867106100-0d2039fc8757?auto=format&fit=crop&q=80&w=800" },
-    { name: "Kerala", emoji: "🌴", desc: t("Backwaters", "बैकवाटर"), image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80" },
-    { name: "Leh Ladakh", emoji: "⛰️", desc: t("Adventure", "साहस"), image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80" }
+    { name: "Goa", emoji: "🏖️", desc: t("Beaches & Vibes", "समुद्र तट और मस्ती"), image: "https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?auto=format&fit=crop&w=800&q=80" },
+    { name: "Jaipur", emoji: "🏰", desc: t("Royal Heritage", "शाही किला और विरासत"), image: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80" },
+    { name: "Manali", emoji: "🏔️", desc: t("Mountains", "पहाड़ और ठंडी वादियां"), image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80" },
+    { name: "Rishikesh", emoji: "🪷", desc: t("Yoga & Adventure", "पवित्र गंगा घाट और शांति"), image: "https://images.unsplash.com/photo-1603867106100-0d2039fc8757?auto=format&fit=crop&q=80&w=800" },
+    { name: "Kerala", emoji: "🌴", desc: t("Backwaters", "हरे-भरे नारियल के पेड़ और पानी"), image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80" },
+    { name: "Leh Ladakh", emoji: "⛰️", desc: t("Adventure", "रोमांचक पहाड़ी रास्ते"), image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80" }
   ];
 
   return (
@@ -179,16 +179,6 @@ export default function App() {
           </div>
         </div>
       </header>
-
-      {/* Live Social Proof Ticker */}
-      <div className="bg-amber-500 text-amber-950 font-medium py-2.5 px-4 overflow-hidden transition-all duration-300">
-        <div className="max-w-7xl mx-auto flex items-center justify-center gap-2 text-xs md:text-sm">
-          <span className="inline-block bg-white text-amber-600 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md animate-pulse">LIVE</span>
-          <div className="transition-opacity duration-500 ease-in-out text-center">
-            {language === 'en' ? tickerItems[tickerIndex].textEn : tickerItems[tickerIndex].textHi}
-          </div>
-        </div>
-      </div>
 
       {/* Hero Section */}
       <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
@@ -291,14 +281,14 @@ export default function App() {
               </button>
             </div>
 
-            {/* Interactive Live Perks Estimator Side */}
+            {/* Interactive Budget Perks Estimator Side */}
             <div className="p-6 md:p-10 lg:col-span-5 bg-gradient-to-b from-zinc-50 to-zinc-100 flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-xl">💰</span>
-                  <h4 className="font-serif font-bold text-xl text-zinc-800">{t("Live Luxury Perk Matcher", "लाइव लग्जरी पर्क मैचर")}</h4>
+                  <h4 className="font-serif font-bold text-xl text-zinc-800">{t("Live Luxury Perk Matcher", "लाइव होटल सुविधा मैचर")}</h4>
                 </div>
-                <p className="text-sm text-zinc-500 mb-6">{t("Slide to set your target budget per day to preview custom concierge privileges.", "कस्टमाइज़्ड सुख-सुविधाओं को देखने के लिए अपना दैनिक बजट स्लाइड करें।")}</p>
+                <p className="text-sm text-zinc-500 mb-6">{t("Slide to set your target budget per day to preview custom hotel privileges.", "सुविधाओं को देखने के लिए अपना दैनिक बजट आगे-पीछे स्लाइड करें।")}</p>
 
                 <div className="mb-6 bg-white p-4 rounded-2xl border border-zinc-200 shadow-sm">
                   <div className="flex justify-between items-center mb-2">
@@ -351,18 +341,47 @@ export default function App() {
         <div className="grid sm:grid-cols-3 gap-6">
           <div className="bg-white border border-zinc-100 p-6 rounded-2xl shadow-sm text-center flex flex-col items-center">
             <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center text-2xl mb-4">💎</div>
-            <h4 className="text-lg font-bold text-zinc-800 mb-1">{t("Zero Hidden Margins", "जीरो हिडन मार्जिन")}</h4>
-            <p className="text-sm text-zinc-500 max-w-xs">{t("Completely transparent pricing model. You pay actual dynamic hotel corporate rates directly.", "पूरी तरह से पारदर्शी मूल्य निर्धारण। आप सीधे वास्तविक होटल दरों पर भुगतान करते हैं।")}</p>
+            <h4 className="text-lg font-bold text-zinc-800 mb-1">{t("Zero Hidden Margins", "जीरो हिडन चार्जेस")}</h4>
+            <p className="text-sm text-zinc-500 max-w-xs">{t("Completely transparent model. You get actual dynamic hotel tariffs without hidden agents cuts.", "पूरी तरह से पारदर्शी मूल्य निर्धारण। बिना किसी छिपे हुए अतिरिक्त कमीशन के सीधे बुकिंग।")}</p>
           </div>
           <div className="bg-white border border-zinc-100 p-6 rounded-2xl shadow-sm text-center flex flex-col items-center">
             <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center text-2xl mb-4">🛡️</div>
-            <h4 className="text-lg font-bold text-zinc-800 mb-1">{t("100% Quality Audited", "100% क्वालिटी ऑडिटेड")}</h4>
-            <p className="text-sm text-zinc-500 max-w-xs">{t("We strictly propose verified premium stays passing stringent hygiene, safety, and service logs.", "हम केवल कड़े स्वच्छता, सुरक्षा और सेवा मानदंडों को पास करने वाले होटल ही सुझाते हैं।")}</p>
+            <h4 className="text-lg font-bold text-zinc-800 mb-1">{t("100% Quality Audited", "100% परखी हुई होटल्स")}</h4>
+            <p className="text-sm text-zinc-500 max-w-xs">{t("We strictly propose family-safe stays passing hygiene, safety, and hospitality audits.", "हम केवल उन होटल्स की सिफारिश करते हैं जो साफ-सफाई और पारिवारिक सुरक्षा मानकों पर खरे उतरते हैं।")}</p>
           </div>
           <div className="bg-white border border-zinc-100 p-6 rounded-2xl shadow-sm text-center flex flex-col items-center">
-            <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center text-2xl mb-4">🤝</div>
-            <h4 className="text-lg font-bold text-zinc-800 mb-1">{t("24/7 On-Trip Concierge", "24/7 ऑन-ट्रिप सहायता")}</h4>
-            <p className="text-sm text-zinc-500 max-w-xs">{t("Your personal friend assistance channel remains active from check-in right until absolute checkout.", "आपका व्यक्तिगत मित्र सहायता चैनल चेक-इन से लेकर चेक-आउट तक सक्रिय रहता है।")}</p>
+            <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center text-2xl mb-4">📞</div>
+            <h4 className="text-lg font-bold text-zinc-800 mb-1">{t("9 AM - 7 PM Active Support", "9 AM से 7 PM पक्की सहायता")}</h4>
+            <p className="text-sm text-zinc-500 max-w-xs">{t("Our dedicated curators are available daily from 9:00 AM to 7:00 PM to handle all edits and requests.", "हमारे विशेषज्ञ सुबह 9 से शाम 7 बजे तक आपके चेक-इन, बदलावों और हर जरूरत के लिए फोन/व्हाट्सएप पर उपलब्ध हैं।")}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Family-First Assurances (Highly Appreciated in Tier 2 / Tier 3) */}
+      <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
+        <div className="bg-amber-50/60 rounded-3xl border border-amber-200/50 p-8 md:p-12">
+          <div className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
+            <span className="text-3xl">👨‍👩‍👧‍👦</span>
+            <h3 className="text-2xl md:text-3xl font-serif font-bold text-zinc-800 mt-2 mb-3">
+              {t("Vetted Specially for Indian Families", "भारतीय परिवारों के लिए खास सुविधाएं")}
+            </h3>
+            <p className="text-zinc-600 text-sm font-medium">
+              {t("We understand that a perfect family trip requires more than just a room. We take special care of your specific household needs.", "हम समझते हैं कि परिवार के साथ यात्रा करने में क्या महत्वपूर्ण होता है। हम आपकी हर जरूरत का पूरा ख्याल रखते हैं।")}
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {familyAssurances.map((item, index) => (
+              <div key={index} className="bg-white p-6 rounded-2xl border border-zinc-100 shadow-sm flex flex-col items-start">
+                <span className="text-3xl mb-4 block">{item.icon}</span>
+                <h4 className="text-lg font-bold text-zinc-800 mb-2">
+                  {language === 'en' ? item.titleEn : item.titleHi}
+                </h4>
+                <p className="text-zinc-500 text-sm leading-relaxed">
+                  {language === 'en' ? item.descEn : item.descHi}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -372,29 +391,29 @@ export default function App() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h3 className="text-3xl md:text-4xl font-serif font-bold text-zinc-800 mb-3">{t("How StaySaathi Works", "StaySaathi कैसे काम करता है")}</h3>
-            <p className="text-zinc-500 font-medium">{t("No endless scrolling, no automated bots. Seamless human-assisted bespoke bookings.", "कोई अंतहीन स्क्रॉलिंग नहीं, कोई स्वचालित बॉट नहीं। निर्बाध मानव-सहायता प्राप्त बुकिंग।")}</p>
+            <p className="text-zinc-500 font-medium">{t("No endless searching, no automated bots. Direct helpful human assisted booking.", "कोई अंतहीन उलझन नहीं, कोई ऑटोमैटिक रोबोटिक रिप्लाई नहीं। पक्की मानवीय सहायता।")}</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 relative">
             <div className="bg-white p-6 rounded-2xl shadow-sm relative border border-zinc-200/40">
               <span className="absolute -top-5 left-6 bg-gradient-to-br from-amber-500 to-yellow-600 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-md">1</span>
               <div className="text-zinc-400 font-bold text-xs uppercase tracking-wider mb-2 mt-2">{t("TAKES 30 SECONDS", "30 सेकंड का समय")}</div>
-              <h4 className="text-lg font-bold text-zinc-800 mb-2">{t("Share Preferences", "अपनी पसंद साझा करें")}</h4>
-              <p className="text-sm text-zinc-500 leading-relaxed">{t("Fill out your specific group size and comfortable daily budget parameters above and trigger WhatsApp connect.", "ऊपर अपने समूह का आकार और आरामदायक दैनिक बजट दर्ज करें और व्हाट्सएप पर कनेक्ट करें।")}</p>
+              <h4 className="text-lg font-bold text-zinc-800 mb-2">{t("Share Preferences", "अपनी पसंद बताएं")}</h4>
+              <p className="text-sm text-zinc-500 leading-relaxed">{t("Fill out your specific family requirements and budget parameters above and click WhatsApp connect.", "ऊपर अपनी जरूरतें और मनमुताबिक बजट दर्ज करें और व्हाट्सएप बटन दबाएं।")}</p>
             </div>
 
             <div className="bg-white p-6 rounded-2xl shadow-sm relative border border-zinc-200/40">
               <span className="absolute -top-5 left-6 bg-gradient-to-br from-amber-500 to-yellow-600 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-md">2</span>
               <div className="text-amber-600 font-bold text-xs uppercase tracking-wider mb-2 mt-2">{t("WITHIN 29 MINUTES", "29 मिनट के भीतर")}</div>
-              <h4 className="text-lg font-bold text-zinc-800 mb-2">{t("Receive Mini-Brochure", "मिनी-ब्रोशर प्राप्त करें")}</h4>
-              <p className="text-sm text-zinc-500 leading-relaxed">{t("Our dedicated destination expert filters local logs and delivers 3 tailored top-tier hotel options matching your exact vibe.", "हमारा समर्पित विशेषज्ञ स्थानीय स्तर पर फ़िल्टर करता है और आपके वाइब से मेल खाने वाले 3 चुनिंदा विकल्प प्रदान करता है।")}</p>
+              <h4 className="text-lg font-bold text-zinc-800 mb-2">{t("Receive Custom Options", "होटल विकल्प पाएं")}</h4>
+              <p className="text-sm text-zinc-500 leading-relaxed">{t("Our destination helper filters clean local properties and delivers 3 best tailored hotel choices to your chat.", "हमारे लोकल एक्सपर्ट सबसे सुरक्षित और बेहतरीन 3 विकल्प आपके व्हाट्सएप पर भेजेंगे।")}</p>
             </div>
 
             <div className="bg-white p-6 rounded-2xl shadow-sm relative border border-zinc-200/40">
               <span className="absolute -top-5 left-6 bg-gradient-to-br from-amber-500 to-yellow-600 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-md">3</span>
-              <div className="text-zinc-400 font-bold text-xs uppercase tracking-wider mb-2 mt-2">{t("SEAMLESS PRIVILEGES", "निर्बाध विशेषाधिकार")}</div>
-              <h4 className="text-lg font-bold text-zinc-800 mb-2">{t("Secure VIP Tariffs", "वीआईपी टैरिफ सुरक्षित करें")}</h4>
-              <p className="text-sm text-zinc-500 leading-relaxed">{t("Choose your favorite stay option. We secure exclusive platform discounts and add-on privileges directly for your room entry.", "अपना पसंदीदा विकल्प चुनें। हम सीधे आपके रूम एंट्री के लिए विशेष छूट और एड-ऑन विशेषाधिकार सुरक्षित करते हैं।")}</p>
+              <div className="text-zinc-400 font-bold text-xs uppercase tracking-wider mb-2 mt-2">{t("SEAMLESS BOOKING", "आसान बुकिंग")}</div>
+              <h4 className="text-lg font-bold text-zinc-800 mb-2">{t("Pay Safely Direct", "सुरक्षित भुगतान करें")}</h4>
+              <p className="text-sm text-zinc-500 leading-relaxed">{t("Select your preferred stay. Pay directly to the hotel or verified portal link securely with no hidden platform fees.", "पसंदीदा होटल चुनें और बिना किसी अतिरिक्त छिपे शुल्क के सीधे होटल के माध्यम से सुरक्षित भुगतान करें।")}</p>
             </div>
           </div>
         </div>
@@ -404,7 +423,7 @@ export default function App() {
       <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
         <div className="text-center max-w-xl mx-auto mb-12">
           <h3 className="text-3xl md:text-4xl font-serif font-bold text-zinc-800 mb-2">{t("Popular Indian Escapes", "लोकप्रिय भारतीय गंतव्य")}</h3>
-          <p className="text-zinc-500 font-medium">{t("Handpicked properties loved extensively by luxury travelers across the subcontinent.", "भारतीय उपमहाद्वीप के लक्जरी यात्रियों द्वारा व्यापक रूप से पसंद की गई चुनिंदा संपत्तियां।")}</p>
+          <p className="text-zinc-500 font-medium">{t("Handpicked destinations loved extensively by Indian families and travelers alike.", "भारतीय परिवारों और यात्रियों द्वारा सबसे ज्यादा पसंद किए जाने वाले चुनिंदा स्थान।")}</p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -432,51 +451,18 @@ export default function App() {
         </div>
       </section>
 
-      {/* Curated Stay Collections (Themes) */}
-      <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
-        <div className="text-center max-w-xl mx-auto mb-12">
-          <h3 className="text-3xl md:text-4xl font-serif font-bold text-zinc-800 mb-2">{t("Browse by Travel Vibe", "वाइब के अनुसार ब्राउज़ करें")}</h3>
-          <p className="text-zinc-500 font-medium">{t("Select an experiential theme collection to streamline your personal holiday search setup.", "अपनी व्यक्तिगत अवकाश खोज को आसान बनाने के लिए एक थीम चुनें।")}</p>
-        </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {travelThemes.map((theme, i) => (
-            <div 
-              key={i}
-              onClick={() => {
-                setForm(prev => ({ ...prev, destination: language === 'en' ? theme.titleEn : theme.titleHi }));
-                if (validationError) setValidationError('');
-                const element = document.getElementById('booking-form');
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="group relative h-72 rounded-2xl overflow-hidden cursor-pointer shadow-md border border-zinc-100"
-            >
-              <img src={theme.img} alt={theme.titleEn} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-              <div className="absolute bottom-4 left-4 right-4 text-white">
-                <span className="inline-block px-2.5 py-0.5 bg-amber-500 text-black font-bold text-[10px] uppercase rounded mb-2 tracking-wider">
-                  {theme.tag}
-                </span>
-                <h4 className="text-lg font-bold tracking-tight">{language === 'en' ? theme.titleEn : theme.titleHi}</h4>
-                <p className="text-white/80 text-xs mt-0.5 font-medium">{language === 'en' ? theme.descEn : theme.descHi}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Premium Testimonials Section */}
       <section className="bg-gradient-to-b from-zinc-50 to-zinc-100 border-t border-zinc-200 py-20 px-4 md:px-6 mb-12">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-xl mx-auto mb-14">
-            <h3 className="text-3xl md:text-4xl font-serif font-bold text-zinc-800 mb-2">{t("Stories From Verified Saathis", "वेरिफाइड यात्रियों के अनुभव")}</h3>
-            <p className="text-zinc-500 font-medium">{t("See how premium Indian travelers bypass automated stress using our boutique desk.", "देखें कि कैसे प्रीमियम भारतीय यात्री हमारे बुटीक डेस्क का उपयोग करके तनावमुक्त बुकिंग करते हैं।")}</p>
+            <h3 className="text-3xl md:text-4xl font-serif font-bold text-zinc-800 mb-2">{t("Stories From Verified Saathis", "हमारे खुश यात्रियों के अनुभव")}</h3>
+            <p className="text-zinc-500 font-medium">{t("See how families and groups travel hassle-free across India with our personalized support.", "देखें कैसे भारतीय परिवार हमारे व्यक्तिगत सहयोग से बिना किसी तनाव के सुखद यात्रा करते हैं।")}</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-white p-6 rounded-2xl border border-zinc-200/60 shadow-sm flex flex-col justify-between">
               <p className="text-zinc-600 text-sm leading-relaxed italic">
-                "{t("Saved me nearly 4 hours of toxic review sorting across typical travel websites. The property suggested in Goa had pristine private access beaches perfect for my family layout.", "मुझे विभिन्न यात्रा वेबसाइटों पर घंटों समीक्षाएं छांटने से बचाया। गोवा में जो प्रॉपर्टी सुझाई गई थी, उसमें हमारे परिवार के लिए एकदम सही प्राइवेट बीच एक्सेस था।")}"
+                "{t("Saved me nearly 4 hours of reading fake reviews on booking apps. The property suggested in Goa was very decent, safe, and located right near a clean beach. Perfect for my family.", "बुकिंग एप्स पर घंटों झूठे रिव्यूज पढ़ने से बच गए। गोवा में जो होटल सुझाया गया था वह बेहद पारिवारिक, सुरक्षित और साफ बीच के करीब था।")}"
               </p>
               <div className="mt-5 flex items-center gap-3 pt-4 border-t border-zinc-100">
                 <div className="w-9 h-9 bg-amber-100 text-amber-800 font-bold rounded-full flex items-center justify-center text-sm">RK</div>
@@ -489,7 +475,7 @@ export default function App() {
 
             <div className="bg-white p-6 rounded-2xl border border-zinc-200/60 shadow-sm flex flex-col justify-between">
               <p className="text-zinc-600 text-sm leading-relaxed italic">
-                "{t("I was highly hesitant regarding the absolute legitimacy at start. But StaySaathi directly managed room-type matching options and secured an automatic suite upgrade at Jaipur. Impeccable execution.", "शुरुआत में मैं थोड़ा हिचकिचा रही थी। लेकिन StaySaathi ने सीधे रूम-टाइप मैचिंग का प्रबंधन किया और जयपुर में एक ऑटोमैटिक सुइट अपग्रेड सुनिश्चित किया। बेहतरीन अनुभव।")}"
+                "{t("I was highly hesitant about online sites at first. But StaySaathi directly managed room-type matching options, extra bed for child, and guided us directly on WhatsApp with pure vegetarian restaurant locations.", "पहले मैं संकोच कर रही थी, लेकिन इन्होंने व्हाट्सएप पर ही हमारी मनपसंद शुद्ध शाकाहारी भोजन व्यवस्था वाले होटल के साथ शानदार कमरा बुक करवा दिया। बहुत ही भरोसेमंद।")}"
               </p>
               <div className="mt-5 flex items-center gap-3 pt-4 border-t border-zinc-100">
                 <div className="w-9 h-9 bg-amber-100 text-amber-800 font-bold rounded-full flex items-center justify-center text-sm">MS</div>
@@ -502,7 +488,7 @@ export default function App() {
 
             <div className="bg-white p-6 rounded-2xl border border-zinc-200/60 shadow-sm flex flex-col justify-between">
               <p className="text-zinc-600 text-sm leading-relaxed italic">
-                "{t("Traveling with a toddler and a pet dog is historically chaotic. StaySaathi hand-screened resorts in Rishikesh that welcomed pets with open arms and clean lawns. Highly recommended companion service.", "एक छोटे बच्चे और पालतू कुत्ते के साथ यात्रा करना हमेशा से चुनौतीपूर्ण रहा है। StaySaathi ने ऋषिकेश में ऐसे रिसॉर्ट्स चुने जहां पालतू जानवरों का खुले दिल से स्वागत किया गया।")}"
+                "{t("Traveling with elderly parents can be stressful because they cannot walk much. They selected a property in Rishikesh with perfect elevator access and rooms on lower floors. Incredible human touch.", "बुजुर्ग माता-पिता के साथ यात्रा करना कठिन होता है क्योंकि वे ज्यादा चल नहीं सकते। इन्होंने ऋषिकेश में लिफ्ट सुविधा और ग्राउंड फ्लोर वाला बेहतरीन होटल ढूंढकर दिया।")}"
               </p>
               <div className="mt-5 flex items-center gap-3 pt-4 border-t border-zinc-100">
                 <div className="w-9 h-9 bg-amber-100 text-amber-800 font-bold rounded-full flex items-center justify-center text-sm">DV</div>
@@ -521,16 +507,16 @@ export default function App() {
         <h3 className="text-3xl md:text-4xl font-serif font-bold text-center mb-10 text-zinc-800">{t("Frequently Asked Questions", "अक्सर पूछे जाने वाले सवाल")}</h3>
         <div className="space-y-4">
           <div className="bg-white p-6 rounded-2xl border border-zinc-200/60 shadow-sm">
-            <strong className="text-base md:text-lg text-zinc-800 block">❓ {t("How does booking payment execution work?", "पेमेंट निष्पादन कैसे काम करता है?")}</strong>
-            <p className="mt-2.5 text-zinc-600 text-sm leading-relaxed">{t("You process all direct settlement payments securely directly to the specific chosen hotel property endpoint or their approved official localized distribution portals.", "आप सभी सीधे भुगतान सुरक्षित रूप से सीधे चुने गए होटल प्रॉपर्टी को या उनके स्वीकृत आधिकारिक पोर्टल पर करते हैं।")}</p>
+            <strong className="text-base md:text-lg text-zinc-800 block">❓ {t("How does booking payment execution work?", "पेमेंट का भुगतान कैसे होता है?")}</strong>
+            <p className="mt-2.5 text-zinc-600 text-sm leading-relaxed">{t("For complete financial safety, you pay directly to the verified chosen hotel property or through their official verified secure payment gateway links.", "पूर्ण वित्तीय सुरक्षा के लिए, आप सभी भुगतानों को सीधे चुने गए होटल को या उनके आधिकारिक सुरक्षित पेमेंट लिंक के माध्यम से ही पूरा करते हैं।")}</p>
           </div>
           <div className="bg-white p-6 rounded-2xl border border-zinc-200/60 shadow-sm">
-            <strong className="text-base md:text-lg text-zinc-800 block">❓ {t("Is StaySaathi an independent standalone hotel asset?", "क्या StaySaathi एक स्वतंत्र होटल संपत्ति है?")}</strong>
-            <p className="mt-2.5 text-zinc-600 text-sm leading-relaxed">{t("No. StaySaathi serves directly as a high-end personal human-assisted travel boutique curation platform designed to bridge personalized premium property matches for consumers.", "नहीं। StaySaathi एक प्रीमियम मानव-सहायता प्राप्त ट्रैवल बुटीक क्यूरेशन प्लेटफॉर्म के रूप में काम करता है जो उपभोक्ताओं के लिए व्यक्तिगत प्रीमियम प्रॉपर्टी मैच प्रदान करता है।")}</p>
+            <strong className="text-base md:text-lg text-zinc-800 block">❓ {t("Are there any hidden platform assistance fees?", "क्या इसके लिए कोई छिपी हुई फीस ली जाती है?")}</strong>
+            <p className="mt-2.5 text-zinc-600 text-sm leading-relaxed">{t("No, our assistance service is completely free of charge for travelers. We partner directly with property operators to secure customized perks for our community.", "नहीं, हमारी सहायता सेवा यात्रियों के लिए पूरी तरह से निःशुल्क है। हम होटल्स के साथ सीधे जुड़कर आपके लिए खास रियायतें तय करते हैं।")}</p>
           </div>
           <div className="bg-white p-6 rounded-2xl border border-zinc-200/60 shadow-sm">
-            <strong className="text-base md:text-lg text-zinc-800 block">❓ {t("Can I structure custom modifications entirely via WhatsApp channels?", "क्या मैं व्हाट्सएप चैनलों के माध्यम से कस्टम संशोधन कर सकता हूं?")}</strong>
-            <p className="mt-2.5 text-zinc-600 text-sm leading-relaxed">{t("Absolutely! WhatsApp serves as our flagship lightning-fast assistance highway where you talk live with real human experts without passing robot prompt queues.", "बिल्कुल! व्हाट्सएप हमारा सबसे तेज़ सहायता मार्ग है जहां आप रोबोट कतारों को पार किए बिना सीधे वास्तविक मानव विशेषज्ञों से लाइव बात करते हैं।")}</p>
+            <strong className="text-base md:text-lg text-zinc-800 block">❓ {t("Can I call and speak to a real person directly?", "क्या मैं सीधे फोन पर बात कर सकता हूँ?")}</strong>
+            <p className="mt-2.5 text-zinc-600 text-sm leading-relaxed">{t("Yes! Between 9:00 AM and 7:00 PM daily, you will connect directly with real travel assistant curators on WhatsApp or calls, with no automated robots or complex chatbot loops.", "जी हाँ! रोज सुबह 9 बजे से शाम 7 बजे के बीच आप व्हाट्सएप या कॉल पर सीधे हमारे विशेषज्ञ मार्गदर्शक से बात कर सकते हैं। कोई रोबोटिक या परेशान करने वाले बॉट सिस्टम नहीं हैं।")}</p>
           </div>
         </div>
       </section>
@@ -545,7 +531,7 @@ export default function App() {
           <p className="opacity-75 text-sm font-medium">Assistance Hours: 9 AM – 7 PM IST</p>
           <div className="w-16 h-0.5 bg-zinc-800 mx-auto my-6" />
           <p className="text-xs opacity-50 max-w-xl mx-auto leading-relaxed">
-            Curated & Personalized Premium Hotel Assistance • Pay Directly to Property Operations. All rights reserved. © 2026 StaySaathi Desk.
+            Curated & Personalized Premium Family Hotel Assistance • Pay Directly to Vetted Hotel Operations. All rights reserved. © 2026 StaySaathi Desk.
           </p>
         </div>
       </footer>
