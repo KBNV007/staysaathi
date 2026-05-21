@@ -135,9 +135,9 @@ export default function App() {
         
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           <h2 className="text-white text-5xl md:text-6xl font-serif font-medium leading-tight mb-6">
-            {t("Discover Luxury Stays in India", "भारत में लग्जरी ठहराव की खोज करें")}
+            {t("Luxury That Fits Your Wallet", "लग्ज़री जो आपकी जेब पर भारी न पड़े")}
           </h2>
-          <p className="text-white/90 text-xl md:text-2xl mb-10">
+          <p className="text-white/100 text-xxl md:text-3xl mb-10">
             {t("Curated • Personalized • Human Assisted", "क्यूरेटेड • पर्सनलाइज्ड • मानवीय सहायता")}
           </p>
         </div>
