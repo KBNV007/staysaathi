@@ -286,7 +286,7 @@ export default function App() {
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-xl">💰</span>
-                  <h4 className="font-serif font-bold text-xl text-zinc-800">{t("Live Luxury Perk Matcher", "लाइव होटल सुविधा मैचर")}</h4>
+                  <h4 className="font-serif font-bold text-xl text-zinc-800">{t("Live hotel style Matcher", "लाइव होटल सुविधा मैचर")}</h4>
                 </div>
                 <p className="text-sm text-zinc-500 mb-6">{t("Slide to set your target budget per day to preview custom hotel privileges.", "सुविधाओं को देखने के लिए अपना दैनिक बजट आगे-पीछे स्लाइड करें।")}</p>
 
@@ -297,17 +297,17 @@ export default function App() {
                   </div>
                   <input 
                     type="range" 
-                    min="4000" 
-                    max="25000" 
+                    min="2000" 
+                    max="15000" 
                     step="500"
                     value={form.budgetPerDay} 
                     onChange={handleSliderChange} 
                     className="w-full accent-amber-500 cursor-pointer h-2 bg-zinc-100 rounded-lg appearance-none"
                   />
                   <div className="flex justify-between text-[10px] font-bold text-zinc-400 mt-2">
-                    <span>₹4,000</span>
-                    <span>₹12,000</span>
-                    <span>₹25,000+</span>
+                    <span>₹2,000</span>
+                    <span>₹8,000</span>
+                    <span>₹15,000+</span>
                   </div>
                 </div>
 
