@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 export default function App() {
-  const whatsappNumber = '918450972317';
+  const whatsappNumber = '918826492707';
 
   const [language, setLanguage] = useState('en');
   const t = (en, hi) => language === 'en' ? en : hi;
