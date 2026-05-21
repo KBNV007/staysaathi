@@ -95,7 +95,7 @@ export default function App() {
     name: "Jaipur",
     emoji: "🏰",
     desc: t("Royal Heritage", "शाही विरासत"),
-    image: "https://images.unsplash.com/photo-1599661046827-dacde6976548?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80"
   },
   {
     name: "Manali",
@@ -107,7 +107,7 @@ export default function App() {
     name: "Udaipur",
     emoji: "🪷",
     desc: t("Lakes & Romance", "झीलें"),
-    image: "https://images.unsplash.com/photo-1603262110263-fb0112e7cc33?auto=format&fit=crop&w=800&q=80"
+    image: "https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?auto=format&fit=crop&w=800&q=80"
   },
   {
     name: "Kerala",
