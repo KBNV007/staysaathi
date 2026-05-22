@@ -26,6 +26,7 @@ export default function App() {
     children: 0,
     childAges: [],
     budgetPerDay: '8000', 
+    customNotes: '',
   });
 
   const [filters, setFilters] = useState({
@@ -146,6 +147,10 @@ export default function App() {
       mealPlanText = `\n🍲 *Meal Preference:* Breakfast + Lunch + Dinner / तीनों समय का भोजन`;
     }
 
+    const specialNotesText = form.customNotes.trim() 
+      ? `\n📝 *Special Requests:* ${form.customNotes.trim()}` 
+      : '';
+
     const budgetFormatted = form.budgetPerDay === '20000' ? '₹15,000+' : `₹${form.budgetPerDay}`;
 
     const msg = `*Premium Hotel Enquiry - StaySaathi*\n\n` +
@@ -158,7 +163,8 @@ export default function App() {
       `${stayTypesText}` +
       `${amenitiesText}` +
       `${roomTypesText}` +
-      `${mealPlanText}\n\n` +
+      `${mealPlanText}` +
+      `${specialNotesText}\n\n` +
       `Please suggest the best matching options.`;
 
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
@@ -250,7 +256,6 @@ export default function App() {
       </section>
 
       {/* Booking Form + Stay Type & Amenities Filters */}
-      {}
       <section id="booking-form" className="max-w-6xl mx-auto px-4 md:px-6 -mt-36 relative z-20 mb-20">
         <div className="bg-white rounded-3xl shadow-2xl border border-zinc-100 overflow-hidden">
           <div className="p-6 md:p-10 border-b border-zinc-100 bg-amber-50/50">
@@ -334,10 +339,38 @@ export default function App() {
                   </div>
                 </div>
               )}
+
+              {/* Useful Addition: Special Request Textbox */}
+              <div className="mb-6">
+                <label className="block text-sm font-semibold text-zinc-600 mb-1.5">
+                  📝 {t("Any Special Requests / Custom Notes?", "विशेष अनुरोध / टिप्पणी")}
+                </label>
+                <textarea
+                  name="customNotes"
+                  value={form.customNotes}
+                  onChange={handleChange}
+                  rows="3"
+                  placeholder={t(
+                    "e.g., adjacent rooms, ground floor, pure veg restaurants nearby, hot water kettle for baby, early check-in request...",
+                    "जैसे: पास-पास कमरे चाहिए, ग्राउंड फ्लोर कमरा, बच्चे के लिए गर्म पानी की केतली, या जल्दी चेक-इन अनुरोध..."
+                  )}
+                  className="w-full border-2 border-zinc-200 focus:border-amber-500 focus:ring-4 focus:ring-amber-100 rounded-xl p-3 text-sm focus:outline-none resize-none"
+                />
+              </div>
+
+              {/* Useful Addition: Safe Direct-Pay Guarantee Banner */}
+              <div className="p-4 bg-emerald-50 rounded-2xl border border-emerald-100/80 flex items-start gap-3">
+                <div className="text-2xl p-1 bg-white rounded-xl shadow-sm">🛡️</div>
+                <div>
+                  <h5 className="text-sm font-bold text-emerald-950">{t("100% Safe Pay-Direct Guarantee", "100% सुरक्षित डायरेक्ट भुगतान")}</h5>
+                  <p className="text-xs text-emerald-800 mt-0.5 leading-relaxed">
+                    {t("Pay directly to the hotel's verified account. We never collect or hold your card details, keeping your hard-earned money completely safe.", "सीधे होटल के सत्यापित खाते में भुगतान करें। हम कभी भी आपके कार्ड का विवरण नहीं मांगते, जिससे आपके पैसे पूरी तरह सुरक्षित रहते हैं।")}
+                  </p>
+                </div>
+              </div>
             </div>
 
             {/* Preferred Amenities & Filters Side */}
-            {}
             <div className="p-6 md:p-10 lg:col-span-5 bg-gradient-to-b from-zinc-50 to-zinc-100 flex flex-col justify-between">
               <div>
                 <h4 className="text-lg font-bold text-zinc-800 mb-5 pb-2 border-b border-zinc-200">
@@ -526,7 +559,6 @@ export default function App() {
           </div>
 
           {/* Unified Submission Footer */}
-          {}
           <div className="bg-zinc-50 border-t border-zinc-100 p-6 md:p-8 flex flex-col items-center justify-center text-center">
             <button
               onClick={handleWhatsApp}
@@ -622,7 +654,7 @@ export default function App() {
 
             <div className="bg-white p-6 rounded-2xl shadow-sm relative border border-zinc-200/40">
               <span className="absolute -top-5 left-6 bg-gradient-to-br from-amber-500 to-yellow-600 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-md">2</span>
-              <div className="text-amber-600 font-bold text-xs uppercase tracking-wider mb-2 mt-2">{t("WITHIN FEW HOURS", "कुछ घंटे के भीतर")}</div>
+              <div className="text-amber-600 font-bold text-xs uppercase tracking-wider mb-2 mt-2">{t("WITHIN 2 HOURS", "2 घंटे के भीतर")}</div>
               <h4 className="text-lg font-bold text-zinc-800 mb-2">{t("Receive Custom Options", "होटल विकल्प पाएं")}</h4>
               <p className="text-sm text-zinc-500 leading-relaxed">{t("Our destination helper filters clean local properties and delivers 3 best tailored hotel choices to your chat.", "हमारे लोकल एक्सपर्ट सबसे सुरक्षित और बेहतरीन 3 विकल्प आपके व्हाट्सएप पर भेजेंगे।")}</p>
             </div>
@@ -670,7 +702,6 @@ export default function App() {
       </section>
 
       {/* Why Us Section */}
-      {}
       <section className="bg-gradient-to-b from-zinc-50 to-zinc-100 border-t border-zinc-200 py-20 px-4 md:px-6 mb-12">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16">
