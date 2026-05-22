@@ -30,6 +30,7 @@ export default function App() {
     childAges: [],
     budgetPerDay: '8000', 
     customNotes: '',
+    datesFlexible: false,
   });
 
   const [filters, setFilters] = useState({
@@ -53,6 +54,36 @@ export default function App() {
     mealPlan: '', // 'breakfast', 'halfBoard' (B+L/D), 'fullBoard' (B+L+D)
   });
 
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  // Massive list of over 150+ popular Indian destinations to guarantee robust autocomplete matching
+  const popularSuggestNames = [
+    // North India
+    "Manali", "Shimla", "Rishikesh", "Haridwar", "Dehradun", "Mussoorie", "Nainital", "Ranikhet", "Almora", 
+    "Kausani", "Mukteshwar", "Bhimtal", "Lansdowne", "Chopta", "Auli", "Dharamshala", "Mcleodganj", "Dalhousie", 
+    "Khajjiar", "Kasauli", "Shimla Hills", "Chail", "Kufri", "Srinagar", "Gulmarg", "Pahalgam", "Sonamarg", 
+    "Katra", "Vaishno Devi", "Leh Ladakh", "Nubra Valley", "Pangong Lake", "Amritsar", "Chandigarh", "Noida", 
+    "Delhi", "Gurugram", "Agra", "Varanasi", "Mathura", "Vrindavan", "Jim Corbett National Park", "Naranag",
+    // West & Central India
+    "Jaipur", "Udaipur", "Jodhpur", "Jaisalmer", "Bikaner", "Pushkar", "Mount Abu", "Ranthambore", "Chittorgarh", 
+    "Alwar", "Neemrana", "Bharatpur", "Ajmer", "Mandawa", "Mumbai", "Lonavala", "Khandala", "Mahabaleshwar", 
+    "Panchgani", "Matheran", "Alibaug", "Kashid", "Pune", "Nashik", "Shirdi", "Aurangabad", "Lavasa", "Kolad", 
+    "Tarkarli", "Bhandardara", "Goa", "North Goa", "South Goa", "Panaji", "Calangute", "Baga", "Anjuna", 
+    "Ahmedabad", "Kutch", "Rann of Kutch", "Dwarka", "Somnath", "Sasan Gir", "Saputara", "Diu", "Daman", 
+    "Khajuraho", "Gwalior", "Orchha", "Pachmarhi", "Kanha National Park", "Bandhavgarh", "Pench National Park",
+    // South India
+    "Ooty", "Kodaikanal", "Coonoor", "Yercaud", "Chennai", "Mahabalipuram", "Pondicherry", "Madurai", "Rameswaram", 
+    "Kanyakumari", "Coimbatore", "Munnar", "Wayanad", "Thekkady", "Alleppey", "Kumarakom", "Kochi", "Kovalam", 
+    "Varkala", "Bekal", "Athirappilly", "Vagamon", "Poovar", "Bengaluru", "Mysore", "Coorg", "Chikmagalur", 
+    "Gokarna", "Hampi", "Badami", "Mangalore", "Udupi", "Murudeshwar", "Kabini", "Bandipur", "Hyderabad", 
+    "Visakhapatnam", "Araku Valley", "Tirupati", "Ananthagiri Hills", "Warangal",
+    // East & North-East India
+    "Kolkata", "Darjeeling", "Kalimpong", "Kurseong", "Digha", "Mandarmoni", "Sundarbans", "Shantiniketan", 
+    "Puri", "Bhubaneswar", "Konark", "Cuttack", "Gopalpur", "Gangtok", "Pelling", "Lachung", "Lachen", 
+    "Ravangla", "Namchi", "Shillong", "Cherrapunji", "Guwahati", "Kaziranga National Park", "Tawang", "Ziro Valley", 
+    "Imphal", "Kohima", "Aizawl", "Agartala"
+  ];
+
   const seasonalGuide = [
     {
       id: 0,
@@ -62,7 +93,7 @@ export default function App() {
       places: [
         { dest: "Manali", icon: "🏔️", titleEn: "Snowy Manali Escapes", titleHi: "बर्फबारी और मनाली की वादियां", descEn: "Perfect for winter lovers! Enjoy scenic snowfall, skiing, and cozy mountain resort fireplace rooms.", descHi: "सर्दियों के प्रेमियों के लिए! ताज़ा बर्फबारी, स्कीइंग और गर्म आरामदायक रिज़ॉर्ट्स का आनंद लें।", tagEn: "Snow Peak", tagHi: "बर्फ़ीली वादियाँ" },
         { dest: "Auli", icon: "🎿", titleEn: "Auli Skiing Meadows", titleHi: "औली स्कीइंग और देवदार के जंगल", descEn: "Breathtaking Himalayan snow slopes. Great for scenic cable-car rides with kids.", descHi: "भव्य हिमालयी बर्फ के मैदान। बच्चों के साथ केबल कार की रोमांचक सवारी के लिए सर्वश्रेष्ठ स्थान।" , tagEn: "Skiing Spot", tagHi: "स्कीइंग प्रेमी" },
-        { dest: "Jaisalmer", icon: "🐪", titleEn: "Golden Desert Dunes", titleHi: "जैसलमेर का सुनहरा रेगिस्तानी कैंप", descEn: "Pleasant days for camel safaris, luxury swiss camping under stars, and cultural puppet shows.", descHi: "ऊंट की सवारी, तारों की छांव में लग्जरी स्विस कैंपिंग और सांस्कृतिक कठपुतली शो के लिए सुखद दिन।", tagEn: "Desert Magic", tagHi: "रेगिस्तान सफारी" },
+        { dest: "Jaisalmer", icon: "🐪", titleEn: "Golden Desert Dunes", titleHi: "जैसलमेर का सुनहरा रेगिस्तानी कैंप", descEn: "Pleasant days for camel safaris, luxury swiss camping under stars, and cultural puppet shows.", descHi: "ऊंत की सवारी, तारों की छांव में लग्जरी स्विस कैंपिंग और सांस्कृतिक कठपुतली शो के लिए सुखद दिन।", tagEn: "Desert Magic", tagHi: "रेगिस्तान सफारी" },
         { dest: "Goa", icon: "🏖️", titleEn: "South Goa Beaches", titleHi: "शांतिपूर्ण दक्षिण गोवा के बीच", descEn: "Mild winter sun. Best for peaceful beach walks, safe kid-friendly shallow waters, and cool evening shacks.", descHi: "हल्की सर्दियों की धूप। शांतिपूर्ण सैर, सुरक्षित उथले पानी और बच्चों के साथ स्वादिष्ट भोजन के लिए उत्तम।", tagEn: "Winter Sun", tagHi: "धूप और रेत" },
         { dest: "Shimla", icon: "🚂", titleEn: "Shimla Heritage Toy Train", titleHi: "शिमला की ऐतिहासिक टॉय ट्रेन", descEn: "Enjoy snowy walking tracks along Mall Road, warm wood shopping, and historic mountain train journeys.", descHi: "मॉल रोड पर बर्फबारी के नज़ारे, लकड़ी के सुंदर हस्तशिल्प और ऐतिहासिक पहाड़ी ट्रेन का शानदार सफर।", tagEn: "Colonial Classic", tagHi: "ऐतिहासिक हिल्स" }
       ]
@@ -113,7 +144,7 @@ export default function App() {
       icon: "⛰️",
       places: [
         { dest: "Munnar", icon: "⛰️", titleEn: "Cool Munnar Hills", titleHi: "मुन्नार की ठंडी वादियां", descEn: "Perfect escape from peak summers. Refresh amidst cascading cold waterfalls and cool tea gardens.", descHi: "भीषण गर्मी से बचने के लिए उत्तम पहाड़ी स्थान। ताज़े बहते ठंडे झरनों और हरे-भरे चाय के बागानों का आनंद लें।", tagEn: "Cool Escape", tagHi: "गर्मी से राहत" },
-        { dest: "Shimla", icon: "🌲", titleEn: "Shimla Pine Walkways", titleHi: "शिमला की ठंडी पाइन वादियां", descEn: "Pleasant 18°C temperatures. Walk on traffic-free ridges and enjoy sweet local ice creams with family.", descDescEn: "गर्मियों में भी सुहावना 18°C तापमान। माल रोड की स्वच्छ सड़कों पर टहलें और परिवार के साथ समय बिताएं।", tagEn: "Summer Peak", tagHi: "पहाड़ों की रानी" },
+        { dest: "Shimla", icon: "🌲", titleEn: "Shimla Pine Walkways", titleHi: "शिमला की ठंडी पाइन वादियां", descEn: "Pleasant 18°C temperatures. Walk on traffic-free ridges and enjoy sweet local ice creams with family.", descHi: "गर्मियों में भी सुहावना 18°C तापमान। माल रोड की स्वच्छ सड़कों पर टहलें और परिवार के साथ समय बिताएं।", tagEn: "Summer Peak", tagHi: "पहाड़ों की रानी" },
         { dest: "Mount Abu", icon: "🧗", titleEn: "Mount Abu Lake Escapes", titleHi: "माउंट आबू के शांत नक्की लेक", descEn: "The only cool hill retreat in Rajasthan. Enjoy pleasant evening boating on Nakki Lake and cold mountain winds.", descHi: "राजस्थान का एकमात्र ठंडा हिल स्टेशन। नक्की झील पर बोटिंग और सनसेट पॉइंट पर ठंडी हवाओं का मज़ा लें।", tagEn: "Oasis", tagHi: "रेगिस्तानी हिल" },
         { dest: "Mussoorie", icon: "⛰️", titleEn: "Mussoorie Queen of Hills", titleHi: "मसूरी की हरी-भरी पहाड़ियां", descEn: "Visit the cascading Kempty Waterfalls and enjoy cold pine breezes overlooking the vast Doon Valley.", descHi: "प्रसिद्ध केम्प्टी फॉल्स के ठंडे पानी में नहाएं और दून घाटी का मनमोहक नज़ारा पेश करने वाले हिल रिसॉर्ट्स में ठहरें।", tagEn: "Hill Station", tagHi: "मशहूर हिल स्टेशन" },
         { dest: "Gangtok", icon: "🏔️", titleEn: "Gangtok Buddhist Trails", titleHi: "गंगटोक के बौद्ध मठ और झीलें", descEn: "Marvelous Himalayan views, clean mountain air, and colorful flower-decorated pathways with local monasteries.", descHi: "शानदार कंचनजंगा व्यू, पहाड़ों की साफ ठंडी हवा और बौद्ध भिक्षुओं की प्रार्थनाओं से गुंजायमान सुंदर मठ।", tagEn: "Monasteries", tagHi: "हिमालयन संस्कृति" }
@@ -190,7 +221,7 @@ export default function App() {
       monthHi: "नवंबर",
       icon: "🐪",
       places: [
-        { dest: "Jaisalmer", icon: "🐪", titleEn: "Golden Desert Swiss Tents", titleHi: "जैसलमेर का सुनहरा रेगिस्तानी कैंप", descEn: "Perfect cold desert nights. Experience camel safaris, stargazing, and traditional puppet folk dances.", descHi: "रेगिस्तान की ठंडी सुहावनी रातें। ऊंट की सवारी, राजस्थानी लोक नृत्य और शानदार लग्जरी स्विस टेंट में रहने का अनुभव।", tagEn: "Starry Nights", tagHi: "सुनहरा रेगिस्तान" },
+        { dest: "Jaisalmer", icon: "🐪", titleEn: "Golden Desert Swiss Tents", titleHi: "जैसलमेर का सुनहरा रेगिस्तानी कैंप", descEn: "Perfect cold desert nights. Experience camel safaris, stargazing, and traditional puppet folk dances.", descHi: "रेगिस्तान की ठंडी सुहावनी रातें। ऊंत की सवारी, राजस्थानी लोक नृत्य और शानदार लग्जरी स्विस टेंट में रहने का अनुभव।", tagEn: "Starry Nights", tagHi: "सुनहरा रेगिस्तान" },
         { dest: "Pushkar", icon: "🐫", titleEn: "Pushkar Camel Fair", titleHi: "पुष्कर का पारंपरिक मेला", descEn: "Experience the colorful cultural fair, traditional hot air balloon rides, and peaceful lakeside temple visits.", descHi: "दुनिया का सबसे अनोखा ऊंट मेला, रंग-बिरंगे पारंपरिक खेल, हॉट एयर बैलून राइड और शांत ब्रह्मा मंदिर के दर्शन।", tagEn: "Heritage Fair", tagHi: "पारंपरिक मेला" },
         { dest: "Amritsar", icon: "🕌", titleEn: "Amritsar Golden Lights", titleHi: "अमृतसर का पावन स्वर्ण मंदिर", descEn: "Pleasant chilly weather. Visit the Golden Temple illuminated with lights, and enjoy delicious hot langar meals.", descHi: "सर्दियों की सुहावनी शुरुआत। रोशनी से नहाया स्वर्ण मंदिर, वाघा बॉर्डर की परेड और लज़ीज़ परांठे व लंगर का स्वाद।", tagEn: "Devotional Lights", tagHi: "पवित्र दर्शन" },
         { dest: "Varanasi", icon: "🌅", titleEn: "Varanasi Ghat Boat Rides", titleHi: "काशी के कोहरे भरे घाट", descEn: "Pleasant early mornings to feed migratory birds on boat rides and walk around ancient sweet streets.", descHi: "सुबह-सुबह बोटिंग करते हुए प्रवासी पक्षियों को दाना खिलाएं और गरमा-गरम कचौड़ी और जलेबी का स्वाद लें।", tagEn: "Sacred Dawn", tagHi: "पवित्र बनारस" },
@@ -221,7 +252,11 @@ export default function App() {
 
   const handleChange = (e) => {
     if (validationError && e.target.name === 'destination') setValidationError('');
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    setForm(prev => ({ ...prev, [e.target.name]: value }));
+    if (e.target.name === 'destination') {
+      setShowSuggestions(e.target.value.trim().length > 0);
+    }
   };
 
   const handleFilterToggle = (key) => {
@@ -313,12 +348,16 @@ export default function App() {
       ? `\n📝 *Special Requests:* ${form.customNotes.trim()}` 
       : '';
 
+    const datesFlexibleText = form.datesFlexible 
+      ? `\n📆 *Date Flexibility:* Yes, flexible by 2-3 days for best rates` 
+      : '';
+
     const budgetFormatted = form.budgetPerDay === '20000' ? '₹15,000+' : `₹${form.budgetPerDay}`;
 
     const msg = `*Premium Hotel Enquiry - StaySaathi*\n\n` +
       `📍 Destination: ${form.destination}\n` +
       `📅 From: ${form.fromDate || 'Flexible'}\n` +
-      `📅 Till: ${form.toDate || 'Flexible'}\n` +
+      `📅 Till: ${form.toDate || 'Flexible'}${datesFlexibleText}\n` +
       `👨‍👩‍👧 Adults: ${form.adults}\n` +
       `👦 ${childInfo}\n` +
       `💰 Budget: ${budgetFormatted} per room/day` +
@@ -358,7 +397,7 @@ export default function App() {
       descHi: "हम बच्चों की ज़रूरतों के हिसाब से ऐसे होटल चुनते हैं जहाँ उनके खेलने के लिए खुले और बड़े मैदान (ओपन स्पेस) हों।"
     },
     {
-      icon: "👨‍‍👧‍👦",
+      icon: "👨‍👩‍👧‍👦",
       titleEn: "Joint Family & Group Stays",
       titleHi: "संयुक्त परिवार और ग्रुप बुकिंग",
       descEn: "Perfect connected rooms, adjacent layouts, and special direct group discounts for family reunions or celebrations.",
@@ -445,15 +484,43 @@ export default function App() {
                 📍 {t("1. Basic Details", "1. मुख्य विवरण")}
               </h4>
               
-              <div className="mb-5">
+              <div className="mb-5 relative">
                 <label className="block text-sm font-semibold text-zinc-600 mb-1.5">{t("Where do you want to go?", "आप कहाँ जाना चाहते हैं?")}</label>
                 <input 
                   name="destination" 
                   value={form.destination} 
                   onChange={handleChange}
+                  onFocus={() => {
+                    if (form.destination.trim().length > 0) setShowSuggestions(true);
+                  }}
+                  onBlur={() => {
+                    setTimeout(() => setShowSuggestions(false), 200);
+                  }}
                   placeholder={t("Destination (e.g. Manali, Goa, Rishikesh, Jaipur)", "गंतव्य (जैसे: मनाली, गोवा, ऋषिकेश, जयपुर)")}
                   className={`w-full border-2 focus:outline-none focus:ring-4 rounded-xl p-3.5 text-base transition-all ${validationError ? 'border-red-400 focus:ring-red-100 focus:border-red-500' : 'border-zinc-200 focus:border-amber-500 focus:ring-amber-100'}`} 
                 />
+                {showSuggestions && (
+                  <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-zinc-200 rounded-xl shadow-lg z-30 max-h-48 overflow-y-auto">
+                    {(() => {
+                      const filtered = popularSuggestNames.filter(name => name.toLowerCase().includes(form.destination.toLowerCase()) && name.toLowerCase() !== form.destination.toLowerCase());
+                      if (filtered.length === 0) return null;
+                      return filtered.map((name, i) => (
+                        <button
+                          key={i}
+                          type="button"
+                          onMouseDown={() => {
+                            setForm(prev => ({ ...prev, destination: name }));
+                            if (validationError) setValidationError('');
+                            setShowSuggestions(false);
+                          }}
+                          className="w-full text-left px-4 py-2.5 hover:bg-zinc-50 text-sm text-zinc-700 font-semibold transition duration-150 border-b border-zinc-100 last:border-0"
+                        >
+                          📍 {name}
+                        </button>
+                      ));
+                    })()}
+                  </div>
+                )}
                 {validationError && (
                   <p className="text-red-500 text-sm mt-1.5 flex items-center gap-1 font-medium">
                     ⚠️ {validationError}
@@ -461,7 +528,8 @@ export default function App() {
                 )}
               </div>
 
-              <div className="grid grid-cols-2 gap-4 mb-5">
+              {}
+              <div className="grid grid-cols-2 gap-4 mb-2">
                 <div>
                   <label className="block text-sm font-semibold text-zinc-600 mb-1.5">{t("Check-In", "चेक-इन")}</label>
                   <input type="date" name="fromDate" value={form.fromDate} onChange={handleChange} className="w-full border-2 border-zinc-200 focus:border-amber-500 focus:ring-4 focus:ring-amber-100 rounded-xl p-3 text-sm focus:outline-none" />
@@ -470,6 +538,21 @@ export default function App() {
                   <label className="block text-sm font-semibold text-zinc-600 mb-1.5">{t("Check-Out", "चेक-आउट")}</label>
                   <input type="date" name="toDate" value={form.toDate} onChange={handleChange} className="w-full border-2 border-zinc-200 focus:border-amber-500 focus:ring-4 focus:ring-amber-100 rounded-xl p-3 text-sm focus:outline-none" />
                 </div>
+              </div>
+
+              {/* Date Flexibility helper */}
+              <div className="mb-5 flex items-center gap-2 px-1">
+                <input 
+                  type="checkbox" 
+                  id="datesFlexible" 
+                  name="datesFlexible"
+                  checked={form.datesFlexible}
+                  onChange={handleChange}
+                  className="w-4 h-4 rounded border-zinc-300 text-amber-500 focus:ring-amber-500 cursor-pointer"
+                />
+                <label htmlFor="datesFlexible" className="text-xs font-semibold text-zinc-600 cursor-pointer select-none">
+                  📅 {t("My travel dates are flexible (+/- 2-3 days) for better rates", "मेरी यात्रा की तिथियां बेहतर दरों के लिए लचीली (+/- 2-3 दिन) हैं")}
+                </label>
               </div>
 
               <div className="grid grid-cols-2 gap-4 mb-5">
@@ -579,6 +662,7 @@ export default function App() {
                   </div>
                 </div>
 
+                {}
                 {/* Essential Amenities List */}
                 <div className="mb-5">
                   <h5 className="text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-2">{t("Essential Amenities", "आवश्यक सुविधाएं")}</h5>
@@ -731,6 +815,47 @@ export default function App() {
 
           {/* Unified Submission Footer */}
           <div className="bg-zinc-50 border-t border-zinc-100 p-6 md:p-8 flex flex-col items-center justify-center text-center">
+            
+            {}
+            {/* Live WhatsApp Message Preview Container */}
+            <div className="w-full max-w-2xl mb-6 bg-[#efeae2] rounded-2xl p-4 border border-zinc-200 shadow-inner relative overflow-hidden text-left font-sans">
+              <div className="absolute top-0 left-0 right-0 bg-[#075e54] text-white px-3.5 py-1.5 flex items-center gap-2 text-xs font-bold shadow">
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
+                <span>StaySaathi Desk (Draft Summary)</span>
+              </div>
+              <div className="mt-7 flex justify-start">
+                <div className="bg-white text-zinc-800 text-xs sm:text-sm p-3 rounded-2xl rounded-tl-none shadow-md max-w-[90%] relative border-l-4 border-emerald-500">
+                  <p className="font-semibold text-emerald-700 mb-1">💬 {t("Draft Query Preview", "ड्राफ्ट संदेश का पूर्वावलोकन")}:</p>
+                  <p className="leading-relaxed">
+                    🌟 <strong>{form.destination ? `${t("Trip to", "यात्रा:")} ${form.destination}` : `[ ${t("Select Destination", "स्थान चुनें")} ]`}</strong>
+                    <br />
+                    📅 {form.fromDate || 'Flexible'} {t("to", "से")} {form.toDate || 'Flexible'} {form.datesFlexible ? `(${t("Flexible Dates", "लचीली तिथियां")})` : ''}
+                    <br />
+                    👨‍👩‍👧‍👦 {form.adults} {t("Adults", "वयस्क")}, {form.children > 0 ? `${form.children} ${t("Children", "बच्चे")}` : t("No kids", "कोई बच्चे नहीं")}
+                    <br />
+                    💰 {t("Budget", "बजट")}: {form.budgetPerDay === '20000' ? '₹15,000+' : `₹${form.budgetPerDay}`} / {t("day", "दिन")}
+                    {Object.keys(filters).some(k => filters[k] === true) && (
+                      <>
+                        <br />
+                        ⚙️ {t("Preferences", "पसंद")}: {
+                          [
+                            filters.hotel && "Hotel",
+                            filters.resort && "Resort",
+                            filters.homestay && "Homestay",
+                            filters.hostel && "Hostel",
+                            filters.parking && "🚗 Parking",
+                            filters.kidsPlay && "🧸 Kids Area",
+                            filters.pool && "🏊‍♂️ Pool",
+                            filters.wifi && "📶 Wi-Fi"
+                          ].filter(Boolean).join(', ')
+                        }
+                      </>
+                    )}
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <button
               onClick={handleWhatsApp}
               disabled={isSubmitting}
@@ -778,8 +903,8 @@ export default function App() {
         </div>
       </section>
 
-      {/* Seasonal Planner - 5 Curated Places to Visit Per Month */}
       {}
+      {/* Seasonal Planner - 5 Curated Places Suggestions to Visit Per Month */}
       <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
         <div className="bg-zinc-100/80 rounded-3xl border border-zinc-200/60 p-6 md:p-10">
           <div className="text-center max-w-2xl mx-auto mb-10">
@@ -869,6 +994,7 @@ export default function App() {
         </div>
       </section>
 
+      {}
       {/* Family-First Assurances */}
       <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
         <div className="bg-amber-50/60 rounded-3xl border border-amber-200/50 p-8 md:p-12">
@@ -899,7 +1025,6 @@ export default function App() {
       </section>
 
       {/* Step-by-Step Experience Timeline */}
-      {}
       <section className="bg-zinc-100/70 border-y border-zinc-200/50 py-20 px-4 md:px-6 mb-24">
         <div className="max-w-5xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -932,6 +1057,7 @@ export default function App() {
         </div>
       </section>
 
+      {}
       {/* Popular Destinations */}
       <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
         <div className="text-center max-w-xl mx-auto mb-12">
@@ -1022,6 +1148,7 @@ export default function App() {
         </div>
       </section>
 
+      {}
       {/* FAQ */}
       <section className="max-w-4xl mx-auto px-4 md:px-6 py-12 mb-16">
         <h3 className="text-3xl md:text-4xl font-serif font-bold text-center mb-10 text-zinc-800">{t("Frequently Asked Questions", "अक्सर पूछे जाने वाले सवाल")}</h3>
