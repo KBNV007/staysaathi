@@ -681,7 +681,7 @@ export default function App() {
               {/* Special Request Textbox */}
               <div className="mb-6">
                 <label className="block text-sm font-semibold text-zinc-600 mb-1.5">
-                  📝 {t("Any Special Requests / Custom Notes?", "विशेष अनुरोध / टिप्पणी")}
+                  📝 {t("Any Custom Notes?", "विशेष टिप्पणी")}
                 </label>
                 <textarea
                   name="customNotes"
@@ -689,8 +689,8 @@ export default function App() {
                   onChange={handleChange}
                   rows="3"
                   placeholder={t(
-                    "e.g., adjacent rooms, ground floor, pure veg restaurants nearby, hot water kettle for baby, early check-in request...",
-                    "जैसे: पास-पास कमरे चाहिए, ग्राउंड फ्लोर कमरा, बच्चे के लिए गर्म पानी की केतली, या जल्दी चेक-इन अनुरोध..."
+                    "e.g., Closer to market, near railway station, restaurants nearby, near mountains ...",
+                    "जैसे: बाज़ार के पास, रेलवे स्टेशन के पास, आसपास रेस्टोरेंट होने चाहिए, पहाड़ों के पास..."
                   )}
                   className="w-full border-2 border-zinc-200 focus:border-amber-500 focus:ring-4 focus:ring-amber-100 rounded-xl p-3 text-sm focus:outline-none resize-none"
                 />
@@ -906,7 +906,7 @@ export default function App() {
             <div className="w-full max-w-2xl mb-6 bg-[#efeae2] rounded-2xl p-4 border border-zinc-200 shadow-inner relative overflow-hidden text-left font-sans">
               <div className="absolute top-0 left-0 right-0 bg-[#075e54] text-white px-3.5 py-1.5 flex items-center gap-2 text-xs font-bold shadow">
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
-                <span>StaySaathi Desk (Draft Summary)</span>
+                <span>StaySaathi Requirement Draft (Your choosen Summary)</span>
               </div>
               <div className="mt-7 flex justify-start">
                 <div className="bg-white text-zinc-800 text-xs sm:text-sm p-3 rounded-2xl rounded-tl-none shadow-md max-w-[90%] relative border-l-4 border-emerald-500">
