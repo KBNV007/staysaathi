@@ -147,7 +147,7 @@ export default function App() {
         { dest: "Vrindavan", icon: "🎨", titleEn: "Vibrant Holi Colors", titleHi: "वृंदावन की पावन होली", descEn: "Experience legendary traditional flower Holi celebrations, sweet pedas, and divine temple chantings.", descHi: "पारंपरिक फूलों की अनूठी होली, वृंदावन के मशहूर पेड़े और दिव्य भजनों के साथ अध्यात्म का अनुभव करें।", tagEn: "Devotion", tagHi: "पवित्र त्योहार" },
         { dest: "Munnar", icon: "🍃", titleEn: "Emerald Munnar Hills", titleHi: "मुन्नार के हरे-भरे चाय बागान", descEn: "Breathe in sweet tea-scented air. Explore cool mist-covered winding roads and spice plantations.", descHi: "चाय की मनमोहक खुशबू वाली ताजी हवा। कोहरे से ढकी पहाड़ियों और मसालों के बागानों की सैर करें।", tagEn: "Tea Valley", tagHi: "हरियाली और सुकून" },
         { dest: "Kaziranga", icon: "🐅", titleEn: "Kaziranga Wildlife Safaris", titleHi: "काजीरंगा वन्यजीव सफारी", descEn: "Excellent weather to spot the famous Indian One-horned Rhinoceros in lush green grasslands.", descHi: "घने जंगलों के बीच विख्यात एक सींग वाले भारतीय गैंडे और जंगली हाथियों को देखने का सबसे अनुकूल समय।", tagEn: "Nature Trail", tagHi: "जंगल सफारी" },
-        { dest: "Gokarna", icon: "🌊", titleEn: "Peaceful Gokarna Bays", titleHi: "गोकर्ण के शांत रेतीले बीच", descEn: "Serene alternative to busy beaches. Great for clean sunset viewing and temples adjacent to the sea.", descHi: "भीड़भाड़ से दूर। सुंदर साफ तटों पर डूबते सूरज के नज़ारे और प्राचीन मंदिरों के शांत दर्शन का लाभ लें।", tagEn: "Quiet Escape", tagHi: "समुद्र और शांति" }
+        { dest: "Gokarna", icon: "🌊", titleEn: "Peaceful Gokarna Bays", titleHi: "गोकर्ण के शांत रेतीले बीच", descEn: "Serene alternative to busy beaches. Great for clean sunset viewing and temples adjacent to the sea.", descHi: "भीड़भाड़ से दूर। सुंदर साफ तटों पर डूबते सूरज के नज़ारे and प्राचीन मंदिरों के शांत दर्शन का लाभ लें।", tagEn: "Quiet Escape", tagHi: "समुद्र और शांति" }
       ]
     },
     {
@@ -185,7 +185,7 @@ export default function App() {
         { dest: "Leh Ladakh", icon: "⛰️", titleEn: "Ladakh High Passes", titleHi: "लद्दाख के ऊंचे बर्फीले दर्रे", descEn: "Mountain passes open up fully. Breathtaking blue lakes, high cold deserts, and historic ancient monasteries.", descHi: "सभी बर्फीले रास्ते खुल जाते हैं। शांत नीली झीलें, ठंडी रेतीली वादियाँ और प्राचीन तिब्बती मठों का अनुभव करें।", tagEn: "High Altitude", tagHi: "रोमांचक लद्दाख" },
         { dest: "Spiti Valley", icon: "🏔️", titleEn: "Spiti Desert Mountains", titleHi: "स्पीति वैली की ठंडी मरुभूमि", descEn: "Travel to remote clean cold deserts, mud monasteries, and high-altitude safe family homestays.", descHi: "सड़क मार्ग से सुलभ होने वाली सुंदर घाटी। प्राचीन तिब्बती वास्तुकला वाले गांवों और सेब के बागानों को देखें।", tagEn: "Remote Valley", tagHi: "पहाड़ी गांव" },
         { dest: "Manali", icon: "🏔️", titleEn: "Solang Adventure Parks", titleHi: "मनाली और सोलांग वैली", descEn: "Go paragliding, visit the Rohtang Pass snow walls, and walk along gushing Beas River mountain streams.", descHi: "रोहतांग पास की विशाल बर्फ की दीवारें देखें, पैराग्लाइडिंग करें और व्यास नदी के ठंडे पानी के पास पिकनिक मनाएं।", tagEn: "Adventure", tagHi: "रोमांचक वादियां" },
-        { dest: "Dharamshala", icon: "☸️", titleEn: "Dharamshala Peace Walks", titleHi: "धर्मशाला और मैक्लोडगंज के मठ", descEn: "Cool pine forests and spiritual Buddhist temples. Handpick organic green tea from beautiful local estates.", descHi: "देवदार के ठंडे जंगल और शांतिपूर्ण बौद्ध मंदिर। सुंदर तिब्बती बाजारों और स्थानीय चाय बागानों की सैर करें।", tagEn: "Tibetan Vibe", tagHi: "शांति और अध्यात्म" },
+        { dest: "Dharamshala", icon: "☸️", titleEn: "Dharamshala Peace Walks", titleHi: "धर्मशाला and मैक्लोडगंज के मठ", descEn: "Cool pine forests and spiritual Buddhist temples. Handpick organic green tea from beautiful local estates.", descHi: "देवदार के ठंडे जंगल और शांतिपूर्ण बौद्ध मंदिर। सुंदर तिब्बती बाजारों और स्थानीय चाय बागानों की सैर करें।", tagEn: "Tibetan Vibe", tagHi: "शांति और अध्यात्म" },
         { dest: "Gulmarg", icon: "🚠", titleEn: "Gulmarg Summer Meadows", titleHi: "गुलमर्ग के हरे-भरे घास के मैदान", descEn: "Prisinte green meadows in summer. Play family mini-golf or take scenic pony rides along peaceful valleys.", descHi: "गर्मियों में मखमली घास के मैदान। पहाड़ों के बीच बच्चों के साथ घुड़सवारी और ठंडी प्राकृतिक सैर का आनंद लें।", tagEn: "Green Slopes", tagHi: "मखमली पहाड़ियां" }
       ]
     },
@@ -498,13 +498,12 @@ export default function App() {
     { name: "Manali", emoji: "🏔️", desc: t("Mountains", "पहाड़ और ठंडी वादियां"), image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80" },
     { name: "Rishikesh", emoji: "🪷", desc: t("Yoga & Adventure", "पवित्र गंगा घाट और शांति"), image: "https://images.unsplash.com/photo-1603867106100-0d2039fc8757?auto=format&fit=crop&q=80&w=800" },
     { name: "Kerala", emoji: "🌴", desc: t("Backwaters", "हरे-भरे नारियल के पेड़ और पानी"), image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80" },
-    { name: "Leh Ladakh", emoji: "⛰️", desc: t("Adventure", "रोमांचक पहाड़ी रास्ते"), image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80" }
+    { name: "Leh Ladakh", emoji: "⛰️", desc: t("Adventure", "रोमांचक पहाड़ी रास्ते"), image: "https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?q=80&w=800&auto=format&fit=crop" }
   ];
 
   return (
     <div className={`min-h-screen font-sans antialiased relative transition-colors duration-300 ${darkMode ? 'bg-[#07070a] text-zinc-100' : 'bg-zinc-50 text-gray-900'}`}>
       
-      {}
       {/* Header */}
       <header className={`sticky top-0 backdrop-blur-md border-b z-50 transition-all duration-300 ${darkMode ? 'bg-[#09090d]/90 border-zinc-900' : 'bg-white/95 border-zinc-200/80'}`}>
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
@@ -574,7 +573,6 @@ export default function App() {
         </div>
       </section>
 
-      {}
       {/* Booking Form + Stay Type & Amenities Filters */}
       <section id="booking-form" className="max-w-6xl mx-auto px-4 md:px-6 -mt-36 relative z-20 mb-20">
         <div className={`rounded-3xl shadow-2xl overflow-hidden transition-all duration-300 ${darkMode ? 'bg-[#0c0c11]/90 border border-zinc-800/80 backdrop-blur-md' : 'bg-white border border-zinc-100'}`}>
@@ -722,7 +720,7 @@ export default function App() {
                         key={i} 
                         value={age} 
                         onChange={(e) => updateChildAge(i, e.target.value)} 
-                        className={`border-2 rounded-xl p-2.5 text-sm focus:outline-none transition-colors duration-200 ${darkMode ? 'bg-[#07070a] text-white border-zinc-800 focus:border-amber-500' : 'bg-white text-zinc-800 border-zinc-200 focus:border-amber-500'}`}
+                        className={`border-2 rounded-xl p-2.5 text-sm focus:outline-none transition-colors duration-200 ${darkMode ? 'bg-[#07070a] text-white border-zinc-800 focus:border-amber-500' : 'bg-white text-zinc-800 border-zinc-200'}`}
                       >
                         {[...Array(12)].map((_, idx) => <option key={idx} className={darkMode ? 'bg-zinc-950 text-zinc-200' : 'bg-white text-zinc-800'} value={idx+1}>{idx+1} {t("yrs", "साल")}</option>)}
                       </select>
@@ -1073,7 +1071,6 @@ export default function App() {
             </div>
           </div>
 
-          {}
           {/* Unified Submission Footer with WhatsApp Simulator Preview */}
           <div className={`border-t p-6 md:p-8 flex flex-col items-center justify-center text-center transition-colors duration-300 ${darkMode ? 'bg-[#09090d] border-zinc-800/80' : 'bg-zinc-50 border-zinc-100'}`}>
             
@@ -1177,7 +1174,6 @@ export default function App() {
         </div>
       </section>
 
-      {}
       {/* Seasonal Planner - Where to Go in Which Season */}
       <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
         <div className={`rounded-3xl border p-6 md:p-10 transition-all ${darkMode ? 'bg-[#0c0c11] border-zinc-900/80 shadow-xl' : 'bg-zinc-100/80 border-zinc-200/60'}`}>
@@ -1485,7 +1481,6 @@ export default function App() {
         </div>
       )}
 
-      {}
       {/* Stop Gap Warning Modal */}
       {showPreferenceReminder && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
