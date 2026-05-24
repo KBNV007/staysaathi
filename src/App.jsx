@@ -3,9 +3,8 @@ import React, { useState, useEffect } from 'react';
 export default function App() {
   const whatsappNumber = '918826492707';
 
-  // State managers
   const [language, setLanguage] = useState('en');
-  const [darkMode, setDarkMode] = useState(false); // Default to Light Mode as requested
+  const [darkMode, setDarkMode] = useState(false); // Default to clean Light Mode as recommended
   
   const t = (en, hi) => language === 'en' ? en : hi;
 
@@ -49,6 +48,10 @@ export default function App() {
   // Set default selected month to current month
   const [selectedMonthIndex, setSelectedMonthIndex] = useState(new Date().getMonth());
 
+  // Interactive Checklist tool state
+  const [checklistCategory, setChecklistCategory] = useState('mountains');
+  const [checkedItems, setCheckedItems] = useState({});
+
   const [form, setForm] = useState({
     destination: '',
     fromDate: '',
@@ -78,7 +81,7 @@ export default function App() {
     petsAllowed: false,
     bunkBed: false,
     // Meal Plan selection
-    mealPlan: '', // 'breakfast', 'halfBoard' (B+L/D), 'fullBoard' (B+L+D)
+    mealPlan: '', 
   });
 
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -119,9 +122,9 @@ export default function App() {
       places: [
         { dest: "Manali", icon: "🏔️", titleEn: "Snowy Manali Escapes", titleHi: "बर्फबारी और मनाली की वादियां", descEn: "Perfect for winter lovers! Enjoy scenic snowfall, skiing, and cozy mountain resort fireplace rooms.", descHi: "सर्दियों के प्रेमियों के लिए! ताज़ा बर्फबारी, स्कीइंग और गर्म आरामदायक रिज़ॉर्ट्स का आनंद लें।" },
         { dest: "Auli", icon: "🎿", titleEn: "Auli Skiing Meadows", titleHi: "औली स्कीइंग और देवदार के जंगल", descEn: "Breathtaking Himalayan snow slopes. Great for scenic cable-car rides with kids.", descHi: "भव्य हिमालयी बर्फ के मैदान। बच्चों के साथ केबल कार की रोमांचक सवारी के लिए सर्वश्रेष्ठ स्थान।" },
-        { dest: "Jaisalmer", icon: "🐪", titleEn: "Golden Desert Dunes", titleHi: "जैसलमेर का सुनहरा रेगिस्तानी कैंप", descEn: "Pleasant days for camel safaris, luxury swiss camping under stars, and cultural puppet shows.", descHi: "ऊंत की सवारी, तारों की छांव में लग्जरी स्विस कैंपिंग और सांस्कृतिक कठपुतली शो के लिए सुखद दिन।" },
-        { dest: "Goa", icon: "🏖️", titleEn: "South Goa Beaches", titleHi: "शांतिपूर्ण दक्षिण गोवा के बीच", descEn: "Mild winter sun. Best for peaceful beach walks, safe kid-friendly shallow waters, and cool evening shacks.", descHi: "हल्की सर्दियों की धूप। शांतिपूर्ण सैर, सुरक्षित उथले पानी और बच्चों के साथ स्वादिष्ट भोजन के लिए उत्तम।" },
-        { dest: "Shimla", icon: "🚂", titleEn: "Shimla Heritage Toy Train", titleHi: "शिमला की ऐतिहासिक टॉय ट्रेन", descEn: "Enjoy snowy walking tracks along Mall Road, warm wood shopping, and historic mountain train journeys.", descHi: "मॉल रोड पर बर्फबारी के नज़ारे, लकड़ी के सुंदर हस्तशिल्प और ऐतिहासिक पहाड़ी ट्रेन का शानदार सफर।" }
+        { dest: "Jaisalmer", icon: "🐪", titleEn: "Golden Desert Dunes", titleHi: "जैसलमेर का सुनहरा रेगिस्तानी कैंप", descEn: "Pleasant days for camel safaris, luxury swiss camping under stars, and cultural puppet shows.", descHi: "ऊंट की सवारी, तारों की छांव में लग्जरी स्विस कैंपिंग और सांस्कृतिक कठपुतली शो के लिए सुखद दिन।" },
+        { dest: "Gulmarg", icon: "❄️", titleEn: "Gulmarg Snow Slopes", titleHi: "गुलमर्ग के बर्फीले पहाड़", descEn: "Stunning snow meadows and the famous Gondola cable car ride over pine trees.", descHi: "शानदार बर्फ के मैदान और देवदार के पेड़ों के ऊपर प्रसिद्ध गोंडोला केबल कार की सवारी।" },
+        { dest: "Jaipur", icon: "🏰", titleEn: "Pleasant Pink City", titleHi: "जयपुर की गुलाबी रंगत", descEn: "Warm daytime sun perfect for visiting the magnificent Amber Fort and local bazaars.", descHi: "शानदार आमेर किले और स्थानीय बाजारों का दौरा करने के लिए दिन की सुखद गुनगुनी धूप।" }
       ]
     },
     {
@@ -133,8 +136,8 @@ export default function App() {
         { dest: "Jaipur", icon: "🏰", titleEn: "Pink City Royals", titleHi: "गुलाबी नगरी जयपुर की शाही सैर", descEn: "Excellent pleasant weather for exploring magnificent fort ramparts and local organic dining.", descHi: "भव्य किलों, विशाल उद्यानों और स्वादिष्ट पारंपरिक भोजन की खोज के लिए सबसे सुहावना मौसम।" },
         { dest: "Agra", icon: "🕌", titleEn: "Agra Taj Monument", titleHi: "आगरा का भव्य ताज महल", descEn: "Crisp cool mornings perfect for taking memorable family photographs around the beautiful Taj Mahal garden.", descHi: "सुबह की सुहानी हवा में ताजमहल के बगीचे और सुंदर ऐतिहासिक महलों को देखने का सबसे बढ़िया समय।" },
         { dest: "Jodhpur", icon: "👑", titleEn: "Sun City Blue Streets", titleHi: "जोधपुर की नीली गलियां", descEn: "Explore the giant Mehrangarh Fort and local folk puppet markets under pleasant, sweat-free skies.", descHi: "विशाल मेहरानगढ़ किले और लोक बाजारों की सुहावनी, बिना उमस वाली धूप में सैर का आनंद लें।" },
-        { dest: "Kutch", icon: "🌕", titleEn: "White Salt Desert Kutch", titleHi: "कच्छ का सफेद नमक का रेगिस्तान", descEn: "Experience the majestic Rann Utsav with folk musicians under the crisp winter full moon with family.", descHi: "परिजनों के साथ चांदनी रात में शानदार सफेद मरुस्थल, पारंपरिक लोक नृत्य और हस्तशिल्प उत्सव का अनुभव करें।" },
-        { dest: "Gulmarg", icon: "🏔️", titleEn: "Gulmarg Gondola Rides", titleHi: "गुलमर्ग के बर्फीले पहाड़", descEn: "Ride Asia's highest cable car over thick pine trees loaded with heavy white winter snow.", descHi: "सफेद बर्फ से लदे देवदार के पेड़ों के ऊपर एशिया की सबसे ऊंची केबल कार (गोंडोला) की अद्भुत सवारी करें।" }
+        { dest: "Udaipur", icon: "🛶", titleEn: "Udaipur Romantic Lakes", titleHi: "उदयपुर के शाही तालाब व महल", descEn: "Mild pleasant days for peaceful boat rides in Lake Pichola and visiting majestic palace terraces.", descHi: "पिछोला झील में शांतिपूर्ण नाव की सवारी और भव्य महल की छतों को देखने के लिए हल्के सुखद दिन।" },
+        { dest: "Jaisalmer", icon: "⛺", titleEn: "Desert Cultural Camps", titleHi: "रेगिस्तानी लोक उत्सव", descEn: "Experience vibrant desert festivals, folk dances, and clear starry skies at night.", descHi: "नया रेगिस्तानी अनुभव, पारंपरिक उत्सव और रात के तारों भरा आसमान।" }
       ]
     },
     {
@@ -146,8 +149,8 @@ export default function App() {
         { dest: "Rishikesh", icon: "🪷", titleEn: "Divine Ganges Ghats", titleHi: "पवित्र ऋषिकेश गंगा घाट", descEn: "Mild river breeze. Perfect for peaceful Ganga Aarti, yoga retreats, and safe family rafting.", descHi: "हल्की ठंडी हवाएं। गंगा आरती के दर्शन, योगाश्रमों में आत्मिक शांति और पारिवारिक राफ्टिंग का सही समय।" },
         { dest: "Vrindavan", icon: "🎨", titleEn: "Vibrant Holi Colors", titleHi: "वृंदावन की पावन होली", descEn: "Experience legendary traditional flower Holi celebrations, sweet pedas, and divine temple chantings.", descHi: "पारंपरिक फूलों की अनूठी होली, वृंदावन के मशहूर पेड़े और दिव्य भजनों के साथ अध्यात्म का अनुभव करें।" },
         { dest: "Munnar", icon: "🍃", titleEn: "Emerald Munnar Hills", titleHi: "मुन्नार के हरे-भरे चाय बागान", descEn: "Breathe in sweet tea-scented air. Explore cool mist-covered winding roads and spice plantations.", descHi: "चाय की मनमोहक खुशबू वाली ताजी हवा। कोहरे से ढकी पहाड़ियों और मसालों के बागानों की सैर करें।" },
-        { dest: "Kaziranga", icon: "🐅", titleEn: "Kaziranga Wildlife Safaris", titleHi: "काजीरंगा वन्यजीव सफारी", descEn: "Excellent weather to spot the famous Indian One-horned Rhinoceros in lush green grasslands.", descHi: "घने जंगलों के बीच विख्यात एक सींग वाले भारतीय गैंडे और जंगली हाथियों को देखने का सबसे अनुकूल समय।" },
-        { dest: "Gokarna", icon: "🌊", titleEn: "Peaceful Gokarna Bays", titleHi: "गोकर्ण के शांत रेतीले बीच", descEn: "Serene alternative to busy beaches. Great for clean sunset viewing and temples adjacent to the sea.", descHi: "भीड़भाड़ से दूर। सुंदर साफ तटों पर डूबते सूरज के नज़ारे और प्राचीन मंदिरों के शांत दर्शन का लाभ लें।" }
+        { dest: "Ooty", icon: "🚂", titleEn: "Ooty Spring Blooms", titleHi: "ऊटी के खिलते हुए मखमली बगीचे", descEn: "Enjoy the spring season with botanical gardens starting to bloom beautifully in cool air.", descHi: "ठंडी हवा में खूबसूरती से खिलने वाले बॉटनिकल गार्डन के साथ वसंत के मौसम का आनंद लें।" },
+        { dest: "Goa", icon: "🎭", titleEn: "Goa Shigmo Festivals", titleHi: "गोवा का पारंपरिक शिगमोत्सव", descEn: "Pleasant beach breezes combined with colorful traditional spring parade carnivals.", descHi: "रंग-बिरंगे पारंपरिक वसंत परेड कार्निवल के साथ समुद्र तट की सुखद हवाओं का आनंद।" }
       ]
     },
     {
@@ -159,8 +162,8 @@ export default function App() {
         { dest: "Kashmir", icon: "🌸", titleEn: "Kashmir Tulip Blooms", titleHi: "कश्मीर के खूबसूरत ट्यूलिप बाग", descEn: "Witness millions of colorful tulips blooming in Srinagar alongside peaceful Shikara boat rides.", descHi: "डल झील में शांत शिकारा बोट की सवारी और श्रीनगर में खिले लाखों ट्यूलिप फूलों की रंगीन चादर देखें।" },
         { dest: "Ooty", icon: "🚂", titleEn: "Ooty Botanical Lakes", titleHi: "ऊटी के चाय बागान व झीलें", descEn: "Escape early summer heat. Ride the iconic heritage toy train through beautiful dense eucalyptus forests.", descHi: "मैदानी गर्मी से बचें। नीलगिरि के घने जंगलों के बीच प्रसिद्ध हेरिटेज टॉय ट्रेन की सवारी का आनंद लें।" },
         { dest: "Darjeeling", icon: "🏔️", titleEn: "Darjeeling Tea Estates", titleHi: "दार्जिलिंग के हिमालयी व्यू", descEn: "Magnificent views of Mount Kanchenjunga peaks. Stay in traditional family bungalows with organic farms.", descHi: "कांचनजंगा पर्वत की बर्फ से ढकी चोटियों के अद्भुत नज़ारे। जैविक चाय बागान और आरामदायक कॉटेज का मज़ा लें।" },
-        { dest: "Wayanad", icon: "🌲", titleEn: "Wayanad Forest Treehouses", titleHi: "वायनाड के घने जंगलों के ट्रीहाउस", descEn: "Explore prehistoric caves, spice plantations, and treehouses nested deep inside Kerala forests.", descHi: "केरल के पहाड़ों में आदिम गुफाओं की खोज करें और घने शांत जंगलों के बीच ट्रीहाउस में ठहरें।" },
-        { dest: "Kodaikanal", icon: "⛵", titleEn: "Kodaikanal Misty Lakes", titleHi: "कोड़ाईकनाल की खूबसूरत झीलें", descEn: "Pedal-boat on the star-shaped lake, walk in pine forests, and watch clouds rolling into deep valleys.", descHi: "तारा-आकार की ठंडी झील में बोटिंग का आनंद लें, पाइन के शांत जंगलों में टहलें और वादियों में कोहरा बहते देखें।" }
+        { dest: "Gangtok", icon: "🏔️", titleEn: "Gangtok Spring Hills", titleHi: "गंगटोक के सुंदर झरने", descEn: "Pleasant cold weather. Marvel at the lush green valley view, orchid sanctuaries, and mountain lakes.", descHi: "सुखद ठंडा मौसम। हरी-भरी घाटी के नज़ारे, ऑर्किड अभयारण्य और पहाड़ी झीलों को देखकर चकित रह जाएं।" },
+        { dest: "Shimla", icon: "🌲", titleEn: "Shimla Mall Road Walks", titleHi: "शिमला माल रोड की सुहानी हवा", descEn: "Beautiful clear skies and comfortable mountain walking conditions for kids and senior members.", descHi: "बच्चों और बुजुर्गों के लिए सुंदर साफ आसमान और पहाड़ी रास्तों पर टहलने की सुखद परिस्थितियां।" }
       ]
     },
     {
@@ -172,8 +175,8 @@ export default function App() {
         { dest: "Munnar", icon: "⛰️", titleEn: "Cool Munnar Hills", titleHi: "मुन्नार की ठंडी वादियां", descEn: "Perfect escape from peak summers. Refresh amidst cascading cold waterfalls and cool tea gardens.", descHi: "भीषण गर्मी से बचने के लिए उत्तम पहाड़ी स्थान। ताज़े बहते ठंडे झरनों और हरे-भरे चाय के बागानों का आनंद लें।" },
         { dest: "Shimla", icon: "🌲", titleEn: "Shimla Pine Walkways", titleHi: "शिमला की ठंडी पाइन वादियां", descEn: "Pleasant 18°C temperatures. Walk on traffic-free ridges and enjoy sweet local ice creams with family.", descHi: "गर्मियों में भी सुहावना 18°C तापमान। माल रोड की स्वच्छ सड़कों पर टहलें और परिवार के साथ समय बिताएं।" },
         { dest: "Mount Abu", icon: "🧗", titleEn: "Mount Abu Lake Escapes", titleHi: "माउंट आबू के शांत नक्की लेक", descEn: "The only cool hill retreat in Rajasthan. Enjoy pleasant evening boating on Nakki Lake and cold mountain winds.", descHi: "राजस्थान का एकमात्र ठंडा हिल स्टेशन। नक्की झील पर बोटिंग और सनसेट पॉइंट पर ठंडी हवाओं का मज़ा लें।" },
-        { dest: "Mussoorie", icon: "⛰️", titleEn: "Mussoorie Queen of Hills", titleHi: "मसूरी की हरी-भरी पहाड़ियां", descEn: "Visit the cascading Kempty Waterfalls and enjoy cold pine breezes overlooking the vast Doon Valley.", descHi: "प्रसिद्ध केम्प्टी फॉल्स के ठंडे पानी में नहाएं और दून घाटी का मनमोहक नज़ारा पेश करने वाले हिल रिसॉर्ट्स में ठहरें।" },
-        { dest: "Gangtok", icon: "🏔️", titleEn: "Gangtok Buddhist Trails", titleHi: "गुकटोक के बौद्ध मठ और झीलें", descEn: "Marvelous Himalayan views, clean mountain air, and colorful flower-decorated pathways with local monasteries.", descHi: "शानदार कंचनजंगा व्यू, पहाड़ों की साफ ठंडी हवा और बौद्ध भिक्षुओं की प्रार्थनाओं से गुंजायमान सुंदर मठ।" }
+        { dest: "Mussoorie", icon: "⛰️", titleEn: "Mussoorie Queen of Hills", titleHi: "मसूरी की बर्फीली हवाएं", descEn: "Breathtaking views of the Doon valley. Enjoy refreshing walks and waterfalls away from mainland heat.", descHi: "दून घाटी के लुभावने दृश्य। मुख्य भूमि की गर्मी से दूर ताज़ा सैर और झरनों का आनंद लें।" },
+        { dest: "Kodaikanal", icon: "🏞️", titleEn: "Kodaikanal Mist Valleys", titleHi: "कोड़ाईकनाल के खूबसूरत तालाब", descEn: "Beautiful misty star-shaped lakes, cold pine forests, and sweet-scented homemade chocolate shops.", descHi: "कोहरे से ढके सुंदर तालाब, ठंडे देवदार के जंगल और स्वादिष्ट घरेलू चॉकलेट का मज़ा लें।" }
       ]
     },
     {
@@ -182,11 +185,11 @@ export default function App() {
       monthHi: "जून",
       icon: "🏍️",
       places: [
-        { dest: "Leh Ladakh", icon: "⛰️", titleEn: "Ladakh High Passes", titleHi: "लद्दाख के ऊंचे बर्फीले दर्रे", descEn: "Mountain passes open up fully. Breathtaking blue lakes, high cold deserts, and historic ancient monasteries.", descHi: "सभी बर्फीले रास्ते खुल जाते हैं। शांत नीली झीलें, ठंडी रेतीली वादियाँ और प्राचीन तिब्बती मठों का अनुभव करें।" },
+        { dest: "Leh Ladakh", icon: "⛰️", titleEn: "Ladakh High Passes", titleHi: "लद्दाख के ऊंचे दर्रे", descEn: "Mountain passes open up fully. Breathtaking blue lakes, high cold deserts, and historic ancient monasteries.", descHi: "सभी बर्फीले रास्ते खुल जाते हैं। शांत नीली झीलें, ठंडी रेतीली वादियाँ और प्राचीन तिब्बती मठों का अनुभव करें।" },
         { dest: "Spiti Valley", icon: "🏔️", titleEn: "Spiti Desert Mountains", titleHi: "स्पीति वैली की ठंडी मरुभूमि", descEn: "Travel to remote clean cold deserts, mud monasteries, and high-altitude safe family homestays.", descHi: "सड़क मार्ग से सुलभ होने वाली सुंदर घाटी। प्राचीन तिब्बती वास्तुकला वाले गांवों और सेब के बागानों को देखें।" },
         { dest: "Manali", icon: "🏔️", titleEn: "Solang Adventure Parks", titleHi: "मनाली और सोलांग वैली", descEn: "Go paragliding, visit the Rohtang Pass snow walls, and walk along gushing Beas River mountain streams.", descHi: "रोहतांग पास की विशाल बर्फ की दीवारें देखें, पैराग्लाइडिंग करें और व्यास नदी के ठंडे पानी के पास पिकनिक मनाएं।" },
-        { dest: "Dharamshala", icon: "☸️", titleEn: "Dharamshala Peace Walks", titleHi: "धर्मशाला और मैक्लोडगंज के मठ", descEn: "Cool pine forests and spiritual Buddhist temples. Handpick organic green tea from beautiful local estates.", descHi: "देवदार के ठंडे जंगल और शांतिपूर्ण बौद्ध मंदिर। सुंदर तिब्बती बाजारों और स्थानीय चाय बागानों की सैर करें।" },
-        { dest: "Gulmarg", icon: "🚠", titleEn: "Gulmarg Summer Meadows", titleHi: "गुलमर्ग के हरे-भरे घास के मैदान", descEn: "Prisinte green meadows in summer. Play family mini-golf or take scenic pony rides along peaceful valleys.", descHi: "गर्मियों में मखमली घास के मैदान। पहाड़ों के बीच बच्चों के साथ घुड़सवारी और ठंडी प्राकृतिक सैर का आनंद लें।" }
+        { dest: "Dharamshala", icon: "🕉️", titleEn: "Dharamshala Pine Valleys", titleHi: "धर्मशाला के शांत बौद्ध मठ", descEn: "Cool pine-scented breeze, beautiful Buddhist temples, and majestic snow-capped Dhauladhar peaks.", descHi: "ठंडी देवदार की खुशबू वाली हवा, खूबसूरत बौद्ध मंदिर और बर्फ से ढकी धौलाधार पर्वत श्रृंखला।" },
+        { dest: "Nainital", icon: "🛶", titleEn: "Nainital Lake Rowings", titleHi: "नैनीताल की ठंडी झीलें", descEn: "Row boats on pear-shaped Naini Lake under pleasant mist. Enjoy beautiful lakeside family markets.", descHi: "सुखद धुंध के बीच नैनी झील में नाव की सवारी करें। सुंदर झील के किनारे पारिवारिक बाजारों का आनंद लें।" }
       ]
     },
     {
@@ -196,10 +199,10 @@ export default function App() {
       icon: "🌧️",
       places: [
         { dest: "Lonavala", icon: "🌧️", titleEn: "Monsoon Mist Lonavala", titleHi: "लोनावला के मानसून झरने", descEn: "Monsoon paradise! Clouds rolling over green hills, piping hot corn cobs, and roaring seasonal mountain waterfalls.", descHi: "हर तरफ बिखरी मानसून की हरी चादर, गरमा-गरम भुट्टे और पहाड़ों से बहते सुंदर झरने।" },
-        { dest: "Valley of Flowers", icon: "🌸", titleEn: "Himalayan Flower Bloom", titleHi: "उत्तराखंड की फूलों की घाटी", descEn: "Rare alpine flowers bloom into thousands of colors across the high meadows during early rain showers.", descHi: "मानसून की बौछारों के साथ पहाड़ों पर खिलने वाले लाखों दुर्लभ हिमालयी फूल और जादुई हरी वादियां।" },
+        { dest: "Valley of Flowers", icon: "🌸", titleEn: "Himalayan Flower Bloom", titleHi: "उत्तराखंड की फूलों की घाटी", descEn: "Rare alpine flowers bloom into thousands of colors across the high meadows during early rain showers.", descHi: "मानसून की बौछारों के साथ पहाड़ों पर खिलने वाले लाखों दुर्लभ फूल और जादुई हरी वादियां।" },
         { dest: "Coorg", icon: "☕", titleEn: "Coorg Coffee Estates", titleHi: "कूर्ग के चाय व कॉफी बागान", descEn: "Watch waterfalls swelling with rainwater and breathe in fresh coffee-scented forest air under mild drizzle.", descHi: "बारिश के पानी से लबालब भरते झरने और कूर्ग के घने जंगलों के बीच कॉफी की ताज़ा भीनी-भीनी खुशबू का आनंद लें।" },
-        { dest: "Mahabaleshwar", icon: "🍓", titleEn: "Misty Mahabaleshwar", titleHi: "महाबलेश्वर की धुंध और घाटियां", descEn: "Beautiful valley viewpoints covered in rolling clouds. Enjoy delicious fresh organic strawberry cream desserts.", descHi: "कोहरे से ढकी सुंदर घाटियां। ताज़ा स्ट्रॉबेरी क्रीम डेसर्ट और पहाड़ों से गिरती पानी की बौछारों का आनंद लें।" },
-        { dest: "Udaipur", icon: "🏰", titleEn: "Udaipur Lake Palaces", titleHi: "उदयपुर के लबालब भरे तालाब", descEn: "The lakes fill up beautifully during monsoons. Enjoy pleasant cool winds while boating near heritage palaces.", descHi: "बारिश में झीलें पानी से लबालब भर जाती हैं। झीलों के शहर में बोटिंग और महलों के शानदार दृश्यों का आनंद लें।" }
+        { dest: "Wayanad", icon: "🏕️", titleEn: "Wayanad Rainforest Trail", titleHi: "वायनाड के वर्षावन व गुफाएं", descEn: "Beautiful misty roads, ancient caves, and green plantations roaring with monsoon fresh life.", descHi: "सुंदर धुंधली सड़कें, प्राचीन गुफाएं और मानसून के ताज़ा जीवन से लबालब हरे-भरे बागान।" },
+        { dest: "Mahabaleshwar", icon: "🍓", titleEn: "Mahabaleshwar Waterfalls", titleHi: "महाबलेश्वर की मखमली हरियाली", descEn: "Witness jaw-dropping views of Sahyadri peaks, deep green valleys, and seasonal pristine rain showers.", descHi: "सह्याद्रि चोटियों के नज़ारे, गहरी हरी घाटियाँ और मौसमी रिमझिम मानसून की बौछारें देखें।" }
       ]
     },
     {
@@ -211,8 +214,8 @@ export default function App() {
         { dest: "Kerala", icon: "🌴", titleEn: "Lush Backwater Stays", titleHi: "केरल के शांत नारियल के बाग", descEn: "Post-monsoon leaves backwaters ultra-clean and green. Stay in premium traditional houseboats safely.", descHi: "बारिश के बाद की अद्भुत चमकीली हरियाली। नारियल के पेड़ों के बीच तैरते शानदार सुरक्षित हाउसबोट का मज़ा।" },
         { dest: "Cherrapunji", icon: "🌧️", titleEn: "Greenest Cherrapunji", titleHi: "चेरापूंजी के बादलों का घर", descEn: "Experience the majestic rain! Watch roaring waterfalls and walk on living root bridges in clean air.", descHi: "दुनिया की सबसे भारी बारिश के रोमांच, बादलों की लुका-छिपी और प्राचीन लिविंग ROOT ब्रिजों की सैर का अनुभव करें।" },
         { dest: "Mount Abu", icon: "⛰️", titleEn: "Misty Abu Monsoons", titleHi: "माउंट आबू के मानसून झरने", descEn: "Misty lakes and waterfalls rolling over green rocks. Enjoy pleasant cool evening shopping walks.", descHi: "कोहरे से ढकी झीलें और पहाड़ों से बहते सुंदर झरने। राजस्थानी और गुजराती भोजन व शाम की ठंडी सैर का आनंद लें।" },
-        { dest: "Coorg", icon: "🌿", titleEn: "Coorg Mist Waterfalls", titleHi: "कूर्ग के घने मानसून वन", descEn: "Spot seasonal wildlife, walk inside spice gardens, and listen to the relaxing sound of natural rain.", descHi: "इलायची और काली मिर्च के खुशबूदार बागानों में टहलें और शांत वातावरण में मानसून की फुहारों का आनंद लें।" },
-        { dest: "Athirappilly", icon: "🌊", titleEn: "Niagara Falls of India", titleHi: "अथिरापल्ली के विशाल झरने", descEn: "Witness Kerala's largest, most majestic waterfall swelling in full capacity with dramatic roaring waters.", descHi: "भारत का सबसे विशाल और भव्य झरना जो मानसून के दौरान अपने पूरे वेग के साथ दहाड़ते हुए गिरता है।" }
+        { dest: "Lonavala", icon: "🌿", titleEn: "Misty Sahyadri Meadows", titleHi: "लोनावला की हरी-भरी पहाड़ियाँ", descEn: "Vibrant mountain springs and deep green valleys. Walk along mist-covered mountain trails.", descHi: "जैविक झरने, गहरी हरी घाटियाँ और कोहरे से ढकी पहाड़ी पगडंडियों पर टहलने का आनंद लें।" },
+        { dest: "Chikmagalur", icon: "☕", titleEn: "Chikmagalur Coffee Clouds", titleHi: "चिकमगलूर के कॉफी बागान", descEn: "Walk inside dense coffee bushes loaded with fresh monsoon rain droplets and mist-topped peaks.", descHi: "मानसून की ताज़ा बूंदों और कोहरे से ढकी चोटियों के बीच कॉफी के घने बागानों में टहलें।" }
       ]
     },
     {
@@ -224,8 +227,8 @@ export default function App() {
         { dest: "Udaipur", icon: "👑", titleEn: "Udaipur Post-Monsoon", titleHi: "उदयपुर के सुंदर हेरिटेज तालाब", descEn: "The weather clears up beautifully. Ideal for lakeside family dining and sunset heritage photography.", descHi: "बारिश के बाद आसमान साफ हो जाता है और झीलें पानी से भरी रहती हैं। झील किनारे शाही भोजन का आनंद लें।" },
         { dest: "Lonavala", icon: "🍃", titleEn: "Lonavala Green Meadows", titleHi: "लोनावला के शांत मखमली पहाड़", descEn: "Vast clean green rolling grasslands without heavy downpours. Enjoy pleasant weather and scenic drives.", descHi: "बिना भारी बारिश के सुहाना सुहावना मौसम। मुंबई-पुणे हाईवे के पास पहाड़ों की सुखद सैर और ट्रेकिंग।" },
         { dest: "Valley of Flowers", icon: "🌺", titleEn: "Prisinte Valley Blooms", titleHi: "उत्तराखंड के ताज़ा मखमली मैदान", descEn: "Catch the final bloom of rare Himalayan valley flowers before the winter cold starts setting in.", descHi: "सर्दियों की दस्तक से ठीक पहले खिलने वाले सुंदर फूलों से महकते पहाड़ों पर शांतिपूर्ण ट्रैकिंग करें।" },
-        { dest: "Rishikesh", icon: "🧗", titleEn: "Ganga River Rafting Opens", titleHi: "ऋषिकेश में एडवेंचर की शुरुआत", descEn: "Enjoy the crisp post-monsoon clean waters. Safe guides reopen family river rafting and forest camping.", descHi: "बारिश के बाद गंगा का पानी बिल्कुल साफ और वेग से भरा होता है। रिवर राफ्टिंग और कैम्पिंग की दोबारा शुरुआत।" },
-        { dest: "Wayanad", icon: "🏡", titleEn: "Wayanad Bamboo Rafting", titleHi: "वायनाड के झरने और बांध", descEn: "Enjoy bamboo rafting on peaceful lakes and walk on eco-friendly wooden forest bridges with family.", descHi: "शांत झीलों में बांस के पारंपरिक बेड़े पर बोटिंग का आनंद लें और सुंदर इको-पार्कों में समय बिताएं।" }
+        { dest: "Coonoor", icon: "🍵", titleEn: "Coonoor Tea Plantation", titleHi: "कुन्नूर के नीलगिरि चाय बागान", descEn: "Vast landscape of emerald tea bushes under sweet pleasant skies. Perfect for a quiet mountain stroll.", descHi: "सुखद आसमान के नीचे पन्ना चाय की झाड़ियों का विशाल परिदृश्य। शांत पहाड़ी सैर के लिए बिल्कुल सही।" },
+        { dest: "Rishikesh", icon: "🛶", titleEn: "Rishikesh Cleared Ganges", titleHi: "ऋषिकेश की पवित्र गंगा धारा", descEn: "Enjoy the pristine newly-cleared blue waters of the Ganges River after monsoon rains finish.", descHi: "मानसून की बारिश समाप्त होने के बाद गंगा नदी के प्राचीन, नए साफ नीले पानी का आनंद लें।" }
       ]
     },
     {
@@ -237,8 +240,8 @@ export default function App() {
         { dest: "Jaipur", icon: "🏵️", titleEn: "Jaipur Festive Markets", titleHi: "जयपुर के रंग-बिरंगे बाज़ार", descEn: "Warm pleasant evenings. Great for local festive shopping, heritage walks, and traditional food courts.", descHi: "सुहावनी शामें। दिवाली की खरीदारी, पुराने महलों की सैर और लजीज पारम्परिक खाने का आनंद लें।" },
         { dest: "Hampi", icon: "🏛️", titleEn: "Ancient Hampi Ruins", titleHi: "हम्पी के ऐतिहासिक पत्थर के मंदिर", descEn: "Mild winter sun starts. Explore magnificent stone structures, river boat rides, and heritage architecture.", descHi: "हल्की सर्दियों की शुरुआत। तुंगभद्रा नदी के पास प्राचीन पाषाण वास्तुकला और प्रसिद्ध रथ मंदिरों की सैर करें।" },
         { dest: "Kolkata", icon: "🪔", titleEn: "Grand Durga Puja", titleHi: "कोलकाता की भव्य दुर्गा पूजा", descEn: "Witness spectacular artistic pandals, local sweet delicacies, and colorful lights decorated across the city.", descHi: "विशाल कलात्मक पंडालों के दर्शन, बंगाली मिठाइयों का स्वाद और पूरे शहर में जगमगाती रोशनी की धूम।" },
-        { dest: "Varanasi", icon: "🪔", titleEn: "Varanasi Ganga Ghats", titleHi: "पवित्र वाराणसी देव दीपावली", descEn: "Crisp pleasant evenings. Experience holy boat rides watching thousands of oil lamps lighting up Varanasi ghats.", descHi: "शाम की पवित्र गंगा आरती, दीपों से जगमगाते घाट और देव दीपावली की विहंगम अलौकिक दृश्य।" },
-        { dest: "Mysore", icon: "🏰", titleEn: "Mysore Palace Dussehra", titleHi: "मैसूर पैलेस का भव्य दशहरा", descEn: "Witness the magnificent royal palace illuminated with nearly 100,000 lightbulbs and traditional grand parades.", descHi: "लाखों बल्बों की रोशनी से जगमगाता मैसूर का राजसी महल और भव्य पारंपरिक सांस्कृतिक झांकियां।" }
+        { dest: "Mysore", icon: "🏰", titleEn: "Mysore Grand Palace", titleHi: "मैसूर महल की राजकीय रोशनी", descEn: "Witness the majestic Mysore Palace lit with over 100,000 bulbs during the legendary Dasara festival.", descHi: "प्रसिद्ध दशहरा उत्सव के दौरान 1,00,000 से अधिक बल्बों से जगमगाते भव्य मैसूर पैलेस के साक्षी बनें।" },
+        { dest: "Amritsar", icon: "🕌", titleEn: "Amritsar Golden Lights", titleHi: "स्वर्ण मंदिर के पावन दीप", descEn: "Pleasant chilly evenings. Best time to sit quietly by the Sarovar water tank under golden ambient lighting.", descHi: "सुखद सर्द शामें। सुनहरी रोशनी में बने सरोवर के किनारे शांत मन से बैठने का सबसे अच्छा समय।" }
       ]
     },
     {
@@ -247,11 +250,11 @@ export default function App() {
       monthHi: "नवंबर",
       icon: "🐪",
       places: [
-        { dest: "Jaisalmer", icon: "🐪", titleEn: "Golden Desert Swiss Tents", titleHi: "जैसलमेर का सुनहरा रेगिस्तानी कैंप", descEn: "Perfect cold desert nights. Experience camel safaris, stargazing, and traditional puppet folk dances.", descHi: "रेगिस्तान की ठंडी सुहावनी रातें। ऊंत की सवारी, राजस्थानी लोक नृत्य और शानदार लग्जरी स्विस टेंट में रहने का अनुभव।" },
+        { dest: "Jaisalmer", icon: "🐪", titleEn: "Golden Desert Swiss Tents", titleHi: "जैसलमेर का सुनहरा रेगिस्तानी कैंप", descEn: "Perfect cold desert nights. Experience camel safaris, stargazing, and traditional puppet folk dances.", descHi: "रेगिस्तान की ठंडी सुहावनी रातें। ऊंट की सवारी, राजस्थानी लोक नृत्य और शानदार लग्जरी स्विस टेंट में रहने का अनुभव।" },
         { dest: "Pushkar", icon: "🐫", titleEn: "Pushkar Camel Fair", titleHi: "पुष्कर का पारंपरिक मेला", descEn: "Experience the colorful cultural fair, traditional hot air balloon rides, and peaceful lakeside temple visits.", descHi: "दुनिया का सबसे अनोखा ऊंट मेला, रंग-बिरंगे पारंपरिक खेल, हॉट एयर बैलून राइड और शांत ब्रह्मा मंदिर के दर्शन।" },
         { dest: "Amritsar", icon: "🕌", titleEn: "Amritsar Golden Lights", titleHi: "अमृतसर का पावन स्वर्ण मंदिर", descEn: "Pleasant chilly weather. Visit the Golden Temple illuminated with lights, and enjoy delicious hot langar meals.", descHi: "सर्दियों की सुहावनी शुरुआत। रोशनी से नहाया स्वर्ण मंदिर, वाघा बॉर्डर की परेड और लज़ीज़ परांठे व लंगर का स्वाद।" },
-        { dest: "Varanasi", icon: "🌅", titleEn: "Varanasi Ghat Boat Rides", titleHi: "काशी के कोहरे भरे घाट", descEn: "Pleasant early mornings to feed migratory birds on boat rides and walk around ancient sweet streets.", descHi: "सुबह-सुबह बोटिंग करते हुए प्रवासी पक्षियों को दाना खिलाएं और गरमा-गरम कचौड़ी और जलेबी का स्वाद लें।" },
-        { dest: "Goa", icon: "🌊", titleEn: "Goa Beach Shacks Reopen", titleHi: "गोवा के नए बीच शैक और बाजार", descEn: "Fabulous beach weather. The famous wooden beach shacks reopen with delicious family dining menus and cool breezes.", descHi: "बहुत ही सुहावना मौसम। समुद्र किनारे लकड़ी के झोपड़ीनुमा रेस्टोरेंट (शैक) ताज़े भोजन और संगीत के साथ खुल जाते हैं।" }
+        { dest: "Varanasi", icon: "🪔", titleEn: "Varanasi Ganga Dev Deepawali", titleHi: "वाराणसी की देव दीपावली", descEn: "Watch all Ganges ghats lit up with millions of clay lamps under crisp chilly winter winds.", descHi: "ठंडी सर्दियों की हवा के बीच लाखों मिट्टी के दीयों से जगमगाते गंगा के सभी घाटों का अलौकिक दृश्य देखें।" },
+        { dest: "Agra", icon: "🏛️", titleEn: "Agra Crisp Winter Taj", titleHi: "आगरा की ताज का विंटर व्यू", descEn: "Beautiful cool days to explore the majestic red-sandstone Mughal structures without getting tired.", descHi: "बिना थके लाल बलुआ पत्थर की भव्य मुगल संरचनाओं का पता लगाने के लिए सुंदर ठंडे दिन।" }
       ]
     },
     {
@@ -263,10 +266,74 @@ export default function App() {
         { dest: "Goa", icon: "🏖️", titleEn: "Goa Beach Sunshine", titleHi: "गोवा विंटर कार्निवल", descEn: "Cool sea breeze and pleasant sunshine. Best for family beach games, watersports, and year-end carnivals.", descHi: "ठंडी समुद्री हवाएं और खिली धूप। बच्चों के साथ सैंड-कैसल बनाने, वाटर स्पोर्ट्स और विंटर कार्निवल का आनंद लें।" },
         { dest: "Manali", icon: "❄️", titleEn: "Snowy Manali Solang", titleHi: "मनाली के बर्फीले स्की रिज़ॉर्ट", descEn: "Witness heavy snowfall. Enjoy winter ski lessons, snow fights, and premium wooden pine cabins with fireplaces.", descHi: "सफेद बर्फ की मोटी चादर। बच्चों के साथ स्नो-मैन बनाएं, स्कीइंग करें और फायरप्लेस वाले कॉटेज का मज़ा लें।" },
         { dest: "Auli", icon: "🎿", titleEn: "Auli High Mountain Skiing", titleHi: "औली के बर्फीले मखमली ढलान", descEn: "Breathtaking snow slopes and high peaks. Ride the safe cable car watching dense oak forests loaded with white snow.", descHi: "स्कीइंग के प्रेमियों के लिए बेस्ट। बर्फ से लदे देवदार के जंगलों के बीच रोमांचक केबल कार की सवारी करें।" },
-        { dest: "Pondicherry", icon: "⛪", titleEn: "French Quarter Walks", titleHi: "पोन्डिचेरी के सुंदर फ्रेंच रास्ते", descEn: "Mild pleasant coastal breezes. Stroll along yellow-painted colonial villas, safe stone beaches, and cozy cafes.", descHi: "हल्की समुद्री हवाएं। फ्रांसीसी वास्तुकला से सजे सुंदर पीले विला, साफ गलियों और सुंदर कैफे की सैर का आनंद लें।" },
-        { dest: "Jaisalmer", icon: "🌌", titleEn: "Desert Winter Stargazing", titleHi: "रेगिस्तान की ठंडी तारों भरी रातें", descEn: "Cozy nights around bonfire. Enjoy Rajasthani puppet shows, camel desert safaris, and clear starry night sky viewing.", descHi: "ठंडी रातों में अलाव के पास बैठकर संगीत का मज़ा लें। दिन में ऊंत की सवारी और रात को दूरबीन से सितारे देखें।" }
+        { dest: "Rann of Kutch", icon: "🎪", titleEn: "Kutch Rann Utsav", titleHi: "कच्छ का सफेद रण उत्सव", descEn: "Experience pristine white salt desert glowing under full-moon starry nights. Enjoy vibrant tents and crafts.", descHi: "पूर्णिमा की तारों भरी रातों में चमकते हुए सफेद नमक के रेगिस्तान का अनुभव करें। जीवंत टेंट और शिल्पों का आनंद लें।" },
+        { dest: "Ooty", icon: "🌲", titleEn: "Ooty Frosty Pines", titleHi: "ऊटी के ठंडे देवदार के जंगल", descEn: "Crisp cold winter air, mist rolling over deep valley view-points, and tasting delicious hot local tea.", descHi: "ठंडी सर्दियों की ताज़ा हवा, गहरी घाटी के दृश्यों के ऊपर कोहरा और स्वादिष्ट गर्म स्थानीय चाय का स्वाद।" }
       ]
     }
+  ];
+
+  const checklists = {
+    mountains: [
+      { id: 'm1', textEn: "Thermal innerwear & heavy woolen jackets", textHi: "थर्मल इनर वियर और भारी ऊनी जैकेट" },
+      { id: 'm2', textEn: "Pediatric cold & cough syrups (highly recommended)", textHi: "बच्चों की सर्दी-खांसी की दवाएं (बेहद अनुशंसित)" },
+      { id: 'm3', textEn: "Moisturizer, cold cream, and lip balm", textHi: "मोइस्चराइज़र, कोल्ड क्रीम और लिप बाम" },
+      { id: 'm4', textEn: "Comfortable non-slip sneakers for mountain walks", textHi: "पहाड़ों की सैर के लिए आरामदायक ग्रिप वाले जूते" },
+      { id: 'm5', textEn: "Hot water thermos/flask for children's milk", textHi: "बच्चों के दूध/पानी के लिए गर्म पानी का थर्मस" }
+    ],
+    beaches: [
+      { id: 'b1', textEn: "High SPF kids sunscreen & mosquito roll-on", textHi: "बच्चों के लिए सनस्क्रीन और मॉस्किटो रोल-ऑन" },
+      { id: 'b2', textEn: "Lightweight cotton clothing & wide hats", textHi: "हल्के सूती कपड़े और चौड़ी धूप वाली टोपियां" },
+      { id: 'b3', textEn: "Ziplock bags to protect phones & diapers from wet sand", textHi: "फोन और डायपर को गीली रेत से बचाने के लिए जिपलॉक बैग" },
+      { id: 'b4', textEn: "Slippers/crocs with safe grip on wet surfaces", textHi: "गीली सतहों पर सुरक्षित पकड़ वाले सैंडल/क्रॉक्स" },
+      { id: 'b5', textEn: "Rehydration salts (ORS packets) for sun exposure", textHi: "धूप से बचाव के लिए ओआरएस (ORS) पैकेट" }
+    ],
+    heritage: [
+      { id: 'h1', textEn: "Comfortable cotton flats (lots of walking in forts)", textHi: "आरामदायक चलने वाले जूते (किलों में काफी चलना पड़ता है)" },
+      { id: 'h2', textEn: "Umbrella & polarized sunglasses for sunny days", textHi: "धूप से बचने के लिए छाता और धूप का चश्मा" },
+      { id: 'h3', textEn: "Hand sanitizers & wet wipes for on-the-go snacks", textHi: "रास्ते में खाने के लिए हैंड सैनिटाइज़र और वेट वाइप्स" },
+      { id: 'h4', textEn: "Power bank to keep cameras loaded for family photos", textHi: "फैमिली फोटोज के लिए कैमरे/फोन को चार्ज रखने के लिए पावर बैंक" },
+      { id: 'h5', textEn: "Informational travel guide maps or pocket books", textHi: "स्थानीय इतिहास और दर्शनीय स्थलों की पॉकेट गाइड बुक" }
+    ],
+    temples: [
+      { id: 't1', textEn: "Traditional modest clothing (stoles, saris, or light shawls)", textHi: "पारंपरिक शालीन वस्त्र (सिर ढकने के लिए दुपट्टा, स्टोल या शॉल)" },
+      { id: 't2', textEn: "Easy slip-on socks (barefoot marble temple floors get very hot or freezing)", textHi: "आसानी से उतरने वाले सूती मोज़े (मंदिर के फर्श से बचाव हेतु)" },
+      { id: 't3', textEn: "Slip-on sandals / footwear (easy to remove and wear outside shrines)", textHi: "आसानी से उतरने और पहनने योग्य चप्पल/सैंडल" },
+      { id: 't4', textEn: "Small eco-friendly cloth bag (for keeping prasad, flowers, & holy water)", textHi: "छोटा सूती थैला (प्रसाद, फूल और सामग्री सुरक्षित रखने के लिए)" },
+      { id: 't5', textEn: "Wet wipes, hand sanitizer, & small hand towels", textHi: "हैंड सैनिटाइज़र, गीले वाइप्स और हाथ पोंछने के लिए छोटा तौलिया" }
+    ]
+  };
+
+  const familyAssurances = [
+    {
+      icon: "🥗",
+      titleEn: "Nearby famous places and restaurants",
+      titleHi: "आसपास के प्रसिद्ध स्थान और रेस्टोरेंट",
+      descEn: "We filter hotels as per family requirement of famous places and highly-rated family restaurants located right nearby.",
+      descHi: "हम प्रसिद्ध स्थानों और पास ही में स्थित हाई-रेटेड फैमिली रेस्टोरेंट के पास आपकी पारिवारिक आवश्यकताओं के अनुसार होटल ढूंढते हैं।"
+    },
+    {
+      icon: "🧸",
+      titleEn: "Children Friendly",
+      titleHi: "बच्चों के अनुकूल",
+      descEn: "We filter hotels basis children needs of open spaces to play",
+      descHi: "हम बच्चों की ज़रूरतों के हिसाब से ऐसे होटल चुनते हैं जहाँ उनके खेलने के लिए खुले और बड़े मैदान (ओपन स्पेस) हों।"
+    },
+    {
+      icon: "👨‍👩‍👧‍👦",
+      titleEn: "Joint Family & Group Stays",
+      titleHi: "संयुक्त परिवार और ग्रुप बुकिंग",
+      descEn: "Perfect connected rooms, adjacent layouts, and special direct group discounts for family reunions or celebrations.",
+      descHi: "बड़े परिवारों के लिए एक साथ पास-पास कमरे, उत्सवों के लिए विशेष कस्टमाइज़्ड ग्रुप रेट्स।"
+    }
+  ];
+
+  const popularDestinations = [
+    { name: "Goa", emoji: "🏖️", desc: t("Beaches & Vibes", "समुद्र तट और मस्ती"), image: "https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?auto=format&fit=crop&w=800&q=80" },
+    { name: "Jaipur", emoji: "🏰", desc: t("Royal Heritage", "शाही किला और विरासत"), image: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80" },
+    { name: "Manali", emoji: "🏔️", desc: t("Mountains", "पहाड़ और ठंडी वादियां"), image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80" },
+    { name: "Rishikesh", emoji: "🪷", desc: t("Yoga & Adventure", "पवित्र गंगा घाट और शांति"), image: "https://images.unsplash.com/photo-1603867106100-0d2039fc8757?auto=format&fit=crop&q=80&w=800" },
+    { name: "Kerala", emoji: "🌴", desc: t("Backwaters", "हरे-भरे नारियल के पेड़ और पानी"), image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80" },
+    { name: "Leh Ladakh", emoji: "⛰️", desc: t("Adventure", "रोमांचक पहाड़ी रास्ते"), image: "https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?q=80&w=800&auto=format&fit=crop" }
   ];
 
   useEffect(() => {
@@ -340,6 +407,10 @@ export default function App() {
     setForm(prev => ({ ...prev, childAges: newAges }));
   };
 
+  const toggleChecklistItem = (itemId) => {
+    setCheckedItems(prev => ({ ...prev, [itemId]: !prev[itemId] }));
+  };
+
   const handleWhatsApp = (bypassReminder = false) => {
     if (!form.destination.trim()) {
       setValidationError(t("Please enter a destination to proceed.", "कृपया आगे बढ़ने के लिए गंतव्य दर्ज करें।"));
@@ -403,7 +474,7 @@ export default function App() {
     if (filters.parking) selectedAmenities.push("🚗 Safe Parking / सुरक्षित पार्किंग");
     if (filters.kidsPlay) selectedAmenities.push("🧸 Kids Play Area / खेलने की जगह");
     if (filters.pool) selectedAmenities.push("🏊‍♂️ Swimming Pool / स्विमिंग पूल");
-    if (filters.wifi) selectedAmenities.push("📶 Free High-speed Wi-Fi / हाई-स्पीड वाई-फाई");
+    if (filters.wifi) selectedAmenities.push("📶 Free High-speed Wi-Fi / वाई-फाई");
     const amenitiesText = selectedAmenities.length > 0 
       ? `\n⭐ *Amenities:* \n${selectedAmenities.map(item => `- ${item}`).join('\n')}` 
       : '';
@@ -434,19 +505,21 @@ export default function App() {
 
     const budgetFormatted = form.budgetPerDay === '20000' ? '₹15,000+' : `₹${form.budgetPerDay}`;
 
-    const msg = `*Premium Hotel Enquiry - StaySaathi*\n\n` +
-      `📍 Destination: ${form.destination}\n` +
-      `📅 From: ${form.fromDate || 'Flexible'}\n` +
-      `📅 Till: ${form.toDate || 'Flexible'}\n` +
-      `👨‍👩‍👧 Adults: ${form.adults}\n` +
-      `👦 ${childInfo}\n` +
-      `💰 Budget: ${budgetFormatted} per room/day` +
+    // Formatting highly structured code data for B2B parsing efficiency
+    const msg = `*STAYSAATHI TRIP INQUIRY*\n` +
+      `=========================\n` +
+      `📍 DESTINATION : ${form.destination}\n` +
+      `📅 CHECK-IN    : ${form.fromDate || 'Flexible'}\n` +
+      `📅 CHECK-OUT   : ${form.toDate || 'Flexible'}\n` +
+      `👥 GUESTS      : ${form.adults} Adults, ${form.children > 0 ? childInfo : 'No Kids'}\n` +
+      `💰 BUDGET/NIGHT: ${budgetFormatted} per room` +
       `${stayTypesText}` +
       `${amenitiesText}` +
       `${roomTypesText}` +
       `${mealPlanText}` +
-      `${specialNotesText}\n\n` +
-      `Please suggest the best matching options.`;
+      `${specialNotesText}\n` +
+      `=========================\n` +
+      `Please send me the 3 lowest-priced verified options in this range!`;
 
     window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, '_blank');
     setTimeout(() => setIsSubmitting(false), 1200);
@@ -468,43 +541,10 @@ export default function App() {
     }
   };
 
-  const familyAssurances = [
-    {
-      icon: "🥗",
-      titleEn: "Nearby famous places and restaurants",
-      titleHi: "आसपास के प्रसिद्ध स्थान और रेस्टोरेंट",
-      descEn: "We filter hotels as per family requirement of famous places and highly-rated family restaurants located right nearby.",
-      descHi: "हम प्रसिद्ध स्थानों और पास ही में स्थित हाई-रेटेड फैमिली रेस्टोरेंट के पास आपकी पारिवारिक आवश्यकताओं के अनुसार होटल ढूंढते हैं।"
-    },
-    {
-      icon: "🧸",
-      titleEn: "Children Friendly",
-      titleHi: "बच्चों के अनुकूल",
-      descEn: "We filter hotels basis children needs of open spaces to play",
-      descHi: "हम बच्चों की ज़रूरतों के हिसाब से ऐसे होटल चुनते हैं जहाँ उनके खेलने के लिए खुले और बड़े मैदान (ओपन स्पेस) हों।"
-    },
-    {
-      icon: "👨‍👩‍👧‍👦",
-      titleEn: "Joint Family & Group Stays",
-      titleHi: "संयुक्त परिवार और ग्रुप बुकिंग",
-      descEn: "Perfect connected rooms, adjacent layouts, and special direct group discounts for family reunions or celebrations.",
-      descHi: "बड़े परिवारों के लिए एक साथ पास-पास कमरे, उत्सवों के लिए विशेष कस्टमाइज़्ड ग्रुप रेट्स।"
-    }
-  ];
-
-  const popularDestinations = [
-    { name: "Goa", emoji: "🏖️", desc: t("Beaches & Vibes", "समुद्र तट और मस्ती"), image: "https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?auto=format&fit=crop&w=800&q=80" },
-    { name: "Jaipur", emoji: "🏰", desc: t("Royal Heritage", "शाही किला और विरासत"), image: "https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=800&q=80" },
-    { name: "Manali", emoji: "🏔️", desc: t("Mountains", "पहाड़ और ठंडी वादियां"), image: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=80" },
-    { name: "Rishikesh", emoji: "🪷", desc: t("Yoga & Adventure", "पवित्र गंगा घाट और शांति"), image: "https://images.unsplash.com/photo-1603867106100-0d2039fc8757?auto=format&fit=crop&q=80&w=800" },
-    { name: "Kerala", emoji: "🌴", desc: t("Backwaters", "हरे-भरे नारियल के पेड़ और पानी"), image: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80" },
-    { name: "Leh Ladakh", emoji: "⛰️", desc: t("Adventure", "रोमांचक पहाड़ी रास्ते"), image: "https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?q=80&w=800&auto=format&fit=crop" }
-  ];
-
   return (
     <div className={`min-h-screen font-sans antialiased relative transition-colors duration-300 ${darkMode ? 'bg-[#07070a] text-zinc-100' : 'bg-zinc-50 text-gray-900'}`}>
       
-      {/* Header */}
+      {}
       <header className={`sticky top-0 backdrop-blur-md border-b z-50 transition-all duration-300 ${darkMode ? 'bg-[#09090d]/90 border-zinc-900' : 'bg-white/95 border-zinc-200/80'}`}>
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
@@ -517,7 +557,7 @@ export default function App() {
 
           <div className="flex items-center gap-2 md:gap-4">
             
-            {/* Dark Mode Switch Button */}
+            {/* Dark Mode Toggle Button */}
             <button
               onClick={() => setDarkMode(!darkMode)}
               className={`p-2.5 rounded-full border-2 transition-all duration-300 ${darkMode ? 'border-zinc-800 text-yellow-400 bg-zinc-900 hover:border-zinc-700' : 'border-zinc-200 text-zinc-500 bg-white hover:bg-zinc-100 hover:border-zinc-300'}`}
@@ -534,7 +574,7 @@ export default function App() {
               )}
             </button>
 
-            {/* Bilingual Switch Button */}
+            {/* Bilingual Language Switcher */}
             <button 
               onClick={() => setLanguage(language === 'en' ? 'hi' : 'en')}
               className={`px-4 py-2 text-sm border-2 font-bold rounded-full transition duration-200 ${darkMode ? 'border-zinc-800 text-zinc-300 bg-zinc-900 hover:border-zinc-700' : 'border-zinc-200 text-zinc-700 bg-white hover:bg-zinc-100 hover:border-zinc-300'}`}
@@ -542,7 +582,6 @@ export default function App() {
               {language === 'en' ? 'हिन्दी' : 'English'}
             </button>
 
-            {/* Header Direct WhatsApp Connect */}
             <button
               onClick={() => handleWhatsApp(false)}
               className="bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-2xl font-bold flex items-center gap-2 transition shadow-lg shadow-emerald-900/10 text-sm md:text-base"
@@ -554,7 +593,7 @@ export default function App() {
         </div>
       </header>
 
-      {/* Hero Header Banner */}
+      {}
       <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
         <img
           src={luxuryImages[currentImage]}
@@ -573,7 +612,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Booking Form + Stay Type & Amenities Filters */}
+      {}
       <section id="booking-form" className="max-w-6xl mx-auto px-4 md:px-6 -mt-36 relative z-20 mb-20">
         <div className={`rounded-3xl shadow-2xl overflow-hidden transition-all duration-300 ${darkMode ? 'bg-[#0c0c11]/90 border border-zinc-800/80 backdrop-blur-md' : 'bg-white border border-zinc-100'}`}>
           
@@ -581,13 +620,14 @@ export default function App() {
             <h3 className={`text-2xl md:text-3xl font-serif font-bold ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
               {t("Plan Your Perfect Vacation", "अपनी मनपसंद छुट्टी की योजना बनाएं")}
             </h3>
-            <p className={`text-sm mt-1 font-medium ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
+            <p className={`text-sm mt-1 font-medium ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
               {t("Fill in your requirements and customize your stay preferences below.", "नीचे अपनी जरूरतें भरें और रहने की पसंदीदा सुविधाओं को चुनें।")}
             </p>
           </div>
 
           <div className="grid lg:grid-cols-12 gap-y-8">
-            {/* Form Side */}
+            
+            {/* Form Column */}
             <div className={`p-6 md:p-10 lg:col-span-7 lg:border-r transition-all ${darkMode ? 'border-zinc-800/80' : 'border-zinc-100'}`}>
               <h4 className={`text-lg font-bold mb-5 pb-2 border-b transition-all ${darkMode ? 'text-amber-400 border-zinc-800/60' : 'text-zinc-800 border-zinc-100'}`}>
                 📍 {t("1. Basic Details", "1. मुख्य विवरण")}
@@ -601,7 +641,7 @@ export default function App() {
                 </div>
               )}
 
-              {/* Autocomplete Search input */}
+              {/* Destination Search Input */}
               <div className="mb-5 relative">
                 <label className={`block text-sm font-semibold mb-1.5 ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>{t("Where do you want to go?", "आप कहाँ जाना चाहते हैं?")}</label>
                 <input 
@@ -671,7 +711,7 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Adults & Kids count dropdowns */}
+              {/* Adults & Kids count */}
               <div className="grid grid-cols-2 gap-4 mb-5">
                 <div>
                   <label className={`block text-sm font-semibold mb-1.5 ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>{t("Adults (12+ yrs)", "वयस्क")}</label>
@@ -696,6 +736,7 @@ export default function App() {
                 </div>
               </div>
 
+              {/* Budget section */}
               <div className="mb-6">
                 <label className={`block text-sm font-semibold mb-1.5 ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>{t("Budget per room / day", "प्रति कमरा / रात का बजट")}</label>
                 <select 
@@ -729,9 +770,9 @@ export default function App() {
                 </div>
               )}
 
-              {/* Special Request Textarea */}
+              {/* Special Request Area - Examples removed and set to clean solid black */}
               <div className="mb-6">
-                <label className={`block text-sm font-semibold mb-1.5 ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
+                <label className={`block text-sm font-semibold mb-1.5 ${darkMode ? 'text-zinc-400' : 'text-black font-bold'}`}>
                   📝 {t("Any Special Requests / Custom Notes?", "विशेष अनुरोध / टिप्पणी")}
                 </label>
                 <textarea
@@ -739,27 +780,24 @@ export default function App() {
                   value={form.customNotes}
                   onChange={handleChange}
                   rows="3"
-                  placeholder={t(
-                    "e.g., adjacent rooms, ground floor, pure veg restaurants nearby, hot water kettle for baby, early check-in request...",
-                    "जैसे: पास-पास कमरे चाहिए, ग्राउंड फ्लोर कमरा, बच्चे के लिए गर्म पानी की केतली, या जल्दी चेक-इन अनुरोध..."
-                  )}
-                  className={`w-full border-2 focus:ring-4 rounded-xl p-3 text-sm focus:outline-none resize-none transition-colors duration-200 ${darkMode ? 'bg-[#07070a] text-white border-zinc-800 focus:border-amber-500 focus:ring-amber-500/10' : 'bg-white text-zinc-800 border-zinc-200 focus:border-amber-500 focus:ring-amber-100'}`}
+                  placeholder=""
+                  className={`w-full border-2 focus:ring-4 rounded-xl p-3 text-sm focus:outline-none resize-none transition-colors duration-200 ${darkMode ? 'bg-[#07070a] text-white border-zinc-800 focus:border-amber-500 focus:ring-amber-500/10' : 'bg-white text-black border-zinc-300 focus:border-amber-500 focus:ring-amber-100'}`}
                 />
               </div>
 
-              {/* Safe Direct-Pay Guarantee Banner with Emerald accents */}
+              {/* Secure Payment Guarantee Banner */}
               <div className={`p-4 rounded-2xl border flex items-start gap-3 transition-colors duration-300 ${darkMode ? 'bg-emerald-950/20 border-emerald-900/40' : 'bg-emerald-50 border-emerald-100/80'}`}>
                 <div className={`text-2xl p-1 rounded-xl shadow-sm ${darkMode ? 'bg-emerald-900/50' : 'bg-white'}`}>🛡️</div>
                 <div>
-                  <h5 className={`text-sm font-bold ${darkMode ? 'text-emerald-300' : 'text-emerald-950'}`}>{t("100% Safe Pay-Direct Guarantee", "100% सुरक्षित डायरेक्ट भुगतान")}</h5>
+                  <h5 className={`text-sm font-bold ${darkMode ? 'text-emerald-300' : 'text-emerald-950'}`}>{t("100% Secure Checkout Guarantee", "100% सुरक्षित भुगतान गारंटी")}</h5>
                   <p className={`text-xs mt-0.5 leading-relaxed ${darkMode ? 'text-emerald-400/80' : 'text-emerald-800'}`}>
-                    {t("Pay directly to the hotel's verified account. We never collect or hold your card details, keeping your hard-earned money completely safe.", "सीधे होटल के सत्यापित खाते में भुगतान करें। हम कभी भी आपके कार्ड का विवरण नहीं मांगते, जिससे आपके पैसे पूरी तरह सुरक्षित रहते हैं।")}
+                    {t("Pay via our official, white-labeled StaySaathi secure payment link (supporting UPI, Cards, NetBanking). Your payment instantly locks your booking securely under our monitored reservation ledger.", "हमारे आधिकारिक सुरक्षित भुगतान लिंक (UPI, डेबिट/क्रेडिट कार्ड, नेटबैंकिंग) के माध्यम से सुरक्षित भुगतान करें। आपका भुगतान पूरा होते ही आपका कमरा सुरक्षित रूप से तुरंत लॉक हो जाता है।")}
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Preferred Amenities & Filters Side */}
+            {}
             <div className={`p-6 md:p-10 lg:col-span-5 flex flex-col justify-between transition-colors duration-300 ${darkMode ? 'bg-gradient-to-b from-[#0e0e14] to-[#0a0a0e]' : 'bg-gradient-to-b from-zinc-50 to-zinc-100'}`}>
               <div>
                 <h4 className={`text-lg font-bold mb-5 pb-2 border-b transition-all ${darkMode ? 'text-amber-400 border-zinc-800' : 'text-zinc-800 border-zinc-200'}`}>
@@ -851,7 +889,7 @@ export default function App() {
                         <span className="text-lg">🚗</span>
                         <div>
                           <span className={`block text-xs font-bold ${darkMode ? 'text-zinc-200' : 'text-zinc-800'}`}>{t("Safe Parking Available", "सुरक्षित पार्किंग व्यवस्था")}</span>
-                          <span className={`block text-[9px] ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("Protected parking spot for your car", "आपकी गाड़ी के लिए सुरक्षित पार्किंग स्थान")}</span>
+                          <span className={`block text-[9px] ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Protected parking spot for your car", "आपकी गाड़ी के लिए सुरक्षित पार्किंग स्थान")}</span>
                         </div>
                       </div>
                       <div className={`w-3.5 h-3.5 rounded border flex items-center justify-center transition-colors duration-200 ${
@@ -882,7 +920,7 @@ export default function App() {
                         <span className="text-lg">🧸</span>
                         <div>
                           <span className={`block text-xs font-bold ${darkMode ? 'text-zinc-200' : 'text-zinc-800'}`}>{t("Kids Play Area / Garden", "बच्चों के खेलने की खुली जगह")}</span>
-                          <span className={`block text-[9px] ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("Safe lawn and recreation for toddlers", "बच्चों के लिए पार्क व खेलने की सुरक्षित जगह")}</span>
+                          <span className={`block text-[9px] ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Safe lawn and recreation for toddlers", "बच्चों के लिए पार्क व खेलने की सुरक्षित जगह")}</span>
                         </div>
                       </div>
                       <div className={`w-3.5 h-3.5 rounded border flex items-center justify-center transition-colors duration-200 ${
@@ -913,7 +951,7 @@ export default function App() {
                         <span className="text-lg">🏊‍♂️</span>
                         <div>
                           <span className={`block text-xs font-bold ${darkMode ? 'text-zinc-200' : 'text-zinc-800'}`}>{t("Swimming Pool Access", "स्विमिंग पूल की सुविधा")}</span>
-                          <span className={`block text-[9px] ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("Clean active swimming pool on property", "होटल परिसर में स्वच्छ और सुंदर स्विमिंग पूल")}</span>
+                          <span className={`block text-[9px] ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Clean active swimming pool on property", "होटल परिसर में स्वच्छ और सुंदर स्विमिंग पूल")}</span>
                         </div>
                       </div>
                       <div className={`w-3.5 h-3.5 rounded border flex items-center justify-center transition-colors duration-200 ${
@@ -927,7 +965,7 @@ export default function App() {
                       </div>
                     </label>
 
-                    {/* Wifi / Internet Option */}
+                    {/* Wifi Option */}
                     <label 
                       onClick={() => handleFilterToggle('wifi')}
                       className={`flex items-center justify-between p-2.5 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
@@ -944,7 +982,7 @@ export default function App() {
                         <span className="text-lg">📶</span>
                         <div>
                           <span className={`block text-xs font-bold ${darkMode ? 'text-zinc-200' : 'text-zinc-800'}`}>{t("Free High-speed Wi-Fi", "मुफ़्त हाई-स्पीड वाई-फाई")}</span>
-                          <span className={`block text-[9px] ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("Fast internet connection across rooms", "कमरों और परिसर में तेज़ इंटरनेट की सुविधा")}</span>
+                          <span className={`block text-[9px] ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Fast internet connection across rooms", "कमरों और परिसर में तेज़ इंटरनेट की सुविधा")}</span>
                         </div>
                       </div>
                       <div className={`w-3.5 h-3.5 rounded border flex items-center justify-center transition-colors duration-200 ${
@@ -1008,7 +1046,7 @@ export default function App() {
                       onClick={() => handleFilterToggle('petsAllowed')}
                       className={`py-2 px-1 text-[11px] font-bold rounded-xl border-2 transition-all duration-200 flex items-center justify-center gap-1.5 ${
                         filters.petsAllowed 
-                          ? darkMode ? 'bg-amber-950/40 border-amber-500 text-amber-300' : 'bg-amber-100 border-amber-500 text-amber-800' 
+                          ? darkMode ? 'bg-amber-950/40 border-amber-500 text-amber-300 font-bold' : 'bg-amber-100 border-amber-500 text-amber-800' 
                           : darkMode ? 'bg-[#07070a] border-zinc-800 text-zinc-400' : 'bg-white border-zinc-200 text-zinc-600'
                       }`}
                     >
@@ -1027,7 +1065,7 @@ export default function App() {
                   </div>
                 </div>
 
-                {/* Board / Meal Plan selection */}
+                {/* Meal Plan Toggles */}
                 <div>
                   <h5 className={`text-[10px] font-bold uppercase tracking-wider mb-2 ${darkMode ? 'text-zinc-500' : 'text-zinc-400'}`}>{t("Meal Preferences (Board Plans)", "भोजन की प्राथमिकताएं")}</h5>
                   <div className="space-y-2">
@@ -1071,26 +1109,34 @@ export default function App() {
             </div>
           </div>
 
-          {/* Unified Submission Footer with WhatsApp Simulator Preview */}
+          {}
           <div className={`border-t p-6 md:p-8 flex flex-col items-center justify-center text-center transition-colors duration-300 ${darkMode ? 'bg-[#09090d] border-zinc-800/80' : 'bg-zinc-50 border-zinc-100'}`}>
             
-            {/* WhatsApp Message Preview Container */}
+            {/* Live Message Preview container */}
             <div className={`w-full max-w-2xl mb-6 rounded-2xl p-4 border shadow-inner relative overflow-hidden text-left font-sans transition-colors duration-300 ${darkMode ? 'bg-[#0e1115] border-zinc-800' : 'bg-zinc-50 border-zinc-200'}`}>
               <div className={`absolute top-0 left-0 right-0 px-3.5 py-1.5 flex items-center gap-2 text-xs font-bold shadow-md ${darkMode ? 'bg-[#128c7e]/80 text-white' : 'bg-emerald-600/90 text-white'}`}>
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
-                <span>StaySaathi Desk (Draft Summary)</span>
+                <span>StaySaathi Desk (Live Draft Preview)</span>
               </div>
               <div className="mt-7 flex justify-start">
                 <div className={`text-xs sm:text-sm p-3 rounded-2xl rounded-tl-none shadow-md max-w-[90%] relative border-l-4 border-emerald-500 transition-all ${darkMode ? 'bg-[#202c33] text-zinc-300' : 'bg-white text-zinc-700'}`}>
-                  <p className={`font-bold mb-1 ${darkMode ? 'text-emerald-400' : 'text-emerald-600'}`}>💬 {t("Draft Query Preview", "ड्राफ्ट संदेश का पूर्वावलोकन")}:</p>
-                  <p className="leading-relaxed font-sans">
-                    🌟 <strong>{form.destination ? `${t("Trip to", "यात्रा:")} ${form.destination}` : `[ ${t("Select Destination", "स्थान चुनें")} ]`}</strong>
+                  <p className={`font-bold mb-1 ${darkMode ? 'text-emerald-400' : 'text-emerald-600'}`}>💬 {t("Live compiled WhatsApp text:", "लाइव संकलित व्हाट्सएप मैसेज:")}</p>
+                  <p className="leading-relaxed font-sans font-medium whitespace-pre-wrap">
+                    STAYSAATHI TRIP INQUIRY
                     <br />
-                    📅 {form.fromDate || 'Flexible'} {t("to", "से")} {form.toDate || 'Flexible'}
+                    =========================
                     <br />
-                    👨‍👩‍👧‍👦 {form.adults} {t("Adults", "वयस्क")}, {form.children > 0 ? `${form.children} ${t("Children", "बच्चे")}` : t("No kids", "कोई बच्चे नहीं")}
+                    📍 DESTINATION : {form.destination ? form.destination : `[ ${t("Enter Destination", "स्थान भरें")} ]`}
                     <br />
-                    💰 {t("Budget", "बजट")}: {form.budgetPerDay === '20000' ? '₹15,000+' : `₹${form.budgetPerDay}`} / {t("day", "दिन")}
+                    📅 CHECK-IN    : {form.fromDate || 'Flexible'}
+                    <br />
+                    📅 CHECK-OUT   : {form.toDate || 'Flexible'}
+                    <br />
+                    👥 ROOMS       : 1 Room(s)
+                    <br />
+                    👨‍👩‍👧 GUESTS      : {form.adults} Adults, {form.children > 0 ? `${form.children} Children` : 'No Kids'}
+                    <br />
+                    💰 BUDGET/NIGHT: {form.budgetPerDay === '20000' ? '15000+' : `₹${form.budgetPerDay}`} / day
                     {(() => {
                       const selectedPrefs = [
                         filters.hotel && "Hotel",
@@ -1117,10 +1163,14 @@ export default function App() {
                       return (
                         <>
                           <br />
-                          ⚙️ {t("Preferences", "पसंद")}: {selectedPrefs.join(', ')}
+                          ⚙️ PREFERENCES : {selectedPrefs.join(', ')}
                         </>
                       );
                     })()}
+                    <br />
+                    =========================
+                    <br />
+                    Please send me the 3 lowest-priced verified options in this range!
                   </p>
                 </div>
               </div>
@@ -1140,41 +1190,82 @@ export default function App() {
               ) : (
                 <>
                   <svg className="w-6 h-6 fill-current animate-bounce" viewBox="0 0 24 24">
-                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.413 9.863-9.847.001-2.633-1.025-5.101-2.89-6.968-1.866-1.867-4.348-2.895-6.983-2.896-5.442 0-9.866 4.415-9.869 9.85-.001 1.77.461 3.497 1.338 5.025l-.995 3.634 3.711-.969zm11.378-6.13c-.27-.135-1.595-.786-1.842-.876-.246-.09-.427-.135-.607.135-.18.27-.697.876-.855 1.057-.157.18-.315.202-.585.067-1.144-.572-1.928-1.008-2.693-2.316-.201-.343.201-.318.574-1.06.09-.18.045-.337-.022-.472-.067-.135-.607-1.462-.832-2.003-.219-.527-.441-.455-.607-.464-.157-.008-.337-.009-.517-.009s-.472.067-.719.337c-.247.27-.944.922-.944 2.25s.966 2.61 1.101 2.79c.135.18 1.902 2.904 4.607 4.067.643.277 1.145.443 1.535.566.646.205 1.234.176 1.7.106.52-.078 1.595-.652 1.82-1.282.225-.63.225-1.17.157-1.282-.067-.113-.247-.18-.517-.315z"/>
-                  </svg>
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.713-1.457L0 24zm6.59-4.846c1.6.95 3.188 1.449 4.825 1.451 5.436 0 9.86-4.413 9.863-9.847.001-2.633-1.025-5.101-2.89-6.968-1.866-1.867-4.348-2.895-6.983-2.896-5.442 0-9.866 4.415-9.869 9.85-.001 1.77.461 3.497 1.338 5.025l-.995 3.634 3.711-.969zm11.378-6.13c-.27-.135-1.595-.786-1.842-.876-.246-.09-.427-.135-.607.135-.18.27-.697.876-.855 1.057-.157.18-.315.202-.585.067-1.144-.572-1.928-1.008-2.693-2.316-.201-.343.201-.318.574-1.06.09-.18.045-.337-.022-.472-.067-.135-.607-1.462-.832-2.003-.219-.527-.441-.455-.607-.464-.157-.008-.337-.009-.517-.009s-.472.067-.719.337c-.247.27-.944.922-.944 2.25s.966 2.61 1.101 2.79c.135.18 1.902 2.904 4.607 4.067.643.277 1.145.443 1.535.566.646.205 1.234.176 1.7.106.52-.078 1.595-.652 1.82-1.282.225-.63.225-1.17.157-1.282-.067-.113-.247-.18-.517-.315z"/></svg>
                   <span>{t("Submit to get best options on WhatsApp", "व्हाट्सएप पर बेहतरीन विकल्प पाने के लिए सबमिट करें")}</span>
                 </>
               )}
             </button>
-            <p className={`mt-3 text-xs font-medium ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
-              💡 {t("No middleman fees • Your selections will instantly compile into a WhatsApp draft message.", "कोई बिचौलिया शुल्क नहीं • आपकी चुनी गई पसंदीदा सुविधाएं अपने आप व्हाट्सएप संदेश में जुड़ जाएंगी।")}
+
+            {/* True Lock Trust badge - Generic compliance updated */}
+            <p className={`mt-4 text-sm font-bold flex items-center justify-center gap-1.5 transition-colors duration-300 ${darkMode ? 'text-amber-400' : 'text-amber-600'}`}>
+              <span>🛡️</span>
+              <span>
+                {t(
+                  "StaySaathi True-Lock Guarantee: All bookings are backed by India's leading corporate travel supplier networks with instant reservation mapping.",
+                  "स्टेसाथी ट्रू-लॉक गारंटी: सभी बुकिंग भारत के अग्रणी कॉर्पोरेट ट्रैवल सप्लायर नेटवर्क द्वारा सुरक्षित हैं, जिसमें तुरंत बुकिंग मैप हो जाती है।"
+                )}
+              </span>
+            </p>
+            
+            <p className={`mt-2 text-xs font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
+              💡 {t("No platform markup fees • Your selections will instantly compile into a structured WhatsApp inquiry.", "कोई अतिरिक्त प्लेटफ़ॉर्म शुल्क नहीं • आपकी चुनी गई पसंदीदा सुविधाएं अपने आप व्यवस्थित व्हाट्सएप संदेश में जुड़ जाएंगी।")}
             </p>
           </div>
         </div>
       </section>
 
-      {/* Trust Badges Section */}
+      {}
       <section className="max-w-6xl mx-auto px-4 md:px-6 mb-24">
         <div className="grid sm:grid-cols-3 gap-6">
           <div className={`border p-6 rounded-2xl text-center flex flex-col items-center transition-all ${darkMode ? 'bg-[#0c0c11] border-zinc-900 shadow-md' : 'bg-white border-zinc-100 shadow-sm'}`}>
             <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4 ${darkMode ? 'bg-amber-950/40 border border-amber-500/20' : 'bg-amber-50'}`}>💎</div>
             <h4 className={`text-lg font-bold mb-1 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("Zero Hidden Margins", "जीरो हिडन चार्जेस")}</h4>
-            <p className={`text-sm max-w-xs ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("Completely transparent model. You get actual dynamic hotel tariffs without hidden agents cuts.", "पूरी तरह से पारदर्शी मूल्य निर्धारण। बिना किसी छिपे हुए अतिरिक्त कमीशन के सीधे बुकिंग।")}</p>
+            <p className={`text-sm max-w-xs ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Completely transparent model. You get actual hotel tariffs without hidden agents cuts.", "पूरी तरह से पारदर्शी मूल्य निर्धारण। बिना किसी छिपे हुए अतिरिक्त कमीशन के सीधे बुकिंग।")}</p>
           </div>
           <div className={`border p-6 rounded-2xl text-center flex flex-col items-center transition-all ${darkMode ? 'bg-[#0c0c11] border-zinc-900 shadow-md' : 'bg-white border-zinc-100 shadow-sm'}`}>
             <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4 ${darkMode ? 'bg-amber-950/40 border border-amber-500/20' : 'bg-amber-50'}`}>🛡️</div>
             <h4 className={`text-lg font-bold mb-1 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("100% Quality Audited", "100% परखी हुई होटल्स")}</h4>
-            <p className={`text-sm max-w-xs ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("We strictly propose family-safe stays passing hygiene, safety, and hospitality audits.", "हम केवल उन होटल्स की सिफारिश करते हैं जो साफ-सफाई और पारिवारिक सुरक्षा मानकों पर खरे उतरते हैं।")}</p>
+            <p className={`text-sm max-w-xs ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("We strictly propose family-safe stays passing hygiene, safety, and hospitality audits.", "हम केवल उन होटल्स की सिफारिश करते हैं जो साफ-सफाई और पारिवारिक सुरक्षा मानकों पर खरे उतरते हैं।")}</p>
           </div>
           <div className={`border p-6 rounded-2xl text-center flex flex-col items-center transition-all ${darkMode ? 'bg-[#0c0c11] border-zinc-900 shadow-md' : 'bg-white border-zinc-100 shadow-sm'}`}>
             <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl mb-4 ${darkMode ? 'bg-amber-950/40 border border-amber-500/20' : 'bg-amber-50'}`}>📞</div>
             <h4 className={`text-lg font-bold mb-1 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("Support available between 9 - 7", "9 से 7 बजे के बीच सहायता उपलब्ध")}</h4>
-            <p className={`text-sm max-w-xs ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("We are available daily from 9:00 AM to 7:00 PM to handle all requests.", "हम आपकी सभी ज़रूरतों और बुकिंग के लिए रोज़ाना सुबह 9:00 बजे से शाम 7:00 बजे तक उपलब्ध हैं।")}</p>
+            <p className={`text-sm max-w-xs ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("We are available daily from 9:00 AM to 7:00 PM to handle all requests.", "हम आपकी सभी ज़रूरतों और बुकिंग के लिए रोज़ाना सुबह 9:00 बजे से शाम 7:00 बजे तक उपलब्ध हैं।")}</p>
           </div>
         </div>
       </section>
 
-      {/* Seasonal Planner - Where to Go in Which Season */}
+      {}
+      {/* RESTORED SECTION: Vetted Specially for Indian Families */}
+      <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
+        <div className={`rounded-3xl border p-8 md:p-12 transition-all ${darkMode ? 'bg-amber-950/20 border-amber-900/40' : 'bg-amber-50/60 border-amber-200/50'}`}>
+          <div className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
+            <span className="text-3xl">👨‍👩‍👧‍👦</span>
+            <h3 className={`text-2xl md:text-3xl font-serif font-bold mt-2 mb-3 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
+              {t("Vetted Specially for Indian Families", "भारतीय परिवारों के लिए खास सुविधाएं")}
+            </h3>
+            <p className={`text-sm font-medium ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
+              {t("We understand that a perfect family trip requires more than just a room. We take special care of your specific household needs.", "हम समझते हैं कि परिवार के साथ यात्रा करने में क्या महत्वपूर्ण होता है। हम आपकी हर जरूरत का पूरा ख्याल रखते हैं।")}
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {familyAssurances.map((item, index) => (
+              <div key={index} className={`p-6 rounded-2xl border shadow-sm flex flex-col items-start transition-colors ${darkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-zinc-100'}`}>
+                <span className="text-3xl mb-4 block">{item.icon}</span>
+                <h4 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
+                  {language === 'en' ? item.titleEn : item.titleHi}
+                </h4>
+                <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
+                  {language === 'en' ? item.descEn : item.descHi}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {}
       <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
         <div className={`rounded-3xl border p-6 md:p-10 transition-all ${darkMode ? 'bg-[#0c0c11] border-zinc-900/80 shadow-xl' : 'bg-zinc-100/80 border-zinc-200/60'}`}>
           <div className="text-center max-w-2xl mx-auto mb-10">
@@ -1182,12 +1273,12 @@ export default function App() {
             <h3 className={`text-2xl md:text-3xl font-serif font-bold mt-2 mb-3 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
               {t("Where to Go in Which Season? (Destination Suggestions)", "मौसम के अनुसार यात्रा सुझाव")}
             </h3>
-            <p className={`text-sm font-medium ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
+            <p className={`text-sm font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
               {t("Don't let bad weather ruin your trip. Select a month below to find perfect family destination suggestions recommended by Indian travel experts.", "गलत मौसम में यात्रा करके परेशान न हों। नीचे कोई भी महीना चुनें और जानें उस समय परिवार के लिए कौन से स्थान सबसे बेस्ट सुझाव रहेंगे।")}
             </p>
           </div>
 
-          {/* Month grid selector - glass buttons */}
+          {/* Month grid selector */}
           <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-12 gap-2 mb-8">
             {seasonalGuide.map((item, idx) => {
               const isActive = selectedMonthIndex === idx;
@@ -1197,9 +1288,7 @@ export default function App() {
                   onClick={() => setSelectedMonthIndex(idx)}
                   className={`py-3 px-2 rounded-xl border font-bold text-xs flex flex-col items-center gap-1.5 transition-all duration-250 ${
                     isActive 
-                      ? darkMode
-                        ? 'bg-amber-500 border-amber-600 text-zinc-950 shadow-lg shadow-amber-500/20 scale-105' 
-                        : 'bg-amber-500 border-amber-600 text-white shadow-md scale-105'
+                      ? 'bg-amber-500 border-amber-600 text-white shadow-md scale-105' 
                       : darkMode
                         ? 'bg-[#07070a] border-zinc-800 text-zinc-400 hover:border-zinc-700 hover:bg-zinc-900 hover:text-white'
                         : 'bg-white border-zinc-200 text-zinc-700 hover:border-zinc-300 hover:bg-zinc-50'
@@ -1212,7 +1301,6 @@ export default function App() {
             })}
           </div>
 
-          {/* Header of selected month */}
           <div className={`mb-6 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-4 border-b pb-4 transition-colors ${darkMode ? 'border-zinc-800' : 'border-zinc-200'}`}>
             <div>
               <span className={`text-xs font-bold tracking-wider uppercase border px-3 py-1 rounded-full ${darkMode ? 'text-amber-400 bg-amber-950/40 border-amber-500/20' : 'text-amber-600 bg-amber-50 border-amber-200'}`}>
@@ -1222,13 +1310,13 @@ export default function App() {
                 {t("Curated Destination Suggestions", "चुनिंदा पर्यटन स्थल सुझाव")}
               </h4>
             </div>
-            <p className={`text-xs font-semibold max-w-sm md:text-right leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
+            <p className={`text-xs font-semibold max-w-sm md:text-right leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
               {t("Click on any destination's Apply button to instantly load it into your travel planner.", "नीचे दी गई किसी भी जगह के 'चुनें' बटन पर क्लिक करके सीधे योजना बनाना शुरू करें।")}
             </p>
           </div>
 
-          {/* Grid of 5 Recommended Places */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+          {/* Grid of 5 Suggested Places per month */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {seasonalGuide[selectedMonthIndex].places.map((place, idx) => (
               <div 
                 key={idx} 
@@ -1251,7 +1339,7 @@ export default function App() {
                   <h6 className="text-xs font-semibold text-amber-500 mb-2 leading-tight">
                     {language === 'en' ? place.titleEn : place.titleHi}
                   </h6>
-                  <p className={`text-xs leading-relaxed mb-4 ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
+                  <p className={`text-xs leading-relaxed mb-4 ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
                     {language === 'en' ? place.descEn : place.descHi}
                   </p>
                 </div>
@@ -1273,36 +1361,106 @@ export default function App() {
         </div>
       </section>
 
-      {/* Family-First Assurances */}
+      {}
       <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
-        <div className={`rounded-3xl border p-8 md:p-12 transition-colors duration-300 ${darkMode ? 'bg-amber-950/10 border-amber-900/30' : 'bg-amber-50/60 border-amber-200/50'}`}>
-          <div className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
-            <span className="text-3xl">👨‍👩‍👧‍👦</span>
+        <div className={`rounded-3xl border p-6 md:p-10 transition-all ${
+          darkMode ? 'bg-gradient-to-br from-[#0e0e14] to-[#08080c] border-zinc-800' : 'bg-gradient-to-br from-amber-50/30 to-zinc-100 border-zinc-200'
+        }`}>
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="text-4xl">🧳</span>
             <h3 className={`text-2xl md:text-3xl font-serif font-bold mt-2 mb-3 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
-              {t("Vetted Specially for Indian Families", "भारतीय परिवारों के लिए खास सुविधाएं")}
+              {t("Interactive Family Packing Assistant", "पारिवारिक पैकिंग सहायक (इंटरएक्टिव)")}
             </h3>
             <p className={`text-sm font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
-              {t("We understand that a perfect family trip requires more than just a room. We take special care of your specific household needs.", "हम समझते हैं कि परिवार के साथ यात्रा करने में क्या महत्वपूर्ण होता है। हम आपकी हर जरूरत का पूरा ख्याल रखते हैं।")}
+              {t("Select your vacation style below to instantly unlock a tailored, checkable packing safety checklist for your family members.", "अपनी यात्रा का प्रकार चुनें और हमारी ओर से तैयार की गई विशेष सुरक्षात्मक वस्तुओं की पैकिंग लिस्ट को चेक करें।")}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {familyAssurances.map((item, index) => (
-              <div key={index} className={`p-6 rounded-2xl border shadow-sm flex flex-col items-start transition-colors duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-100'}`}>
-                <span className="text-3xl mb-4 block">{item.icon}</span>
-                <h4 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
-                  {language === 'en' ? item.titleEn : item.titleHi}
-                </h4>
-                <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                  {language === 'en' ? item.descEn : item.descHi}
-                </p>
+          <div className="flex justify-center gap-3 mb-8 flex-wrap">
+            <button
+              onClick={() => setChecklistCategory('mountains')}
+              className={`py-2.5 px-6 rounded-2xl font-bold text-xs transition-all ${
+                checklistCategory === 'mountains'
+                  ? 'bg-amber-500 text-zinc-950 shadow-lg shadow-amber-500/20'
+                  : darkMode ? 'bg-zinc-900 text-zinc-400 hover:text-white' : 'bg-white text-zinc-700 shadow-sm'
+              }`}
+            >
+              🏔️ {t("Mountain Stations", "पहाड़ी इलाका")}
+            </button>
+            <button
+              onClick={() => setChecklistCategory('beaches')}
+              className={`py-2.5 px-6 rounded-2xl font-bold text-xs transition-all ${
+                checklistCategory === 'beaches'
+                  ? 'bg-amber-500 text-zinc-950 shadow-lg shadow-amber-500/20'
+                  : darkMode ? 'bg-zinc-900 text-zinc-400 hover:text-white' : 'bg-white text-zinc-700 shadow-sm'
+              }`}
+            >
+              🏖️ {t("Sunny Beaches", "समुद्र तट")}
+            </button>
+            <button
+              onClick={() => setChecklistCategory('heritage')}
+              className={`py-2.5 px-6 rounded-2xl font-bold text-xs transition-all ${
+                checklistCategory === 'heritage'
+                  ? 'bg-amber-500 text-zinc-950 shadow-lg shadow-amber-500/20'
+                  : darkMode ? 'bg-zinc-900 text-zinc-400 hover:text-white' : 'bg-white text-zinc-700 shadow-sm'
+              }`}
+            >
+              🏰 {t("Heritage Fort Cities", "ऐतिहासिक शहर")}
+            </button>
+            <button
+              onClick={() => setChecklistCategory('temples')}
+              className={`py-2.5 px-6 rounded-2xl font-bold text-xs transition-all ${
+                checklistCategory === 'temples'
+                  ? 'bg-amber-500 text-zinc-950 shadow-lg shadow-amber-500/20'
+                  : darkMode ? 'bg-zinc-900 text-zinc-400 hover:text-white' : 'bg-white text-zinc-700 shadow-sm'
+              }`}
+            >
+              🛕 {t("Sacred Temple Trips", "धार्मिक मंदिर दर्शन")}
+            </button>
+          </div>
+
+          <div className="max-w-2xl mx-auto">
+            <div className={`p-6 rounded-2xl border transition-colors duration-300 ${
+              darkMode ? 'bg-[#07070a] border-zinc-800' : 'bg-white border-zinc-100 shadow-inner'
+            }`}>
+              <span className="text-[10px] font-bold text-amber-500 tracking-wider uppercase block mb-3">
+                📋 {t("ESSENTIAL FAMILY CHECKLIST", "अनिवार्य सामान की सूची")}
+              </span>
+              <div className="space-y-3">
+                {checklists[checklistCategory].map((item) => {
+                  const isChecked = !!checkedItems[item.id];
+                  return (
+                    <label 
+                      key={item.id}
+                      onClick={() => toggleChecklistItem(item.id)}
+                      className={`flex items-center gap-3 p-3 rounded-xl border-2 cursor-pointer transition-all select-none ${
+                        isChecked 
+                          ? 'border-emerald-500/50 bg-emerald-500/5' 
+                          : darkMode ? 'border-zinc-850 hover:border-zinc-800' : 'border-zinc-50 hover:border-zinc-100'
+                      }`}
+                    >
+                      <div className={`w-5 h-5 rounded-md border flex items-center justify-center shrink-0 transition-colors ${
+                        isChecked 
+                          ? 'border-emerald-500 bg-emerald-500 text-white' 
+                          : darkMode ? 'border-zinc-700 bg-zinc-900' : 'border-zinc-300 bg-zinc-50'
+                      }`}>
+                        {isChecked && <span className="text-xs font-bold">✓</span>}
+                      </div>
+                      <span className={`text-sm font-semibold transition-all ${
+                        isChecked ? 'line-through text-zinc-500' : darkMode ? 'text-zinc-200' : 'text-zinc-850'
+                      }`}>
+                        {language === 'en' ? item.textEn : item.textHi}
+                      </span>
+                    </label>
+                  );
+                })}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Step-by-Step Experience Timeline */}
+      {}
       <section className={`border-y py-20 px-4 md:px-6 mb-24 transition-colors duration-300 ${darkMode ? 'bg-[#09090d] border-zinc-900' : 'bg-zinc-100/70 border-zinc-200/50'}`}>
         <div className="max-w-5xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -1322,24 +1480,24 @@ export default function App() {
               <span className="absolute -top-5 left-6 bg-gradient-to-br from-amber-500 to-yellow-600 text-[#07070a] w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-lg">2</span>
               <div className="text-amber-500 font-bold text-xs uppercase tracking-wider mb-2 mt-2">{t("WITHIN FEW HOURS", "कुछ ही घंटों में")}</div>
               <h4 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("Receive Custom Options", "होटल विकल्प पाएं")}</h4>
-              <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("Our destination helper filters clean local properties and delivers 3 best tailored hotel choices to your chat.", "हमारे लोकल एक्सपर्ट सबसे सुरक्षित और बेहतरीन 3 विकल्प आपके व्हाट्सएप पर भेजेंगे।")}</p>
+              <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Our destination helper filters clean local properties and delivers 3 best tailored hotel choices to your chat.", "हमारे लोकल एक्सपर्ट सबसे सुरक्षित और बेहतरीन 3 विकल्प आपके व्हाट्सएप पर भेजेंगे।")}</p>
             </div>
 
             <div className={`p-6 rounded-2xl shadow-sm relative border transition-colors duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-200/40'}`}>
               <span className="absolute -top-5 left-6 bg-gradient-to-br from-amber-500 to-yellow-600 text-[#07070a] w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-lg">3</span>
               <div className="text-zinc-400 font-bold text-xs uppercase tracking-wider mb-2 mt-2">{t("SEAMLESS BOOKING", "आसान बुकिंग")}</div>
               <h4 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("Pay Safely Direct", "सुरक्षित भुगतान करें")}</h4>
-              <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("Select your preferred stay. Pay directly to the hotel or verified portal link securely with no hidden platform fees.", "पसंदीदा होटल चुनें और बिना किसी अतिरिक्त छिपे शुल्क के सीधे होटल के माध्यम से सुरक्षित भुगतान करें।")}</p>
+              <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("Select your preferred stay. Pay securely via our verified StaySaathi payment link with zero hidden platform fees and automatic room lock-in.", "पसंदीदा होटल चुनें और बिना किसी अतिरिक्त छिपे शुल्क के हमारे सुरक्षित स्टेसाथी भुगतान लिंक के माध्यम से तुरंत कमरा सुरक्षित करें।")}</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Popular Destinations */}
+      {}
       <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
         <div className="text-center max-w-xl mx-auto mb-12">
           <h3 className={`text-3xl md:text-4xl font-serif font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("Popular Indian Escapes", "लोकप्रिय भारतीय गंतव्य")}</h3>
-          <p className={`font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("Handpicked destinations loved extensively by Indian families and travelers alike.", "भारतीय परिवारों और यात्रियों द्वारा सबसे ज्यादा पसंद किए जाने वाले चुनिंदा स्थान।")}</p>
+          <p className={`font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Handpicked destinations loved extensively by Indian families and travelers alike.", "भारतीय परिवारों और यात्रियों द्वारा सबसे ज्यादा पसंद किए जाने वाले चुनिंदा स्थान।")}</p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -1369,7 +1527,7 @@ export default function App() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
+      {}
       <section className={`border-t py-20 px-4 md:px-6 mb-12 transition-colors duration-300 ${darkMode ? 'bg-gradient-to-b from-[#0a0a0f] to-[#07070a] border-zinc-900' : 'bg-gradient-to-b from-zinc-50 to-zinc-100 border-zinc-200'}`}>
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -1377,7 +1535,7 @@ export default function App() {
             <h3 className={`text-3xl md:text-4xl font-serif font-bold mt-3 mb-4 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
               {t("Why Choose StaySaathi?", "हम ही क्यों चुनें?")}
             </h3>
-            <p className={`font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-650'}`}>
+            <p className={`font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-655'}`}>
               {t("We stand beside you as a true friend, ensuring your holidays are entirely stress-free and full of genuine comfort.", "हम एक सच्चे दोस्त की तरह आपके साथ खड़े हैं, ताकि आपका सफर बिना किसी तनाव और पूरी सुख-सुविधाओं के साथ पूरा हो।")}
             </p>
           </div>
@@ -1391,7 +1549,7 @@ export default function App() {
                 <h4 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
                   {t("Real Humans, No Confusing AI or Bots", "असली इंसानी मदद, कोई उलझाने वाले रोबोट्स नहीं")}
                 </h4>
-                <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
+                <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
                   {t("No automated robotic replies or confusing multi-search websites with fake reviews. Our dedicated destination experts handle your planning and hotel screening headache entirely.", "कोई ऑटोमैटिक रोबोटिक जवाब या उलझाने वाली ढेरों वेबसाइट्स नहीं। आपकी यात्रा की योजना और होटल्स की बारीक से जांच करने का पूरा सिरदर्द हमारे असली विशेषज्ञ खुद लेते हैं।")}
                 </p>
               </div>
@@ -1399,26 +1557,26 @@ export default function App() {
 
             {/* Core Point 2: Vetted Options */}
             <div className={`p-8 rounded-3xl border shadow-md flex gap-5 hover:shadow-xl transition-all duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900 hover:border-zinc-800' : 'bg-white border-zinc-200/50 hover:shadow-md'}`}>
-              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 font-bold ${darkMode ? 'bg-amber-950/30 text-amber-400 border border-amber-900/30' : 'bg-amber-50 text-amber-600'}`}>🔍</div>
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 font-bold ${darkMode ? 'bg-amber-950/30 text-amber-400 border border-amber-900/30' : 'bg-amber-50 text-amber-655'}`}>🔍</div>
               <div>
                 <h4 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
                   {t("Handpicked & Carefully Reviewed Options", "पूरी तरह परखे और जांचे गए बेहतरीन विकल्प")}
                 </h4>
-                <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                  {t("Get carefully hand-screened hotels that offer much better comfort, safe neighborhoods, and true value for your exact price point—none of the guesswork or fake app listings.", "अपने बजट में वो चुनिंदा होटल्स और रिसॉर्ट्स पाएं जिन्हें हमने खुद सुरक्षा और आराम के पैमानों पर परखा है। साधारण बुकिंग ऐप्स के भ्रामक वादों और अधूरी जानकारियों से बिल्कुल सुरक्षित।")}
+                <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
+                  {t("Get carefully hand-screened hotels that offer much better comfort, safe neighborhoods, and true value for your exact price point—none of the guesswork or fake app listings.", "अपने बजट में वो चुनिंदा होटल्स और रिसॉर्ट्स पाएं जिन्हें हमने खुद सुरक्षा और आराम के पैमानों पर परखा है।")}
                 </p>
               </div>
             </div>
 
-            {/* Core Point 3: Safe Direct Pay */}
+            {/* Core Point 3: Safe Payments */}
             <div className={`p-8 rounded-3xl border shadow-md flex gap-5 hover:shadow-xl transition-all duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900 hover:border-zinc-800' : 'bg-white border-zinc-200/50 hover:shadow-md'}`}>
               <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 font-bold ${darkMode ? 'bg-emerald-950/30 text-emerald-400 border border-emerald-900/30' : 'bg-emerald-50 text-emerald-600'}`}>💳</div>
               <div>
                 <h4 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
-                  {t("Direct & Safe Hotel Payments", "सीधे और सुरक्षित भुगतान")}
+                  {t("Direct & Safe Payments", "सीधे और सुरक्षित भुगतान")}
                 </h4>
-                <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                  {t("Enjoy complete financial peace of mind. Pay directly to the hotel's verified account or their official secure payment link with zero middleman holding risks.", "पैसों की पूरी सुरक्षा। बिना किसी बिचौलिए या अनजाने प्लेटफॉर्म के जोखिम के, सीधे होटल के वेरिफाइड बैंक खाते या सुरक्षित भुगतान लिंक पर अपना पेमेंट करें।")}
+                <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
+                  {t("Enjoy complete financial peace of mind. Pay securely via StaySaathi's official payment link with zero middleman holding risks and automatic room lock-in.", "पैसों की पूरी सुरक्षा। बिना किसी बिचौलिए या अनजाने प्लेटफॉर्म के जोखिम के, सीधे स्टेसाथी के आधिकारिक सुरक्षित भुगतान लिंक पर अपना पेमेंट करें और कमरा सुरक्षित करें।")}
                 </p>
               </div>
             </div>
@@ -1427,32 +1585,78 @@ export default function App() {
         </div>
       </section>
 
-      {/* FAQ Section with Static Layout as Requested */}
+      {}
       <section className="max-w-4xl mx-auto px-4 md:px-6 py-12 mb-16">
         <h3 className={`text-3xl md:text-4xl font-serif font-bold text-center mb-10 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("Frequently Asked Questions", "अक्सर पूछे जाने वाले सवाल")}</h3>
         <div className="space-y-4">
           <div className={`p-5 rounded-2xl border shadow-sm transition-all duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-200/60'}`}>
             <strong className="text-base md:text-lg text-amber-500 font-bold block mb-2">❓ {t("How does booking payment execution work?", "पेमेंट का भुगतान कैसे होता है?")}</strong>
             <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-650'}`}>
-              {t("For complete financial safety, you pay directly to the verified chosen hotel property or through their official verified secure payment gateway links.", "पूर्ण वित्तीय सुरक्षा के लिए, आप सभी भुगतानों को सीधे चुने गए होटल को या उनके आधिकारिक सुरक्षित पेमेंट लिंक के माध्यम से ही पूरा करते हैं।")}
+              {t("For complete financial safety, you pay directly via our secure, white-labeled StaySaathi payment gateway link (supporting UPI, Credit/Debit Cards, NetBanking). The payment locks in your room instantly, and your official stay voucher is issued immediately under your name.", "पूरी सुरक्षा के लिए, आप सीधे हमारे सुरक्षित स्टेसाथी गेटवे लिंक (UPI, डेबिट/क्रेडिट कार्ड, नेटबैंकिंग) के माध्यम से भुगतान करते हैं। भुगतान पूरा होते ही आपका रूम तुरंत लॉक हो जाता है और आपका वाउचर तुरंत जारी हो जाता है।")}
             </p>
           </div>
           <div className={`p-5 rounded-2xl border shadow-sm transition-all duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-200/60'}`}>
             <strong className="text-base md:text-lg text-amber-500 font-bold block mb-2">❓ {t("Are there any hidden platform assistance fees?", "क्या इसके लिए कोई छिपी हुई फीस ली जाती है?")}</strong>
-            <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-650'}`}>
+            <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-655'}`}>
               {t("No, our assistance service is completely free of charge for travelers. We partner directly with property operators to secure customized perks for our community.", "नहीं, हमारी सहायता सेवा यात्रियों के लिए पूरी तरह से निःशुल्क है। हम होटल्स के साथ सीधे जुड़कर आपके लिए खास रियायतें तय करते हैं।")}
             </p>
           </div>
           <div className={`p-5 rounded-2xl border shadow-sm transition-all duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-200/60'}`}>
             <strong className="text-base md:text-lg text-amber-500 font-bold block mb-2">❓ {t("Can I call and speak to a real person directly?", "क्या मैं सीधे फोन पर बात कर सकता हूँ?")}</strong>
-            <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-650'}`}>
+            <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-655'}`}>
               {t("Yes! Between 9:00 AM and 7:00 PM daily, you will connect directly with real travel assistant curators on WhatsApp or calls, with no automated robots or complex chatbot loops.", "जी हाँ! रोज सुबह 9 बजे से शाम 7 बजे के बीच आप व्हाट्सएप या कॉल पर सीधे हमारे विशेषज्ञ मार्गदर्शक से बात कर सकते हैं। कोई रोबोटिक या परेशान करने वाले बॉट सिस्टम नहीं हैं।")}
             </p>
           </div>
         </div>
       </section>
 
-      {/* Footer */}
+      {}
+      <section className="max-w-6xl mx-auto px-4 md:px-6 mb-24">
+        <div className={`rounded-3xl border p-6 md:p-10 transition-all ${
+          darkMode ? 'bg-[#0a0a0f] border-zinc-800' : 'bg-zinc-100 border-zinc-200'
+        }`}>
+          <div className="text-center max-w-2xl mx-auto mb-8">
+            <h4 className={`text-xl md:text-2xl font-serif font-bold ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
+              {t("Your Seamless Path to Vacation", "आपकी आसान बुकिंग प्रक्रिया")}
+            </h4>
+            <p className={`text-xs mt-1 font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
+              {t("We handle the complexities directly behind the scenes with zero middleman markup fees.", "हम बिना किसी अतिरिक्त छिपे शुल्कों के पूरी प्रक्रिया को पृष्ठभूमि में आसान बनाते हैं।")}
+            </p>
+          </div>
+
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 max-w-4xl mx-auto">
+            {/* Step 1 */}
+            <div className={`flex items-center gap-3 p-4 rounded-2xl border-2 transition-all w-full md:w-auto ${
+              darkMode ? 'bg-[#0c0c12] border-zinc-800' : 'bg-white border-zinc-200'
+            }`}>
+              <div className="w-8 h-8 rounded-xl bg-amber-500 text-zinc-950 flex items-center justify-center font-extrabold text-sm">1</div>
+              <span className="text-xs sm:text-sm font-bold">{t("Tell Us Your Plan", "अपनी योजना बताएं")}</span>
+            </div>
+            {/* Arrow */}
+            <span className="hidden md:inline text-amber-500 text-xl font-bold">──►</span>
+            
+            {/* Step 2 */}
+            <div className={`flex items-center gap-3 p-4 rounded-2xl border-2 transition-all w-full md:w-auto ${
+              darkMode ? 'bg-[#0c0c12] border-zinc-800' : 'bg-white border-zinc-200'
+            }`}>
+              <div className="w-8 h-8 rounded-xl bg-amber-500 text-zinc-950 flex items-center justify-center font-extrabold text-sm">2</div>
+              <span className="text-xs sm:text-sm font-bold">{t("Get Your 3 Lowest Options", "3 सबसे सस्ते विकल्प पाएं")}</span>
+            </div>
+            {/* Arrow */}
+            <span className="hidden md:inline text-amber-500 text-xl font-bold">──►</span>
+
+            {/* Step 3 */}
+            <div className={`flex items-center gap-3 p-4 rounded-2xl border-2 transition-all w-full md:w-auto ${
+              darkMode ? 'bg-[#0c0c12] border-zinc-800' : 'bg-white border-zinc-200'
+            }`}>
+              <div className="w-8 h-8 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-extrabold text-sm">✓</div>
+              <span className="text-xs sm:text-sm font-bold">{t("Receive Branded StaySaathi PDF Voucher", "ब्रांडेड StaySaathi PDF वाउचर पाएं")}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {}
       <footer className={`py-12 px-4 md:px-6 border-t-4 border-amber-500 transition-colors duration-300 ${darkMode ? 'bg-[#09090c] text-zinc-300' : 'bg-zinc-900 text-zinc-100'}`}>
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex justify-center items-center gap-3 mb-4">
@@ -1462,12 +1666,12 @@ export default function App() {
           <p className="opacity-75 text-sm font-semibold text-amber-500/80">Assistance Hours: 9 AM – 7 PM IST</p>
           <div className="w-16 h-0.5 bg-zinc-800 mx-auto my-6" />
           <p className="text-xs opacity-50 max-w-xl mx-auto leading-relaxed">
-            Curated & Personalized Premium Family Hotel Assistance • Pay Directly to Vetted Hotel Operations. All rights reserved. © 2026 StaySaathi Desk.
+            Curated & Personalized Premium Family Hotel Assistance • Secure White-Labeled Payments. All rights reserved. © 2026 StaySaathi Desk.
           </p>
         </div>
       </footer>
 
-      {/* Fixed bottom scrolling assistant trigger button */}
+      {}
       {showFloatingSubmit && (
         <div className="fixed bottom-6 left-4 right-4 z-40 md:left-auto md:right-8 md:w-[450px] transition-all duration-300">
           <div className={`p-2 rounded-2xl shadow-2xl border backdrop-blur-md flex flex-col items-center transition-colors duration-300 ${darkMode ? 'bg-[#0c0c11]/95 border-amber-500/20' : 'bg-white/95 border-amber-500/30'}`}>
@@ -1484,7 +1688,7 @@ export default function App() {
         </div>
       )}
 
-      {/* Stop Gap Warning Modal */}
+      {}
       {showPreferenceReminder && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div 
@@ -1498,7 +1702,7 @@ export default function App() {
               <h3 className={`text-2xl font-serif font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-850'}`}>
                 {t("Enhance Your Travel Experience!", "अपनी यात्रा को और बेहतर बनाएं!")}
               </h3>
-              <p className={`text-sm leading-relaxed mb-6 font-medium ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
+              <p className={`text-sm leading-relaxed mb-6 font-medium ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
                 {t(
                   "You haven't selected any stay type, essential amenities, or meal plans yet. Adding these details helps our experts find the absolute perfect, family-safe match for your budget!",
                   "आपने अभी तक रहने का प्रकार, आवश्यक सुविधाएं या भोजन की पसंद नहीं चुनी है। इन्हें जोड़ने से हमारे विशेषज्ञ आपके बजट में सबसे उत्तम और सुरक्षित होटल ढूंढ पाएंगे!"
