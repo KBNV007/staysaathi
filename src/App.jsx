@@ -211,9 +211,9 @@ export default function App() {
       monthHi: "अगस्त",
       icon: "🌴",
       places: [
-        { dest: "Kerala", icon: "🌴", titleEn: "Lush Backwater Stays", titleHi: "केरल के शांत नारियल के बाग", descEn: "Post-monsoon leaves backwaters ultra-clean and green. Stay in premium traditional houseboats safely.", descHi: "बारिश के बाद की अद्भुत चमकीली हरियाली। नारियल के पेड़ों के बीच तैरते शानदार सुरक्षित हाउसबोट का मज़ा।" },
+        { dest: "Kerala", icon: "🌴", titleEn: "Lush Backwater Stays", titleHi: "केरल के शांत नारियल के बाग", descEn: "Post-monsoon leaves backwaters ultra-clean and green. Stay in premium traditional houseboats safely.", descHi: "बारिश के बाद की अद्भुत हरियाली। नारियल के पेड़ों के बीच तैरते शानदार सुरक्षित हाउसबोट का मज़ा।" },
         { dest: "Cherrapunji", icon: "🌧️", titleEn: "Greenest Cherrapunji", titleHi: "चेरापूंजी के बादलों का घर", descEn: "Experience the majestic rain! Watch roaring waterfalls and walk on living root bridges in clean air.", descHi: "दुनिया की सबसे भारी बारिश के रोमांच, बादलों की लुका-छिपी और प्राचीन लिविंग ROOT ब्रिजों की सैर का अनुभव करें।" },
-        { dest: "Mount Abu", icon: "⛰️", titleEn: "Misty Abu Monsoons", titleHi: "माउंट आबू के मानसून झरने", descEn: "Misty lakes and waterfalls rolling over green rocks. Enjoy pleasant cool evening shopping walks.", descHi: "कोहरे से ढकी झीलें और पहाड़ों से बहते सुंदर झरने। राजस्थानी और गुजराती भोजन व शाम की ठंडी सैर का आनंद लें।" },
+        { dest: "Mount Abu", icon: "⛰️", titleEn: "Misty Abu Monsoons", titleHi: "माउंट आबू के मानसून झरने", descEn: "Misty lakes and waterfalls rolling over green rocks. Enjoy pleasant cool evening shopping walks.", descHi: "कोहरे से ढके झीलें और पहाड़ों से बहते सुंदर झरने। राजस्थानी और गुजराती भोजन व शाम की ठंडी सैर का आनंद लें।" },
         { dest: "Lonavala", icon: "🌿", titleEn: "Misty Sahyadri Meadows", titleHi: "लोनावला की हरी-भरी पहाड़ियाँ", descEn: "Vibrant mountain springs and deep green valleys. Walk along mist-covered mountain trails.", descHi: "जैविक झरने, गहरी हरी घाटियाँ और कोहरे से ढकी पहाड़ी पगडंडियों पर टहलने का आनंद लें।" },
         { dest: "Chikmagalur", icon: "☕", titleEn: "Chikmagalur Coffee Clouds", titleHi: "चिकमगलूर के कॉफी बागान", descEn: "Walk inside dense coffee bushes loaded with fresh monsoon rain droplets and mist-topped peaks.", descHi: "मानसून की ताज़ा बूंदों और कोहरे से ढकी चोटियों के बीच कॉफी के घने बागानों में टहलें।" }
       ]
@@ -254,7 +254,7 @@ export default function App() {
         { dest: "Pushkar", icon: "🐫", titleEn: "Pushkar Camel Fair", titleHi: "पुष्कर का पारंपरिक मेला", descEn: "Experience the colorful cultural fair, traditional hot air balloon rides, and peaceful lakeside temple visits.", descHi: "दुनिया का सबसे अनोखा ऊंट मेला, रंग-बिरंगे पारंपरिक खेल, हॉट एयर बैलून राइड और शांत ब्रह्मा मंदिर के दर्शन।" },
         { dest: "Amritsar", icon: "🕌", titleEn: "Amritsar Golden Lights", titleHi: "अमृतसर का पावन स्वर्ण मंदिर", descEn: "Pleasant chilly weather. Visit the Golden Temple illuminated with lights, and enjoy delicious hot langar meals.", descHi: "सर्दियों की सुहावनी शुरुआत। रोशनी से नहाया स्वर्ण मंदिर, वाघा बॉर्डर की परेड और लज़ीज़ परांठे व लंगर का स्वाद।" },
         { dest: "Varanasi", icon: "🪔", titleEn: "Varanasi Ganga Dev Deepawali", titleHi: "वाराणसी की देव दीपावली", descEn: "Watch all Ganges ghats lit up with millions of clay lamps under crisp chilly winter winds.", descHi: "ठंडी सर्दियों की हवा के बीच लाखों मिट्टी के दीयों से जगमगाते गंगा के सभी घाटों का अलौकिक दृश्य देखें।" },
-        { dest: "Agra", icon: "🏛️", titleEn: "Agra Crisp Winter Taj", titleHi: "आगरा की ताज का विंटर व्यू", descEn: "Beautiful cool days to explore the majestic red-sandstone Mughal structures without getting tired.", descHi: "बिना थके लाल बलुआ पत्थर की भव्य मुगल संरचनाओं का पता लगाने के लिए सुंदर ठंडे दिन।" }
+        { dest: "Agra", icon: "🏛️", titleEn: "Agra Crisp Winter Taj", titleHi: "आगरा की ताज का विंटर VIEW", descEn: "Beautiful cool days to explore the majestic red-sandstone Mughal structures without getting tired.", descHi: "बिना थके लाल बलुआ पत्थर की भव्य मुगल संरचनाओं का पता लगाने के लिए सुंदर ठंडे दिन।" }
       ]
     },
     {
@@ -544,7 +544,7 @@ export default function App() {
   return (
     <div className={`min-h-screen font-sans antialiased relative transition-colors duration-300 ${darkMode ? 'bg-[#07070a] text-zinc-100' : 'bg-zinc-50 text-gray-900'}`}>
       
-      {}
+      {/* HEADER SECTION */}
       <header className={`sticky top-0 backdrop-blur-md border-b z-50 transition-all duration-300 ${darkMode ? 'bg-[#09090d]/90 border-zinc-900' : 'bg-white/95 border-zinc-200/80'}`}>
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
@@ -593,7 +593,7 @@ export default function App() {
         </div>
       </header>
 
-      {}
+      {/* HERO HERO SECTION */}
       <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
         <img
           src={luxuryImages[currentImage]}
@@ -612,7 +612,7 @@ export default function App() {
         </div>
       </section>
 
-      {}
+      {/* TRIP PLANNER FORM AREA */}
       <section id="booking-form" className="max-w-6xl mx-auto px-4 md:px-6 -mt-36 relative z-20 mb-20">
         <div className={`rounded-3xl shadow-2xl overflow-hidden transition-all duration-300 ${darkMode ? 'bg-[#0c0c11]/90 border border-zinc-800/80 backdrop-blur-md' : 'bg-white border border-zinc-100'}`}>
           
@@ -770,7 +770,7 @@ export default function App() {
                 </div>
               )}
 
-              {/* Special Request Area - Examples removed and set to clean solid black */}
+              {/* Special Request Area - clean solid font colors */}
               <div className="mb-6">
                 <label className={`block text-sm font-semibold mb-1.5 ${darkMode ? 'text-zinc-400' : 'text-black font-bold'}`}>
                   📝 {t("Any Special Requests / Custom Notes?", "विशेष अनुरोध / टिप्पणी")}
@@ -797,7 +797,7 @@ export default function App() {
               </div>
             </div>
 
-            {}
+            {/* Room Preferences & Inclusions Column */}
             <div className={`p-6 md:p-10 lg:col-span-5 flex flex-col justify-between transition-colors duration-300 ${darkMode ? 'bg-gradient-to-b from-[#0e0e14] to-[#0a0a0e]' : 'bg-gradient-to-b from-zinc-50 to-zinc-100'}`}>
               <div>
                 <h4 className={`text-lg font-bold mb-5 pb-2 border-b transition-all ${darkMode ? 'text-amber-400 border-zinc-800' : 'text-zinc-800 border-zinc-200'}`}>
@@ -1109,7 +1109,7 @@ export default function App() {
             </div>
           </div>
 
-          {}
+          {/* WhatsApp Text Draft Preview Area */}
           <div className={`border-t p-6 md:p-8 flex flex-col items-center justify-center text-center transition-colors duration-300 ${darkMode ? 'bg-[#09090d] border-zinc-800/80' : 'bg-zinc-50 border-zinc-100'}`}>
             
             {/* Live Message Preview container */}
@@ -1196,7 +1196,7 @@ export default function App() {
               )}
             </button>
 
-            {/* True Lock Trust badge - Generic compliance updated */}
+            {/* True Lock Trust badge */}
             <p className={`mt-4 text-sm font-bold flex items-center justify-center gap-1.5 transition-colors duration-300 ${darkMode ? 'text-amber-400' : 'text-amber-600'}`}>
               <span>🛡️</span>
               <span>
@@ -1214,7 +1214,7 @@ export default function App() {
         </div>
       </section>
 
-      {}
+      {/* CORE VALUE TRUST CARDS */}
       <section className="max-w-6xl mx-auto px-4 md:px-6 mb-24">
         <div className="grid sm:grid-cols-3 gap-6">
           <div className={`border p-6 rounded-2xl text-center flex flex-col items-center transition-all ${darkMode ? 'bg-[#0c0c11] border-zinc-900 shadow-md' : 'bg-white border-zinc-100 shadow-sm'}`}>
@@ -1235,37 +1235,7 @@ export default function App() {
         </div>
       </section>
 
-      {}
-      {/* RESTORED SECTION: Vetted Specially for Indian Families */}
-      <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
-        <div className={`rounded-3xl border p-8 md:p-12 transition-all ${darkMode ? 'bg-amber-950/20 border-amber-900/40' : 'bg-amber-50/60 border-amber-200/50'}`}>
-          <div className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
-            <span className="text-3xl">👨‍👩‍👧‍👦</span>
-            <h3 className={`text-2xl md:text-3xl font-serif font-bold mt-2 mb-3 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
-              {t("Vetted Specially for Indian Families", "भारतीय परिवारों के लिए खास सुविधाएं")}
-            </h3>
-            <p className={`text-sm font-medium ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
-              {t("We understand that a perfect family trip requires more than just a room. We take special care of your specific household needs.", "हम समझते हैं कि परिवार के साथ यात्रा करने में क्या महत्वपूर्ण होता है। हम आपकी हर जरूरत का पूरा ख्याल रखते हैं।")}
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {familyAssurances.map((item, index) => (
-              <div key={index} className={`p-6 rounded-2xl border shadow-sm flex flex-col items-start transition-colors ${darkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-zinc-100'}`}>
-                <span className="text-3xl mb-4 block">{item.icon}</span>
-                <h4 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
-                  {language === 'en' ? item.titleEn : item.titleHi}
-                </h4>
-                <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
-                  {language === 'en' ? item.descEn : item.descHi}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {}
+      {/* SEASONAL RECON SERVICES SECTION */}
       <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
         <div className={`rounded-3xl border p-6 md:p-10 transition-all ${darkMode ? 'bg-[#0c0c11] border-zinc-900/80 shadow-xl' : 'bg-zinc-100/80 border-zinc-200/60'}`}>
           <div className="text-center max-w-2xl mx-auto mb-10">
@@ -1315,45 +1285,51 @@ export default function App() {
             </p>
           </div>
 
-          {/* Grid of 5 Suggested Places per month */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {/* List of 5 Suggested Places per month - cleanly aligned horizontal rows */}
+          <div className="space-y-4">
             {seasonalGuide[selectedMonthIndex].places.map((place, idx) => (
               <div 
                 key={idx} 
-                className={`rounded-2xl border p-5 shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group ${
+                className={`rounded-2xl border p-5 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col md:flex-row items-center gap-5 justify-between group ${
                   darkMode 
                     ? 'bg-[#07070a] border-zinc-800/80 hover:border-amber-500/50' 
-                    : 'bg-white border-zinc-200/60 hover:border-amber-500'
+                    : 'bg-white border-zinc-200/60 hover:border-amber-500/50'
                 }`}
               >
-                <div>
-                  <div className="flex items-center justify-between mb-3.5">
-                    <span className={`text-3xl w-12 h-12 rounded-xl flex items-center justify-center shadow-inner shrink-0 border ${darkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-zinc-50 border-zinc-200'}`}>
-                      {place.icon}
-                    </span>
+                <div className="flex flex-col sm:flex-row items-center gap-4 grow w-full">
+                  <span className={`text-3xl w-12 h-12 rounded-xl flex items-center justify-center shadow-inner shrink-0 border ${
+                    darkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-zinc-50 border-zinc-200'
+                  }`}>
+                    {place.icon}
+                  </span>
+                  
+                  <div className="text-center sm:text-left grow">
+                    <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1">
+                      <h5 className={`text-base font-bold leading-none ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
+                        {place.dest}
+                      </h5>
+                      <span className="text-xs font-semibold text-amber-500">
+                        • {language === 'en' ? place.titleEn : place.titleHi}
+                      </span>
+                    </div>
+                    <p className={`text-xs leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
+                      {language === 'en' ? place.descEn : place.descHi}
+                    </p>
                   </div>
-
-                  <h5 className={`text-base font-bold mb-1 leading-snug group-hover:text-amber-500 transition-colors ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
-                    {place.dest}
-                  </h5>
-                  <h6 className="text-xs font-semibold text-amber-500 mb-2 leading-tight">
-                    {language === 'en' ? place.titleEn : place.titleHi}
-                  </h6>
-                  <p className={`text-xs leading-relaxed mb-4 ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
-                    {language === 'en' ? place.descEn : place.descHi}
-                  </p>
                 </div>
 
-                <button
-                  onClick={() => handleAutofillSeason(place.dest)}
-                  className={`w-full py-2.5 px-3 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 border ${
-                    darkMode 
-                      ? 'bg-zinc-900 text-zinc-100 border-zinc-800 hover:bg-amber-500 hover:text-zinc-950 active:scale-95' 
-                      : 'bg-zinc-900 text-white border-zinc-700 hover:bg-amber-500 hover:text-zinc-950 active:scale-95'
-                  }`}
-                >
-                  📍 {t("Plan This Spot", "इसे चुनें")}
-                </button>
+                <div className="shrink-0 w-full md:w-auto mt-2 md:mt-0">
+                  <button
+                    onClick={() => handleAutofillSeason(place.dest)}
+                    className={`w-full md:w-auto py-2.5 px-5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 border ${
+                      darkMode 
+                        ? 'bg-zinc-900 text-zinc-100 border-zinc-800 hover:bg-amber-500 hover:text-zinc-950 active:scale-95' 
+                        : 'bg-zinc-900 text-white border-zinc-700 hover:bg-amber-500 hover:text-zinc-950 active:scale-95'
+                    }`}
+                  >
+                    📍 {t("Plan This Spot", "इसे चुनें")}
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -1361,7 +1337,36 @@ export default function App() {
         </div>
       </section>
 
-      {}
+      {/* RESTORED SECTION: Vetted Specially for Indian Families - moved above Packing Assistant */}
+      <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
+        <div className={`rounded-3xl border p-8 md:p-12 transition-all ${darkMode ? 'bg-amber-950/20 border-amber-900/40' : 'bg-amber-50/60 border-amber-200/50'}`}>
+          <div className="text-center max-w-2xl mx-auto mb-10 md:mb-14">
+            <span className="text-3xl">👨‍👩‍👧‍👦</span>
+            <h3 className={`text-2xl md:text-3xl font-serif font-bold mt-2 mb-3 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
+              {t("Vetted Specially for Indian Families", "भारतीय परिवारों के लिए खास सुविधाएं")}
+            </h3>
+            <p className={`text-sm font-medium ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
+              {t("We understand that a perfect family trip requires more than just a room. We take special care of your specific household needs.", "हम समझते हैं कि परिवार के साथ यात्रा करने में क्या महत्वपूर्ण होता है। हम आपकी हर जरूरत का पूरा ख्याल रखते हैं।")}
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {familyAssurances.map((item, index) => (
+              <div key={index} className={`p-6 rounded-2xl border shadow-sm flex flex-col items-start transition-colors ${darkMode ? 'bg-zinc-900 border-zinc-800' : 'bg-white border-zinc-100'}`}>
+                <span className="text-3xl mb-4 block">{item.icon}</span>
+                <h4 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
+                  {language === 'en' ? item.titleEn : item.titleHi}
+                </h4>
+                <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
+                  {language === 'en' ? item.descEn : item.descHi}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* INTERACTIVE PACKING CHECKLIST SECTION */}
       <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
         <div className={`rounded-3xl border p-6 md:p-10 transition-all ${
           darkMode ? 'bg-gradient-to-br from-[#0e0e14] to-[#08080c] border-zinc-800' : 'bg-gradient-to-br from-amber-50/30 to-zinc-100 border-zinc-200'
@@ -1460,40 +1465,84 @@ export default function App() {
         </div>
       </section>
 
-      {}
+      {/* HOW THE PIPELINE WORKS SEGMENT */}
       <section className={`border-y py-20 px-4 md:px-6 mb-24 transition-colors duration-300 ${darkMode ? 'bg-[#09090d] border-zinc-900' : 'bg-zinc-100/70 border-zinc-200/50'}`}>
         <div className="max-w-5xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h3 className={`text-3xl md:text-4xl font-serif font-bold mb-3 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("How StaySaathi Works", "StaySaathi कैसे काम करता है")}</h3>
-            <p className={`font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("No endless searching, no automated bots. Direct helpful human assisted booking.", "कोई अंतहीन उलझन नहीं, कोई ऑटोमैटिक रोबोटिक रिप्लाई नहीं। पक्की मानवीय सहायता।")}</p>
+            <p className={`font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("No endless searching, no automated bots. Direct helpful human assisted booking.", "कोई अंतहीन उलझन नहीं, कोई ऑटोमैटिक रोबोटिक रिप्लाई नहीं। पक्की मानवीय सहायता।")}</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 relative">
             <div className={`p-6 rounded-2xl shadow-sm relative border transition-colors duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-200/40'}`}>
-              <span className="absolute -top-5 left-6 bg-gradient-to-br from-amber-500 to-yellow-600 text-[#07070a] w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-lg">1</span>
+              <span className="absolute -top-5 left-6 bg-gradient-to-br from-amber-500 to-yellow-600 text-zinc-950 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-lg">1</span>
               <div className="text-zinc-400 font-bold text-xs uppercase tracking-wider mb-2 mt-2">{t("TAKES 30 SECONDS", "30 सेकंड का समय")}</div>
               <h4 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("Share Preferences", "अपनी पसंद बताएं")}</h4>
-              <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("Fill out your specific family requirements and budget parameters above and click WhatsApp connect.", "ऊपर अपनी जरूरतें और मनमुताबिक बजट दर्ज करें और व्हाट्सएप बटन दबाएं।")}</p>
+              <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Fill out your specific family requirements and budget parameters above and click WhatsApp connect.", "ऊपर अपनी जरूरतें और मनमुताबिक बजट दर्ज करें और व्हाट्सएप बटन दबाएं।")}</p>
             </div>
 
             <div className={`p-6 rounded-2xl shadow-sm relative border transition-colors duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-200/40'}`}>
-              <span className="absolute -top-5 left-6 bg-gradient-to-br from-amber-500 to-yellow-600 text-[#07070a] w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-lg">2</span>
+              <span className="absolute -top-5 left-6 bg-gradient-to-br from-amber-500 to-yellow-600 text-zinc-950 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-lg">2</span>
               <div className="text-amber-500 font-bold text-xs uppercase tracking-wider mb-2 mt-2">{t("WITHIN FEW HOURS", "कुछ ही घंटों में")}</div>
               <h4 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("Receive Custom Options", "होटल विकल्प पाएं")}</h4>
               <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Our destination helper filters clean local properties and delivers 3 best tailored hotel choices to your chat.", "हमारे लोकल एक्सपर्ट सबसे सुरक्षित और बेहतरीन 3 विकल्प आपके व्हाट्सएप पर भेजेंगे।")}</p>
             </div>
 
             <div className={`p-6 rounded-2xl shadow-sm relative border transition-colors duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-200/40'}`}>
-              <span className="absolute -top-5 left-6 bg-gradient-to-br from-amber-500 to-yellow-600 text-[#07070a] w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-lg">3</span>
+              <span className="absolute -top-5 left-6 bg-gradient-to-br from-amber-500 to-yellow-600 text-zinc-950 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-lg">3</span>
               <div className="text-zinc-400 font-bold text-xs uppercase tracking-wider mb-2 mt-2">{t("SEAMLESS BOOKING", "आसान बुकिंग")}</div>
               <h4 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("Pay Safely Direct", "सुरक्षित भुगतान करें")}</h4>
-              <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("Select your preferred stay. Pay securely via our verified StaySaathi payment link with zero hidden platform fees and automatic room lock-in.", "पसंदीदा होटल चुनें और बिना किसी अतिरिक्त छिपे शुल्क के हमारे सुरक्षित स्टेसाथी भुगतान लिंक के माध्यम से तुरंत कमरा सुरक्षित करें।")}</p>
+              <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Select your preferred stay. Pay securely via our verified StaySaathi payment link with zero hidden platform fees and automatic room lock-in.", "पसंदीदा होटल चुनें और बिना किसी अतिरिक्त छिपे शुल्क के हमारे सुरक्षित स्टेसाथी भुगतान लिंक के माध्यम से तुरंत कमरा सुरक्षित करें।")}</p>
             </div>
           </div>
+
+          {}
+          {/* INTEGRATED SEAMLESS PATH TIMELINE */}
+          <div className={`mt-16 pt-12 border-t text-center transition-colors duration-300 ${darkMode ? 'border-zinc-800/80' : 'border-zinc-200'}`}>
+            <div className="max-w-2xl mx-auto mb-8">
+              <h4 className={`text-xl md:text-2xl font-serif font-bold ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
+                {t("Your Seamless Path to Vacation", "आपकी आसान बुकिंग प्रक्रिया")}
+              </h4>
+              <p className={`text-xs mt-1.5 font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
+                {t("We handle the complexities directly behind the scenes with zero middleman markup fees.", "हम बिना किसी अतिरिक्त छिपे शुल्कों के पूरी प्रक्रिया को पृष्ठभूमि में आसान बनाते हैं।")}
+              </p>
+            </div>
+
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 max-w-4xl mx-auto">
+              {/* Step 1 */}
+              <div className={`flex items-center gap-3 p-4 rounded-2xl border-2 transition-all w-full md:w-auto ${
+                darkMode ? 'bg-[#0c0c12] border-zinc-800/85 text-white' : 'bg-white border-zinc-200 text-zinc-800'
+              }`}>
+                <div className="w-8 h-8 rounded-xl bg-amber-500 text-zinc-950 flex items-center justify-center font-extrabold text-sm">1</div>
+                <span className="text-xs sm:text-sm font-bold">{t("Tell Us Your Plan", "अपनी योजना बताएं")}</span>
+              </div>
+              {/* Arrow */}
+              <span className="hidden md:inline text-amber-500 text-xl font-bold">──►</span>
+              
+              {/* Step 2 */}
+              <div className={`flex items-center gap-3 p-4 rounded-2xl border-2 transition-all w-full md:w-auto ${
+                darkMode ? 'bg-[#0c0c12] border-zinc-800/85 text-white' : 'bg-white border-zinc-200 text-zinc-800'
+              }`}>
+                <div className="w-8 h-8 rounded-xl bg-amber-500 text-zinc-950 flex items-center justify-center font-extrabold text-sm">2</div>
+                <span className="text-xs sm:text-sm font-bold">{t("Get Your 3 Lowest Options", "3 सबसे सस्ते विकल्प पाएं")}</span>
+              </div>
+              {/* Arrow */}
+              <span className="hidden md:inline text-amber-500 text-xl font-bold">──►</span>
+
+              {/* Step 3 */}
+              <div className={`flex items-center gap-3 p-4 rounded-2xl border-2 transition-all w-full md:w-auto ${
+                darkMode ? 'bg-[#0c0c12] border-zinc-800/85 text-white' : 'bg-white border-zinc-200 text-zinc-800'
+              }`}>
+                <div className="w-8 h-8 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-extrabold text-sm">✓</div>
+                <span className="text-xs sm:text-sm font-bold">{t("Receive Branded StaySaathi PDF Voucher", "ब्रांडेड StaySaathi PDF वाउचर पाएं")}</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </section>
 
-      {}
+      {/* POPULAR ESCAPES PORTFOLIO */}
       <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
         <div className="text-center max-w-xl mx-auto mb-12">
           <h3 className={`text-3xl md:text-4xl font-serif font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("Popular Indian Escapes", "लोकप्रिय भारतीय गंतव्य")}</h3>
@@ -1527,7 +1576,7 @@ export default function App() {
         </div>
       </section>
 
-      {}
+      {/* CORES & VALUES */}
       <section className={`border-t py-20 px-4 md:px-6 mb-12 transition-colors duration-300 ${darkMode ? 'bg-gradient-to-b from-[#0a0a0f] to-[#07070a] border-zinc-900' : 'bg-gradient-to-b from-zinc-50 to-zinc-100 border-zinc-200'}`}>
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16">
@@ -1585,7 +1634,7 @@ export default function App() {
         </div>
       </section>
 
-      {}
+      {/* DYNAMIC FAQ ACCORDION PANEL */}
       <section className="max-w-4xl mx-auto px-4 md:px-6 py-12 mb-16">
         <h3 className={`text-3xl md:text-4xl font-serif font-bold text-center mb-10 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("Frequently Asked Questions", "अक्सर पूछे जाने वाले सवाल")}</h3>
         <div className="space-y-4">
@@ -1610,53 +1659,7 @@ export default function App() {
         </div>
       </section>
 
-      {}
-      <section className="max-w-6xl mx-auto px-4 md:px-6 mb-24">
-        <div className={`rounded-3xl border p-6 md:p-10 transition-all ${
-          darkMode ? 'bg-[#0a0a0f] border-zinc-800' : 'bg-zinc-100 border-zinc-200'
-        }`}>
-          <div className="text-center max-w-2xl mx-auto mb-8">
-            <h4 className={`text-xl md:text-2xl font-serif font-bold ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
-              {t("Your Seamless Path to Vacation", "आपकी आसान बुकिंग प्रक्रिया")}
-            </h4>
-            <p className={`text-xs mt-1 font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
-              {t("We handle the complexities directly behind the scenes with zero middleman markup fees.", "हम बिना किसी अतिरिक्त छिपे शुल्कों के पूरी प्रक्रिया को पृष्ठभूमि में आसान बनाते हैं।")}
-            </p>
-          </div>
-
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 max-w-4xl mx-auto">
-            {/* Step 1 */}
-            <div className={`flex items-center gap-3 p-4 rounded-2xl border-2 transition-all w-full md:w-auto ${
-              darkMode ? 'bg-[#0c0c12] border-zinc-800' : 'bg-white border-zinc-200'
-            }`}>
-              <div className="w-8 h-8 rounded-xl bg-amber-500 text-zinc-950 flex items-center justify-center font-extrabold text-sm">1</div>
-              <span className="text-xs sm:text-sm font-bold">{t("Tell Us Your Plan", "अपनी योजना बताएं")}</span>
-            </div>
-            {/* Arrow */}
-            <span className="hidden md:inline text-amber-500 text-xl font-bold">──►</span>
-            
-            {/* Step 2 */}
-            <div className={`flex items-center gap-3 p-4 rounded-2xl border-2 transition-all w-full md:w-auto ${
-              darkMode ? 'bg-[#0c0c12] border-zinc-800' : 'bg-white border-zinc-200'
-            }`}>
-              <div className="w-8 h-8 rounded-xl bg-amber-500 text-zinc-950 flex items-center justify-center font-extrabold text-sm">2</div>
-              <span className="text-xs sm:text-sm font-bold">{t("Get Your 3 Lowest Options", "3 सबसे सस्ते विकल्प पाएं")}</span>
-            </div>
-            {/* Arrow */}
-            <span className="hidden md:inline text-amber-500 text-xl font-bold">──►</span>
-
-            {/* Step 3 */}
-            <div className={`flex items-center gap-3 p-4 rounded-2xl border-2 transition-all w-full md:w-auto ${
-              darkMode ? 'bg-[#0c0c12] border-zinc-800' : 'bg-white border-zinc-200'
-            }`}>
-              <div className="w-8 h-8 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-extrabold text-sm">✓</div>
-              <span className="text-xs sm:text-sm font-bold">{t("Receive Branded StaySaathi PDF Voucher", "ब्रांडेड StaySaathi PDF वाउचर पाएं")}</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {}
+      {/* FOOTER AREA */}
       <footer className={`py-12 px-4 md:px-6 border-t-4 border-amber-500 transition-colors duration-300 ${darkMode ? 'bg-[#09090c] text-zinc-300' : 'bg-zinc-900 text-zinc-100'}`}>
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex justify-center items-center gap-3 mb-4">
@@ -1671,7 +1674,7 @@ export default function App() {
         </div>
       </footer>
 
-      {}
+      {/* FLOATING ACTION GUIDE ELEMENT */}
       {showFloatingSubmit && (
         <div className="fixed bottom-6 left-4 right-4 z-40 md:left-auto md:right-8 md:w-[450px] transition-all duration-300">
           <div className={`p-2 rounded-2xl shadow-2xl border backdrop-blur-md flex flex-col items-center transition-colors duration-300 ${darkMode ? 'bg-[#0c0c11]/95 border-amber-500/20' : 'bg-white/95 border-amber-500/30'}`}>
@@ -1688,7 +1691,7 @@ export default function App() {
         </div>
       )}
 
-      {}
+      {/* CONFIRMATION INTERRUPTOR MODAL */}
       {showPreferenceReminder && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           <div 
