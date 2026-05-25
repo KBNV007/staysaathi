@@ -92,26 +92,22 @@ export default function App() {
   };
 
   const popularSuggestNames = [
-    // North India
     "Manali", "Shimla", "Rishikesh", "Haridwar", "Dehradun", "Mussoorie", "Nainital", "Ranikhet", "Almora", 
     "Kausani", "Mukteshwar", "Bhimtal", "Lansdowne", "Chopta", "Auli", "Dharamshala", "Mcleodganj", "Dalhousie", 
     "Khajjiar", "Kasauli", "Shimla Hills", "Chail", "Kufri", "Srinagar", "Gulmarg", "Pahalgam", "Sonamarg", 
     "Katra", "Vaishno Devi", "Leh Ladakh", "Nubra Valley", "Pangong Lake", "Amritsar", "Chandigarh", "Noida", 
     "Delhi", "Gurugram", "Agra", "Varanasi", "Mathura", "Vrindavan", "Jim Corbett National Park", "Naranag",
-    // West & Central India
     "Jaipur", "Udaipur", "Jodhpur", "Jaisalmer", "Bikaner", "Pushkar", "Mount Abu", "Ranthambore", "Chittorgarh", 
     "Alwar", "Neemrana", "Bharatpur", "Ajmer", "Mandawa", "Mumbai", "Lonavala", "Khandala", "Mahabaleshwar", 
     "Panchgani", "Matheran", "Alibaug", "Kashid", "Pune", "Nashik", "Shirdi", "Aurangabad", "Lavasa", "Kolad", 
     "Tarkarli", "Bhandardara", "Goa", "North Goa", "South Goa", "Panaji", "Calangute", "Baga", "Anjuna", 
     "Ahmedabad", "Kutch", "Rann of Kutch", "Dwarka", "Somnath", "Sasan Gir", "Saputara", "Diu", "Daman", 
     "Khajuraho", "Gwalior", "Orchha", "Pachmarhi", "Kanha National Park", "Bandhavgarh", "Pench National Park",
-    // South India
     "Ooty", "Kodaikanal", "Coonoor", "Yercaud", "Chennai", "Mahabalipuram", "Pondicherry", "Madurai", "Rameswaram", 
     "Kanyakumari", "Coimbatore", "Munnar", "Wayanad", "Thekkady", "Alleppey", "Kumarakom", "Kochi", "Kovalam", 
     "Varkala", "Bekal", "Athirappilly", "Vagamon", "Poovar", "Bengaluru", "Mysore", "Coorg", "Chikmagalur", 
     "Gokarna", "Hampi", "Badami", "Mangalore", "Udupi", "Murudeshwar", "Kabini", "Bandipur", "Hyderabad", 
     "Visakhapatnam", "Araku Valley", "Tirupati", "Ananthagiri Hills", "Warangal",
-    // East & North-East India
     "Kolkata", "Darjeeling", "Kalimpong", "Kurseong", "Digha", "Mandarmoni", "Sundarbans", "Shantiniketan", 
     "Puri", "Bhubaneswar", "Konark", "Cuttack", "Gopalpur", "Gangtok", "Pelling", "Lachung", "Lachen", 
     "Ravangla", "Namchi", "Shillong", "Cherrapunji", "Guwahati", "Kaziranga National Park", "Tawang", "Ziro Valley", 
@@ -255,7 +251,7 @@ export default function App() {
       monthHi: "नवंबर",
       icon: "🐪",
       places: [
-        { dest: "Jaisalmer", icon: "🐪", titleEn: "Golden Desert Swiss Tents", titleHi: "जैसलमेर का सुनहरा रेगिस्तानी कैंप", descEn: "Perfect cold desert nights. Experience camel safaris, stargazing, and traditional puppet folk dances.", descHi: "रेगिस्तान की ठंडी सुहावनी रातें। ऊंट की सवारी, राजस्थानी लोक नृत्य और शानदार लग्जरी स्विस टent में रहने का अनुभव।" },
+        { dest: "Jaisalmer", icon: "🐪", titleEn: "Golden Desert Swiss Tents", titleHi: "जैसलमेर का सुनहरा रेगिस्तानी कैंप", descEn: "Perfect cold desert nights. Experience camel safaris, stargazing, and traditional puppet folk dances.", descHi: "रेगिस्तान की ठंडी सुहावनी रातें। ऊंट की सवारी, राजस्थानी लोक नृत्य और शानदार लग्जरी स्विस टेंट में रहने का अनुभव।" },
         { dest: "Pushkar", icon: "🐫", titleEn: "Pushkar Camel Fair", titleHi: "पुष्कर का पारंपरिक मेला", descEn: "Experience the colorful cultural fair, traditional hot air balloon rides, and peaceful lakeside temple visits.", descHi: "दुनिया का सबसे अनोखा ऊंट मेला, रंग-बिरंगे पारंपरिक खेल, हॉट एयर बैलून राइड और शांत ब्रह्मा मंदिर के दर्शन।" },
         { dest: "Amritsar", icon: "🕌", titleEn: "Amritsar Golden Lights", titleHi: "अमृतसर का पावन स्वर्ण मंदिर", descEn: "Pleasant chilly weather. Visit the Golden Temple illuminated with lights, and enjoy delicious hot langar meals.", descHi: "सर्दियों की सुहावनी शुरुआत। रोशनी से नहाया स्वर्ण मंदिर, वाघा बॉर्डर की परेड और लज़ीज़ परांठे व लंगर का स्वाद।" },
         { dest: "Varanasi", icon: "🪔", titleEn: "Varanasi Ganga Dev Deepawali", titleHi: "वाराणसी की देव दीपावली", descEn: "Watch all Ganges ghats lit up with millions of clay lamps under crisp chilly winter winds.", descHi: "ठंडी सर्दियों की हवा के बीच लाखों मिट्टी के दीयों से जगमगाते गंगा के सभी घाटों का अलौकिक दृश्य देखें।" },
@@ -506,7 +502,8 @@ export default function App() {
 
     const budgetFormatted = budgetRanges[form.budgetPerDay] || `₹${form.budgetPerDay}`;
 
-    const msg = `*STAYSAATHI TRIP INQUIRY*\n` +
+    // Formatting highly structured code data for B2B parsing efficiency
+    const msg = `*ATITHIO TRIP INQUIRY*\n` +
       `=========================\n` +
       `📍 DESTINATION : ${form.destination}\n` +
       `📅 CHECK-IN    : ${form.fromDate || 'Flexible'}\n` +
@@ -548,9 +545,9 @@ export default function App() {
       <header className={`sticky top-0 backdrop-blur-md border-b z-50 transition-all duration-300 ${darkMode ? 'bg-[#09090d]/90 border-zinc-900' : 'bg-white/95 border-zinc-200/80'}`}>
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-md shadow-amber-500/20">S</div>
+            <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl shadow-md shadow-amber-500/20">A</div>
             <div>
-              <h1 className={`text-2xl md:text-3xl font-serif tracking-tight font-bold ${darkMode ? 'text-white' : 'text-zinc-800'}`}>StaySaathi</h1>
+              <h1 className={`text-2xl md:text-3xl font-serif tracking-tight font-bold ${darkMode ? 'text-white' : 'text-zinc-800'}`}>Atithio</h1>
               <p className="text-xs text-amber-600 font-semibold tracking-wider -mt-0.5">{t("Book as a friend", "दोस्त की तरह बुक करें")}</p>
             </div>
           </div>
@@ -793,7 +790,7 @@ export default function App() {
                 <div>
                   <h5 className={`text-sm font-bold ${darkMode ? 'text-emerald-300' : 'text-emerald-950'}`}>{t("100% Secure Checkout Guarantee", "100% सुरक्षित भुगतान गारंटी")}</h5>
                   <p className={`text-xs mt-0.5 leading-relaxed ${darkMode ? 'text-emerald-400/80' : 'text-emerald-800'}`}>
-                    {t("Pay via our official, white-labeled StaySaathi secure payment link (supporting UPI, Cards, NetBanking). Your payment instantly locks your booking securely under our monitored reservation ledger.", "हमारे आधिकारिक सुरक्षित भुगतान लिंक (UPI, डेबिट/क्रेडिट कार्ड, नेटबैंकिंग) के माध्यम से सुरक्षित भुगतान करें। आपका भुगतान पूरा होते ही आपका कमरा सुरक्षित रूप से तुरंत लॉक हो जाता है।")}
+                    {t("Pay via our official, white-labeled Atithio secure payment link (supporting UPI, Cards, NetBanking). Your payment instantly locks your booking securely under our monitored reservation ledger.", "हमारे आधिकारिक सुरक्षित भुगतान लिंक (UPI, डेबिट/क्रेडिट कार्ड, नेटबैंकिंग) के माध्यम से सुरक्षित भुगतान करें। आपका भुगतान पूरा होते ही आपका कमरा सुरक्षित रूप से तुरंत लॉक हो जाता है।")}
                   </p>
                 </div>
               </div>
@@ -1118,13 +1115,13 @@ export default function App() {
             <div className={`w-full max-w-2xl mb-6 rounded-2xl p-4 border shadow-inner relative overflow-hidden text-left font-sans transition-colors duration-300 ${darkMode ? 'bg-[#0e1115] border-zinc-800' : 'bg-zinc-50 border-zinc-200'}`}>
               <div className={`absolute top-0 left-0 right-0 px-3.5 py-1.5 flex items-center gap-2 text-xs font-bold shadow-md ${darkMode ? 'bg-[#128c7e]/80 text-white' : 'bg-emerald-600/90 text-white'}`}>
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
-                <span>StaySaathi Desk (Live Draft Preview)</span>
+                <span>Atithio Desk (Live Draft Preview)</span>
               </div>
               <div className="mt-7 flex justify-start">
                 <div className={`text-xs sm:text-sm p-3 rounded-2xl rounded-tl-none shadow-md max-w-[90%] relative border-l-4 border-emerald-500 transition-all ${darkMode ? 'bg-[#202c33] text-zinc-300' : 'bg-white text-zinc-700'}`}>
                   <p className={`font-bold mb-1 ${darkMode ? 'text-emerald-400' : 'text-emerald-600'}`}>💬 {t("Live compiled WhatsApp text:", "लाइव संकलित व्हाट्सएप मैसेज:")}</p>
                   <p className="leading-relaxed font-sans font-medium whitespace-pre-wrap">
-                    STAYSAATHI TRIP INQUIRY
+                    ATITHIO TRIP INQUIRY
                     <br />
                     =========================
                     <br />
@@ -1203,8 +1200,8 @@ export default function App() {
               <span>🛡️</span>
               <span>
                 {t(
-                  "StaySaathi True-Lock Guarantee: All bookings are backed by India's leading corporate travel supplier networks with instant reservation mapping.",
-                  "स्टेसाथी ट्रू-लॉक गारंटी: सभी बुकिंग भारत के अग्रणी कॉर्पोरेट ट्रैवल सप्लायर नेटवर्क द्वारा सुरक्षित हैं, जिसमें तुरंत बुकिंग मैप हो जाती है।"
+                  "Atithio True-Lock Guarantee: All bookings are backed by India's leading corporate travel supplier networks with instant reservation mapping.",
+                  "अतिथियो ट्रू-लॉक गारंटी: सभी बुकिंग भारत के अग्रणी कॉर्पोरेट ट्रैवल सप्लायर नेटवर्क द्वारा सुरक्षित हैं, जिसमें तुरंत बुकिंग मैप हो जाती है।"
                 )}
               </span>
             </p>
@@ -1468,7 +1465,7 @@ export default function App() {
       <section className={`border-y py-20 px-4 md:px-6 mb-24 transition-colors duration-300 ${darkMode ? 'bg-[#09090d] border-zinc-900' : 'bg-zinc-100/70 border-zinc-200/50'}`}>
         <div className="max-w-5xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h3 className={`text-3xl md:text-4xl font-serif font-bold mb-3 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("How StaySaathi Works", "StaySaathi कैसे काम करता है")}</h3>
+            <h3 className={`text-3xl md:text-4xl font-serif font-bold mb-3 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("How Atithio Works", "Atithio कैसे काम करता है")}</h3>
             <p className={`font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("No endless searching, no automated bots. Direct helpful human assisted booking.", "कोई अंतहीन उलझन नहीं, कोई ऑटोमैटिक रोबोटिक रिप्लाई नहीं। पक्की मानवीय सहायता।")}</p>
           </div>
 
@@ -1491,7 +1488,7 @@ export default function App() {
               <span className="absolute -top-5 left-6 bg-gradient-to-br from-amber-500 to-yellow-600 text-zinc-950 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-lg">3</span>
               <div className="text-zinc-400 font-bold text-xs uppercase tracking-wider mb-2 mt-2">{t("SEAMLESS BOOKING", "आसान बुकिंग")}</div>
               <h4 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("Pay Safely Direct", "सुरक्षित भुगतान करें")}</h4>
-              <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Select your preferred stay. Pay securely via our verified StaySaathi payment link with zero hidden platform fees and automatic room lock-in.", "पसंदीदा होटल चुनें और बिना किसी अतिरिक्त छिपे शुल्क के हमारे सुरक्षित स्टेसाथी भुगतान लिंक के माध्यम से तुरंत कमरा सुरक्षित करें।")}</p>
+              <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Select your preferred stay. Pay securely via our verified Atithio payment link with zero hidden platform fees and automatic room lock-in.", "पसंदीदा होटल चुनें और बिना किसी अतिरिक्त छिपे शुल्क के हमारे सुरक्षित अतिथियो भुगतान लिंक के माध्यम से तुरंत कमरा सुरक्षित करें।")}</p>
             </div>
           </div>
 
@@ -1532,7 +1529,7 @@ export default function App() {
                 darkMode ? 'bg-[#0c0c12] border-zinc-800/85 text-white' : 'bg-white border-zinc-200 text-zinc-800'
               }`}>
                 <div className="w-8 h-8 rounded-xl bg-emerald-500 text-white flex items-center justify-center font-extrabold text-sm">✓</div>
-                <span className="text-xs sm:text-sm font-bold">{t("Receive Branded StaySaathi PDF Voucher", "ब्रांडेड StaySaathi PDF वाउचर पाएं")}</span>
+                <span className="text-xs sm:text-sm font-bold">{t("Receive Branded Atithio PDF Voucher", "ब्रांडेड Atithio PDF वाउचर पाएं")}</span>
               </div>
             </div>
           </div>
@@ -1580,7 +1577,7 @@ export default function App() {
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-3xl">🤝</span>
             <h3 className={`text-3xl md:text-4xl font-serif font-bold mt-3 mb-4 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
-              {t("Why Choose StaySaathi?", "हम ही क्यों चुनें?")}
+              {t("Why Choose Atithio?", "हम ही क्यों चुनें?")}
             </h3>
             <p className={`font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-655'}`}>
               {t("We stand beside you as a true friend, ensuring your holidays are entirely stress-free and full of genuine comfort.", "हम एक सच्चे दोस्त की तरह आपके साथ खड़े हैं, ताकि आपका सफर बिना किसी तनाव और पूरी सुख-सुविधाओं के साथ पूरा हो।")}
@@ -1623,7 +1620,7 @@ export default function App() {
                   {t("Direct & Safe Payments", "सीधे और सुरक्षित भुगतान")}
                 </h4>
                 <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
-                  {t("Enjoy complete financial peace of mind. Pay securely via StaySaathi's official payment link with zero middleman holding risks and automatic room lock-in.", "पैसों की पूरी सुरक्षा। बिना किसी बिचौलिए या अनजाने प्लेटफॉर्म के जोखिम के, सीधे स्टेसाथी के आधिकारिक सुरक्षित भुगतान लिंक पर अपना पेमेंट करें और कमरा सुरक्षित करें।")}
+                  {t("Enjoy complete financial peace of mind. Pay securely via Atithio's official payment link with zero middleman holding risks and automatic room lock-in.", "पैसों की पूरी सुरक्षा। बिना किसी बिचौलिए या अनजाने प्लेटफॉर्म के जोखिम के, सीधे अतिथियो के आधिकारिक सुरक्षित भुगतान लिंक पर अपना पेमेंट करें और कमरा सुरक्षित करें।")}
                 </p>
               </div>
             </div>
@@ -1639,7 +1636,7 @@ export default function App() {
           <div className={`p-5 rounded-2xl border shadow-sm transition-all duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-200/60'}`}>
             <strong className="text-base md:text-lg text-amber-500 font-bold block mb-2">❓ {t("How does booking payment execution work?", "पेमेंट का भुगतान कैसे होता है?")}</strong>
             <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-650'}`}>
-              {t("For complete financial safety, you pay directly via our secure, white-labeled StaySaathi payment gateway link (supporting UPI, Credit/Debit Cards, NetBanking). The payment locks in your room instantly, and your official stay voucher is issued immediately under your name.", "पूरी सुरक्षा के लिए, आप सीधे हमारे सुरक्षित स्टेसाथी गेटवे लिंक (UPI, डेबिट/क्रेडिट कार्ड, नेटबैंकिंग) के माध्यम से भुगतान करते हैं। भुगतान पूरा होते ही आपका रूम तुरंत लॉक हो जाता है और आपका वाउचर तुरंत जारी हो जाता है।")}
+              {t("For complete financial safety, you pay directly via our secure, white-labeled Atithio payment gateway link (supporting UPI, Credit/Debit Cards, NetBanking). The payment locks in your room instantly, and your official stay voucher is issued immediately under your name.", "पूरी सुरक्षा के लिए, आप सीधे हमारे सुरक्षित अतिथियो गेटवे लिंक (UPI, डेबिट/क्रेडिट कार्ड, नेटबैंकिंग) के माध्यम से भुगतान करते हैं। भुगतान पूरा होते ही आपका रूम तुरंत लॉक हो जाता है और आपका वाउचर तुरंत जारी हो जाता है।")}
             </p>
           </div>
           <div className={`p-5 rounded-2xl border shadow-sm transition-all duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-200/60'}`}>
@@ -1661,13 +1658,13 @@ export default function App() {
       <footer className={`py-12 px-4 md:px-6 border-t-4 border-amber-500 transition-colors duration-300 ${darkMode ? 'bg-[#09090c] text-zinc-300' : 'bg-zinc-900 text-zinc-100'}`}>
         <div className="max-w-7xl mx-auto text-center">
           <div className="flex justify-center items-center gap-3 mb-4">
-            <div className="w-8 h-8 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-xl flex items-center justify-center text-zinc-950 font-bold text-lg">S</div>
-            <span className="text-2xl font-serif font-bold tracking-tight text-white">StaySaathi</span>
+            <div className="w-8 h-8 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-xl flex items-center justify-center text-zinc-950 font-bold text-lg">A</div>
+            <span className="text-2xl font-serif font-bold tracking-tight text-white">Atithio</span>
           </div>
           <p className="opacity-75 text-sm font-semibold text-amber-500/80">Assistance Hours: 9 AM – 7 PM IST</p>
           <div className="w-16 h-0.5 bg-zinc-800 mx-auto my-6" />
           <p className="text-xs opacity-50 max-w-xl mx-auto leading-relaxed">
-            Curated & Personalized Premium Family Hotel Assistance • Secure White-Labeled Payments. All rights reserved. © 2026 StaySaathi Desk.
+            Curated & Personalized Premium Family Hotel Assistance • Secure White-Labeled Payments. All rights reserved. © 2026 Atithio Desk.
           </p>
         </div>
       </footer>
