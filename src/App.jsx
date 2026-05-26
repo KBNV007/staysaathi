@@ -50,12 +50,24 @@ export default function App() {
   const [checklistCategory, setChecklistCategory] = useState('mountains');
   const [checkedItems, setCheckedItems] = useState({});
 
+  // Dynamic min date for Check-In selector
+  const [todayStr, setTodayStr] = useState('');
+  useEffect(() => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    setTodayStr(`${yyyy}-${mm}-${dd}`);
+  }, []);
+
   const [form, setForm] = useState({
+    fullName: '',
     destination: '',
     fromDate: '',
     toDate: '',
     adults: 2,
     children: 0,
+    rooms: 1,
     childAges: [],
     budgetPerDay: '4000', 
     customNotes: '',
@@ -122,8 +134,8 @@ export default function App() {
       icon: "❄️",
       places: [
         { dest: "Manali", icon: "🏔️", titleEn: "Snowy Manali Escapes", titleHi: "बर्फबारी और मनाली की वादियां", descEn: "Perfect for winter lovers! Enjoy scenic snowfall, skiing, and cozy mountain resort fireplace rooms.", descHi: "सर्दियों के प्रेमियों के लिए! ताज़ा बर्फबारी, स्कीइंग और गर्म आरामदायक रिज़ॉर्ट्स का आनंद लें।" },
-        { dest: "Auli", icon: "🎿", titleEn: "Auli Skiing Meadows", titleHi: "औली स्कीइंग और देवदार के जंगल", descEn: "Breathtaking Himalayan snow slopes. Great for scenic cable-car rides with kids.", descHi: "भव्य हिमालयी बर्फ के मैदान। बच्चों के साथ केबल कार की रोमांचक सवारी के लिए सर्वश्रेष्ठ स्थान।" },
-        { dest: "Jaisalmer", icon: "🐪", titleEn: "Golden Desert Dunes", titleHi: "जैसलमेर का सुनहरा रेगिस्तानी कैंप", descEn: "Pleasant days for camel safaris, luxury swiss camping under stars, and cultural puppet shows.", descHi: "ऊंट की सवारी, तारों की छांव में लग्जरी स्विस कैंपिंग और सांस्कृतिक कठपुतली शो के लिए सुखद दिन।" },
+        { dest: "Auli", icon: "🎿", titleEn: "Auli Skiing Meadows", titleHi: "औली स्कीइंग और देवदार के जंगल", descEn: "Breathtaking Himalayan snow slopes. Great for scenic cable-car rides with kids.", descHi: "भव्य परीक्षा-योग्य हिमालयी बर्फ के मैदान। बच्चों के साथ केबल कार की रोमांचक सवारी के लिए सर्वश्रेष्ठ स्थान।" },
+        { dest: "Jaisalmer", icon: "🐪", titleEn: "Golden Desert Dunes", titleHi: "जैसलमेर का सुनहरा रेगिस्तानी कैंप", descEn: "Pleasant days for camel safaris, luxury swiss camping under stars, and cultural puppet shows.", descHi: "ऊंत की सवारी, तारों की छांव में लग्जरी स्विस कैंपिंग और सांस्कृतिक कठपुतली शो के लिए सुखद दिन।" },
         { dest: "Gulmarg", icon: "❄️", titleEn: "Gulmarg Snow Slopes", titleHi: "गुलमर्ग के बर्फीले पहाड़", descEn: "Stunning snow meadows and the famous Gondola cable car ride over pine trees.", descHi: "शानदार बर्फ के मैदान और देवदार के पेड़ों के ऊपर प्रसिद्ध गोंडोला केबल कार की सवारी।" },
         { dest: "Jaipur", icon: "🏰", titleEn: "Pleasant Pink City", titleHi: "जयपुर की गुलाबी रंगत", descEn: "Warm daytime sun perfect for visiting the magnificent Amber Fort and local bazaars.", descHi: "शानदार आमेर किले और स्थानीय बाजारों का दौरा करने के लिए दिन की सुखद गुनगुनी धूप।" }
       ]
@@ -251,7 +263,7 @@ export default function App() {
       monthHi: "नवंबर",
       icon: "🐪",
       places: [
-        { dest: "Jaisalmer", icon: "🐪", titleEn: "Golden Desert Swiss Tents", titleHi: "जैसलमेर का सुनहरा रेगिस्तानी कैंप", descEn: "Perfect cold desert nights. Experience camel safaris, stargazing, and traditional puppet folk dances.", descHi: "रेगिस्तान की ठंडी सुहावनी रातें। ऊंट की सवारी, राजस्थानी लोक नृत्य और शानदार लग्जरी स्विस टेंट में रहने का अनुभव।" },
+        { dest: "Jaisalmer", icon: "🐪", titleEn: "Golden Desert Swiss Tents", titleHi: "जैसलमेर का सुनहरा रेगिस्तानी कैंप", descEn: "Perfect cold desert nights. Experience camel safaris, stargazing, and traditional puppet folk dances.", descHi: "रेगिस्तान की ठंडी सुहावनी रातें। ऊंत की सवारी, राजस्थानी लोक नृत्य और शानदार लग्जरी स्विस टेंट में रहने का अनुभव।" },
         { dest: "Pushkar", icon: "🐫", titleEn: "Pushkar Camel Fair", titleHi: "पुष्कर का पारंपरिक मेला", descEn: "Experience the colorful cultural fair, traditional hot air balloon rides, and peaceful lakeside temple visits.", descHi: "दुनिया का सबसे अनोखा ऊंट मेला, रंग-बिरंगे पारंपरिक खेल, हॉट एयर बैलून राइड और शांत ब्रह्मा मंदिर के दर्शन।" },
         { dest: "Amritsar", icon: "🕌", titleEn: "Amritsar Golden Lights", titleHi: "अमृतसर का पावन स्वर्ण मंदिर", descEn: "Pleasant chilly weather. Visit the Golden Temple illuminated with lights, and enjoy delicious hot langar meals.", descHi: "सर्दियों की सुहावनी शुरुआत। रोशनी से नहाया स्वर्ण मंदिर, वाघा बॉर्डर की परेड और लज़ीज़ परांठे व लंगर का स्वाद।" },
         { dest: "Varanasi", icon: "🪔", titleEn: "Varanasi Ganga Dev Deepawali", titleHi: "वाराणसी की देव दीपावली", descEn: "Watch all Ganges ghats lit up with millions of clay lamps under crisp chilly winter winds.", descHi: "ठंडी सर्दियों की हवा के बीच लाखों मिट्टी के दीयों से जगमगाते गंगा के सभी घाटों का अलौकिक दृश्य देखें।" },
@@ -340,7 +352,7 @@ export default function App() {
   useEffect(() => {
     const bgTimer = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % luxuryImages.length);
-    }, 4500);
+    }, 5500);
     return () => clearInterval(bgTimer);
   }, [luxuryImages.length]);
 
@@ -366,12 +378,23 @@ export default function App() {
   }, []);
 
   const handleChange = (e) => {
-    if (validationError && (e.target.name === 'destination' || e.target.name === 'fromDate' || e.target.name === 'toDate')) {
+    const { name, value } = e.target;
+    if (validationError && (name === 'destination' || name === 'fromDate' || name === 'toDate')) {
       setValidationError('');
     }
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
-    if (e.target.name === 'destination') {
-      setShowSuggestions(e.target.value.trim().length > 0);
+    setForm(prev => {
+      const updated = { ...prev, [name]: value };
+      // If check-in changes and check-out is before check-in, auto-adjust check-out to check-in + 1 day
+      if (name === 'fromDate' && updated.toDate && new Date(value) >= new Date(updated.toDate)) {
+        const nextDay = new Date(value);
+        nextDay.setDate(nextDay.getDate() + 1);
+        const nextDayStr = nextDay.toISOString().split('T')[0];
+        updated.toDate = nextDayStr;
+      }
+      return updated;
+    });
+    if (name === 'destination') {
+      setShowSuggestions(value.trim().length > 0);
     }
   };
 
@@ -383,19 +406,29 @@ export default function App() {
     setFilters(prev => ({ ...prev, mealPlan: prev.mealPlan === plan ? '' : plan }));
   };
 
-  const handleAdultsChildren = (type, value) => {
-    if (type === 'adults') {
-      setForm(prev => ({ ...prev, adults: parseInt(value) || 1 }));
-    } else {
-      const newChildren = parseInt(value) || 0;
-      let newAges = [...form.childAges];
-      if (newChildren > form.childAges.length) {
-        newAges = [...newAges, ...Array(newChildren - form.childAges.length).fill(5)];
-      } else {
-        newAges = newAges.slice(0, newChildren);
+  // Interactive Counter Handler (More premium than dropdown)
+  const handleCounter = (field, action) => {
+    setForm(prev => {
+      let val = prev[field];
+      if (action === 'inc') {
+        val += 1;
+      } else if (action === 'dec') {
+        val = Math.max(field === 'adults' || field === 'rooms' ? 1 : 0, val - 1);
       }
-      setForm(prev => ({ ...prev, children: newChildren, childAges: newAges }));
-    }
+
+      const updated = { ...prev, [field]: val };
+
+      if (field === 'children') {
+        let newAges = [...prev.childAges];
+        if (val > prev.childAges.length) {
+          newAges = [...newAges, ...Array(val - prev.childAges.length).fill(5)];
+        } else {
+          newAges = newAges.slice(0, val);
+        }
+        updated.childAges = newAges;
+      }
+      return updated;
+    });
   };
 
   const updateChildAge = (index, age) => {
@@ -409,6 +442,13 @@ export default function App() {
   };
 
   const handleWhatsApp = (bypassReminder = false) => {
+    if (!form.fullName.trim()) {
+      setValidationError(t("Please enter the primary traveler's full name.", "कृपया प्राथमिक यात्री का पूरा नाम दर्ज करें।"));
+      const element = document.getElementById('booking-form');
+      if (element) element.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+
     if (!form.destination.trim()) {
       setValidationError(t("Please enter a destination to proceed.", "कृपया आगे बढ़ने के लिए गंतव्य दर्ज करें।"));
       const element = document.getElementById('booking-form');
@@ -455,7 +495,7 @@ export default function App() {
     setIsSubmitting(true);
 
     const childInfo = form.children > 0 
-      ? `Children: ${form.children} (${form.childAges.join(', ')} yrs)` 
+      ? `Children: ${form.children} (${form.childAges.map(a => `${a} yrs`).join(', ')})` 
       : 'No children';
 
     const selectedStayTypes = [];
@@ -502,12 +542,13 @@ export default function App() {
 
     const budgetFormatted = budgetRanges[form.budgetPerDay] || `₹${form.budgetPerDay}`;
 
-    // Formatting highly structured code data for B2B parsing efficiency
     const msg = `*ATITHIO TRIP INQUIRY*\n` +
       `=========================\n` +
+      `👤 TRAVELER    : ${form.fullName}\n` +
       `📍 DESTINATION : ${form.destination}\n` +
       `📅 CHECK-IN    : ${form.fromDate || 'Flexible'}\n` +
       `📅 CHECK-OUT   : ${form.toDate || 'Flexible'}\n` +
+      `🔑 ROOMS       : ${form.rooms} Room(s)\n` +
       `👥 GUESTS      : ${form.adults} Adults, ${form.children > 0 ? childInfo : 'No Kids'}\n` +
       `💰 BUDGET/NIGHT: ${budgetFormatted} per room` +
       `${stayTypesText}` +
@@ -638,28 +679,54 @@ export default function App() {
                 </div>
               )}
 
+              {/* Traveler Full Name Input */}
+              <div className="mb-5">
+                <label className={`block text-sm font-semibold mb-1.5 ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>{t("Primary Traveler's Full Name", "प्राथमिक यात्री का पूरा नाम")}</label>
+                <div className="relative">
+                  <input 
+                    type="text"
+                    name="fullName" 
+                    value={form.fullName} 
+                    onChange={handleChange}
+                    placeholder={t("Primary Traveler (e.g. Rahul Sharma)", "प्राथमिक यात्री (जैसे: राहुल शर्मा)")}
+                    className={`w-full border-2 focus:outline-none focus:ring-4 rounded-xl p-3.5 pl-10 text-base transition-all ${
+                      validationError && !form.fullName.trim()
+                        ? 'border-red-400 focus:ring-red-100 focus:border-red-500' 
+                        : darkMode 
+                          ? 'bg-[#07070a] text-white border-zinc-800 focus:border-amber-500 focus:ring-amber-500/10' 
+                          : 'bg-white text-zinc-800 border-zinc-200 focus:border-amber-500 focus:ring-amber-100'
+                    }`} 
+                  />
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 opacity-60">👤</span>
+                </div>
+              </div>
+
               {/* Destination Search Input */}
               <div className="mb-5 relative">
                 <label className={`block text-sm font-semibold mb-1.5 ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>{t("Where do you want to go?", "आप कहाँ जाना चाहते हैं?")}</label>
-                <input 
-                  name="destination" 
-                  value={form.destination} 
-                  onChange={handleChange}
-                  onFocus={() => {
-                    if (form.destination.trim().length > 0) setShowSuggestions(true);
-                  }}
-                  onBlur={() => {
-                    setTimeout(() => setShowSuggestions(false), 200);
-                  }}
-                  placeholder={t("Destination (e.g. Manali, Goa, Rishikesh, Jaipur)", "गंतव्य (जैसे: मनाली, गोवा, ऋषिकेश, Jaipur)")}
-                  className={`w-full border-2 focus:outline-none focus:ring-4 rounded-xl p-3.5 text-base transition-all ${
-                    validationError 
-                      ? 'border-red-400 focus:ring-red-100 focus:border-red-500' 
-                      : darkMode 
-                        ? 'bg-[#07070a] text-white border-zinc-800 focus:border-amber-500 focus:ring-amber-500/10' 
-                        : 'bg-white text-zinc-800 border-zinc-200 focus:border-amber-500 focus:ring-amber-100'
-                  }`} 
-                />
+                <div className="relative">
+                  <input 
+                    name="destination" 
+                    value={form.destination} 
+                    onChange={handleChange}
+                    onFocus={() => {
+                      if (form.destination.trim().length > 0) setShowSuggestions(true);
+                    }}
+                    onBlur={() => {
+                      setTimeout(() => setShowSuggestions(false), 200);
+                    }}
+                    placeholder={t("Destination (e.g. Manali, Goa, Rishikesh, Jaipur)", "गंतव्य (जैसे: मनाली, गोवा, ऋषिकेश, Jaipur)")}
+                    className={`w-full border-2 focus:outline-none focus:ring-4 rounded-xl p-3.5 pl-10 text-base transition-all ${
+                      validationError && !form.destination.trim()
+                        ? 'border-red-400 focus:ring-red-100 focus:border-red-500' 
+                        : darkMode 
+                          ? 'bg-[#07070a] text-white border-zinc-800 focus:border-amber-500 focus:ring-amber-500/10' 
+                          : 'bg-white text-zinc-800 border-zinc-200 focus:border-amber-500 focus:ring-amber-100'
+                    }`} 
+                  />
+                  <span className="absolute left-3.5 top-1/2 -translate-y-1/2 opacity-60">🔍</span>
+                </div>
+                
                 {showSuggestions && (
                   <div className={`absolute left-0 right-0 top-full mt-1 border rounded-xl shadow-2xl z-30 max-h-48 overflow-y-auto ${darkMode ? 'bg-[#101015] border-zinc-800' : 'bg-white border-zinc-200'}`}>
                     {(() => {
@@ -684,7 +751,7 @@ export default function App() {
                 )}
               </div>
 
-              {/* Check in & Check out */}
+              {/* Check in & Check out (With past dates restricted) */}
               <div className="grid grid-cols-2 gap-4 mb-5">
                 <div>
                   <label className={`block text-sm font-semibold mb-1.5 ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>{t("Check-In", "चेक-इन")}</label>
@@ -692,6 +759,7 @@ export default function App() {
                     type="date" 
                     name="fromDate" 
                     value={form.fromDate} 
+                    min={todayStr}
                     onChange={handleChange} 
                     className={`w-full border-2 focus:ring-4 rounded-xl p-3 text-sm focus:outline-none transition-colors duration-200 ${darkMode ? 'bg-[#07070a] text-white border-zinc-800 focus:border-amber-500 focus:ring-amber-500/10' : 'bg-white text-zinc-800 border-zinc-200 focus:border-amber-500 focus:ring-amber-100'}`} 
                   />
@@ -702,34 +770,67 @@ export default function App() {
                     type="date" 
                     name="toDate" 
                     value={form.toDate} 
+                    min={form.fromDate || todayStr}
                     onChange={handleChange} 
                     className={`w-full border-2 focus:ring-4 rounded-xl p-3 text-sm focus:outline-none transition-colors duration-200 ${darkMode ? 'bg-[#07070a] text-white border-zinc-800 focus:border-amber-500 focus:ring-amber-500/10' : 'bg-white text-zinc-800 border-zinc-200 focus:border-amber-500 focus:ring-amber-100'}`} 
                   />
                 </div>
               </div>
 
-              {/* Adults & Kids count */}
-              <div className="grid grid-cols-2 gap-4 mb-5">
-                <div>
-                  <label className={`block text-sm font-semibold mb-1.5 ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>{t("Adults (12+ yrs)", "वयस्क (12+ साल)")}</label>
-                  <select 
-                    value={form.adults} 
-                    onChange={(e) => handleAdultsChildren('adults', e.target.value)} 
-                    className={`w-full border-2 focus:outline-none rounded-xl p-3.5 text-zinc-700 transition-colors duration-200 ${darkMode ? 'bg-[#07070a] text-zinc-300 border-zinc-800 focus:border-amber-500' : 'bg-white text-zinc-800 border-zinc-200 focus:border-amber-500'}`}
-                  >
-                    {[1,2,3,4,5,6].map(n => <option key={n} className={darkMode ? 'bg-zinc-950 text-zinc-200' : 'bg-white text-zinc-800'} value={n}>{n}</option>)}
-                  </select>
+              {/* Premium Guest Counter Segment (Instead of raw dropdowns) */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+                {/* Rooms Selector */}
+                <div className={`p-3 rounded-2xl border-2 transition-all ${darkMode ? 'border-zinc-800/80 bg-zinc-900/20' : 'border-zinc-200 bg-zinc-50/50'}`}>
+                  <span className="block text-xs font-semibold uppercase tracking-wider text-amber-500 mb-1">{t("Rooms Needed", "कमरे")}</span>
+                  <div className="flex items-center justify-between mt-1">
+                    <button 
+                      type="button"
+                      onClick={() => handleCounter('rooms', 'dec')}
+                      className={`w-8 h-8 rounded-full border-2 flex items-center justify-center font-bold text-lg active:scale-95 transition-all ${darkMode ? 'border-zinc-700 bg-zinc-800 text-white' : 'border-zinc-300 bg-white text-zinc-800'}`}
+                    >-</button>
+                    <span className="font-bold text-lg">{form.rooms}</span>
+                    <button 
+                      type="button"
+                      onClick={() => handleCounter('rooms', 'inc')}
+                      className={`w-8 h-8 rounded-full border-2 flex items-center justify-center font-bold text-lg active:scale-95 transition-all ${darkMode ? 'border-zinc-700 bg-zinc-800 text-white' : 'border-zinc-300 bg-white text-zinc-800'}`}
+                    >+</button>
+                  </div>
                 </div>
 
-                <div>
-                  <label className={`block text-sm font-semibold mb-1.5 ${darkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>{t("Children (0-12 yrs)", "बच्चे (0-12 साल)")}</label>
-                  <select 
-                    value={form.children} 
-                    onChange={(e) => handleAdultsChildren('children', e.target.value)} 
-                    className={`w-full border-2 focus:outline-none rounded-xl p-3.5 text-zinc-700 transition-colors duration-200 ${darkMode ? 'bg-[#07070a] text-zinc-300 border-zinc-800 focus:border-amber-500' : 'bg-white text-zinc-800 border-zinc-200 focus:border-amber-500'}`}
-                  >
-                    {[0,1,2,3,4].map(n => <option key={n} className={darkMode ? 'bg-zinc-950 text-zinc-200' : 'bg-white text-zinc-800'} value={n}>{n}</option>)}
-                  </select>
+                {/* Adults Selector */}
+                <div className={`p-3 rounded-2xl border-2 transition-all ${darkMode ? 'border-zinc-800/80 bg-zinc-900/20' : 'border-zinc-200 bg-zinc-50/50'}`}>
+                  <span className="block text-xs font-semibold uppercase tracking-wider text-amber-500 mb-1">{t("Adults (12+ yrs)", "वयस्क (12+ साल)")}</span>
+                  <div className="flex items-center justify-between mt-1">
+                    <button 
+                      type="button"
+                      onClick={() => handleCounter('adults', 'dec')}
+                      className={`w-8 h-8 rounded-full border-2 flex items-center justify-center font-bold text-lg active:scale-95 transition-all ${darkMode ? 'border-zinc-700 bg-zinc-800 text-white' : 'border-zinc-300 bg-white text-zinc-800'}`}
+                    >-</button>
+                    <span className="font-bold text-lg">{form.adults}</span>
+                    <button 
+                      type="button"
+                      onClick={() => handleCounter('adults', 'inc')}
+                      className={`w-8 h-8 rounded-full border-2 flex items-center justify-center font-bold text-lg active:scale-95 transition-all ${darkMode ? 'border-zinc-700 bg-zinc-800 text-white' : 'border-zinc-300 bg-white text-zinc-800'}`}
+                    >+</button>
+                  </div>
+                </div>
+
+                {/* Kids Selector */}
+                <div className={`p-3 rounded-2xl border-2 transition-all ${darkMode ? 'border-zinc-800/80 bg-zinc-900/20' : 'border-zinc-200 bg-zinc-50/50'}`}>
+                  <span className="block text-xs font-semibold uppercase tracking-wider text-amber-500 mb-1">{t("Children (0-12 yrs)", "बच्चे (0-12 साल)")}</span>
+                  <div className="flex items-center justify-between mt-1">
+                    <button 
+                      type="button"
+                      onClick={() => handleCounter('children', 'dec')}
+                      className={`w-8 h-8 rounded-full border-2 flex items-center justify-center font-bold text-lg active:scale-95 transition-all ${darkMode ? 'border-zinc-700 bg-zinc-800 text-white' : 'border-zinc-300 bg-white text-zinc-800'}`}
+                    >-</button>
+                    <span className="font-bold text-lg">{form.children}</span>
+                    <button 
+                      type="button"
+                      onClick={() => handleCounter('children', 'inc')}
+                      className={`w-8 h-8 rounded-full border-2 flex items-center justify-center font-bold text-lg active:scale-95 transition-all ${darkMode ? 'border-zinc-700 bg-zinc-800 text-white' : 'border-zinc-300 bg-white text-zinc-800'}`}
+                    >+</button>
+                  </div>
                 </div>
               </div>
 
@@ -742,13 +843,13 @@ export default function App() {
                   onChange={handleChange} 
                   className={`w-full border-2 focus:outline-none rounded-xl p-3.5 text-zinc-700 transition-colors duration-200 ${darkMode ? 'bg-[#07070a] text-zinc-300 border-zinc-800 focus:border-amber-500' : 'bg-white text-zinc-800 border-zinc-200 focus:border-amber-500'}`}
                 >
-                  <option className={darkMode ? 'bg-zinc-950 text-zinc-200' : 'bg-white text-zinc-800'} value="3000">₹2,000 - ₹3,000 ({t("Budget Saver", "सस्ता बजट")})</option>
-                  <option className={darkMode ? 'bg-zinc-950 text-zinc-200' : 'bg-white text-zinc-800'} value="4000">₹3,000 - ₹4,000 ({t("Budget Standard", "बजट होटल")})</option>
-                  <option className={darkMode ? 'bg-zinc-950 text-zinc-200' : 'bg-white text-zinc-800'} value="5000">₹4,000 - ₹5,000 ({t("Standard Premium", "स्टैंडर्ड प्रीमियम")})</option>
-                  <option className={darkMode ? 'bg-zinc-950 text-zinc-200' : 'bg-white text-zinc-800'} value="6000">₹5,000 - ₹6,000 ({t("Family Premium", "फैमिली प्रीमियम")})</option>
-                  <option className={darkMode ? 'bg-zinc-950 text-zinc-200' : 'bg-white text-zinc-800'} value="8000">₹6,000 - ₹8,000 ({t("Premium Plus", "प्रीमियम प्लस")})</option>
-                  <option className={darkMode ? 'bg-zinc-950 text-zinc-200' : 'bg-white text-zinc-800'} value="15000">₹8,000 - ₹15,000 ({t("Luxury Resort", "शानदार लग्जरी रिसॉर्ट")})</option>
-                  <option className={darkMode ? 'bg-zinc-950 text-zinc-200' : 'bg-white text-zinc-800'} value="20000">₹15,000+ ({t("Ultra-Luxury/Villas", "अति-लग्जरी पैलेस / विला")})</option>
+                  <option value="3000">₹2,000 - ₹3,000 ({t("Budget Saver", "सस्ता बजट")})</option>
+                  <option value="4000">₹3,000 - ₹4,000 ({t("Budget Standard", "बजट होटल")})</option>
+                  <option value="5000">₹4,000 - ₹5,000 ({t("Standard Premium", "स्टैंडर्ड प्रीमियम")})</option>
+                  <option value="6000">₹5,000 - ₹6,000 ({t("Family Premium", "फैमिली प्रीमियम")})</option>
+                  <option value="8000">₹6,000 - ₹8,000 ({t("Premium Plus", "प्रीमियम प्लस")})</option>
+                  <option value="15000">₹8,000 - ₹15,000 ({t("Luxury Resort", "शानदार लग्जरी रिसॉर्ट")})</option>
+                  <option value="20000">₹15,000+ ({t("Ultra-Luxury/Villas", "अति-लग्जरी पैलेस / विला")})</option>
                 </select>
               </div>
 
@@ -763,7 +864,7 @@ export default function App() {
                         onChange={(e) => updateChildAge(i, e.target.value)} 
                         className={`border-2 rounded-xl p-2.5 text-sm focus:outline-none transition-colors duration-200 ${darkMode ? 'bg-[#07070a] text-white border-zinc-800 focus:border-amber-500' : 'bg-white text-zinc-800 border-zinc-200'}`}
                       >
-                        {[...Array(12)].map((_, idx) => <option key={idx} className={darkMode ? 'bg-zinc-950 text-zinc-200' : 'bg-white text-zinc-800'} value={idx+1}>{idx+1} {t("yrs", "साल")}</option>)}
+                        {[...Array(12)].map((_, idx) => <option key={idx} value={idx+1}>{idx+1} {t("yrs", "साल")}</option>)}
                       </select>
                     ))}
                   </div>
@@ -790,7 +891,7 @@ export default function App() {
                 <div>
                   <h5 className={`text-sm font-bold ${darkMode ? 'text-emerald-300' : 'text-emerald-950'}`}>{t("100% Secure Checkout Guarantee", "100% सुरक्षित भुगतान गारंटी")}</h5>
                   <p className={`text-xs mt-0.5 leading-relaxed ${darkMode ? 'text-emerald-400/80' : 'text-emerald-800'}`}>
-                    {t("Pay via our official, white-labeled Atithio secure payment link (supporting UPI, Cards, NetBanking). Your payment instantly locks your booking securely under our monitored reservation ledger.", "हमारे आधिकारिक सुरक्षित भुगतान लिंक (UPI, डेबिट/क्रेडिट कार्ड, नेटबैंकिंग) के माध्यम से सुरक्षित भुगतान करें। आपका भुगतान पूरा होते ही आपका कमरा सुरक्षित रूप से तुरंत लॉक हो जाता है।")}
+                    {t("Pay via our official, secure Atithio payment link (supporting UPI, Cards, NetBanking). Your payment instantly locks your booking securely under our monitored reservation ledger.", "हमारे आधिकारिक सुरक्षित भुगतान लिंक (UPI, डेबिट/क्रेडिट कार्ड, नेटबैंकिंग) के माध्यम से सुरक्षित भुगतान करें। आपका भुगतान पूरा होते ही आपका कमरा सुरक्षित रूप से तुरंत लॉक हो जाता है।")}
                   </p>
                 </div>
               </div>
@@ -805,7 +906,7 @@ export default function App() {
 
                 {/* Preferred Stay Types Group */}
                 <div className="mb-5">
-                  <h5 className={`text-[10px] font-bold uppercase tracking-wider mb-2.5 ${darkMode ? 'text-zinc-500' : 'text-zinc-400'}`}>{t("Preferred Stay Type", "रहने का पसंदीदा प्रकार")}</h5>
+                  <h5 className={`text-[10px] font-bold uppercase tracking-wider mb-2.5 ${darkMode ? 'text-zinc-505' : 'text-zinc-400'}`}>{t("Preferred Stay Type", "रहने का पसंदीदा प्रकार")}</h5>
                   <div className="grid grid-cols-2 gap-2">
                     <button
                       onClick={() => handleFilterToggle('hotel')}
@@ -868,7 +969,7 @@ export default function App() {
 
                 {/* Essential Amenities List */}
                 <div className="mb-5">
-                  <h5 className={`text-[10px] font-bold uppercase tracking-wider mb-2 ${darkMode ? 'text-zinc-500' : 'text-zinc-400'}`}>{t("Essential Amenities", "आवश्यक सुविधाएं")}</h5>
+                  <h5 className={`text-[10px] font-bold uppercase tracking-wider mb-2 ${darkMode ? 'text-zinc-505' : 'text-zinc-400'}`}>{t("Essential Amenities", "आवश्यक सुविधाएं")}</h5>
                   
                   <div className="space-y-2">
                     {/* Safe Parking Option */}
@@ -888,7 +989,7 @@ export default function App() {
                         <span className="text-lg">🚗</span>
                         <div>
                           <span className={`block text-xs font-bold ${darkMode ? 'text-zinc-200' : 'text-zinc-800'}`}>{t("Safe Parking Available", "सुरक्षित पार्किंग व्यवस्था")}</span>
-                          <span className={`block text-[9px] ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Protected parking spot for your car", "आपकी गाड़ी के लिए सुरक्षित पार्किंग स्थान")}</span>
+                          <span className={`block text-[9px] ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("Protected parking spot for your car", "आपकी गाड़ी के लिए सुरक्षित पार्किंग स्थान")}</span>
                         </div>
                       </div>
                       <div className={`w-3.5 h-3.5 rounded border flex items-center justify-center transition-colors duration-200 ${
@@ -919,7 +1020,7 @@ export default function App() {
                         <span className="text-lg">🧸</span>
                         <div>
                           <span className={`block text-xs font-bold ${darkMode ? 'text-zinc-200' : 'text-zinc-800'}`}>{t("Kids Play Area / Garden", "बच्चों के खेलने की खुली जगह")}</span>
-                          <span className={`block text-[9px] ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Safe lawn and recreation for toddlers", "बच्चों के लिए पार्क व खेलने की सुरक्षित जगह")}</span>
+                          <span className={`block text-[9px] ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("Safe lawn and recreation for toddlers", "बच्चों के लिए पार्क व खेलने की सुरक्षित जगह")}</span>
                         </div>
                       </div>
                       <div className={`w-3.5 h-3.5 rounded border flex items-center justify-center transition-colors duration-200 ${
@@ -950,7 +1051,7 @@ export default function App() {
                         <span className="text-lg">🏊‍♂️</span>
                         <div>
                           <span className={`block text-xs font-bold ${darkMode ? 'text-zinc-200' : 'text-zinc-800'}`}>{t("Swimming Pool Access", "स्विमिंग पूल की सुविधा")}</span>
-                          <span className={`block text-[9px] ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Clean active swimming pool on property", "होटल परिसर में स्वच्छ और सुंदर स्विमिंग पूल")}</span>
+                          <span className={`block text-[9px] ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("Clean active swimming pool on property", "होटल परिसर में स्वच्छ और सुंदर स्विमिंग पूल")}</span>
                         </div>
                       </div>
                       <div className={`w-3.5 h-3.5 rounded border flex items-center justify-center transition-colors duration-200 ${
@@ -981,7 +1082,7 @@ export default function App() {
                         <span className="text-lg">📶</span>
                         <div>
                           <span className={`block text-xs font-bold ${darkMode ? 'text-zinc-200' : 'text-zinc-800'}`}>{t("Free High-speed Wi-Fi", "मुफ़्त हाई-स्पीड वाई-फाई")}</span>
-                          <span className={`block text-[9px] ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Fast internet connection across rooms", "कमरों और परिसर में तेज़ इंटरनेट की सुविधा")}</span>
+                          <span className={`block text-[9px] ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("Fast internet connection across rooms", "कमरों और परिसर में तेज़ इंटरनेट की सुविधा")}</span>
                         </div>
                       </div>
                       <div className={`w-3.5 h-3.5 rounded border flex items-center justify-center transition-colors duration-200 ${
@@ -999,7 +1100,7 @@ export default function App() {
 
                 {/* Room Amenities Section */}
                 <div className="mb-5">
-                  <h5 className={`text-[10px] font-bold uppercase tracking-wider mb-2 ${darkMode ? 'text-zinc-500' : 'text-zinc-400'}`}>{t("Room Amenities & Vibe", "कमरे की सुख-सुविधाएं")}</h5>
+                  <h5 className={`text-[10px] font-bold uppercase tracking-wider mb-2 ${darkMode ? 'text-zinc-505' : 'text-zinc-400'}`}>{t("Room Amenities & Vibe", "कमरे की सुख-सुविधाएं")}</h5>
                   <div className="grid grid-cols-2 gap-2">
                     <button
                       onClick={() => handleFilterToggle('doubleRoom')}
@@ -1066,7 +1167,7 @@ export default function App() {
 
                 {/* Meal Plan Toggles */}
                 <div>
-                  <h5 className={`text-[10px] font-bold uppercase tracking-wider mb-2 ${darkMode ? 'text-zinc-500' : 'text-zinc-400'}`}>{t("Meal Preferences (Board Plans)", "भोजन की प्राथमिकताएं")}</h5>
+                  <h5 className={`text-[10px] font-bold uppercase tracking-wider mb-2 ${darkMode ? 'text-zinc-505' : 'text-zinc-400'}`}>{t("Meal Preferences (Board Plans)", "भोजन की प्राथमिकताएं")}</h5>
                   <div className="space-y-2">
                     <button
                       onClick={() => handleMealPlanToggle('breakfast')}
@@ -1108,22 +1209,43 @@ export default function App() {
             </div>
           </div>
 
-          {/* WhatsApp Text Draft Preview Area */}
+          {/* WhatsApp Text Draft Preview Area (Gorgous iOS/Android Style Mockup) */}
           <div className={`border-t p-6 md:p-8 flex flex-col items-center justify-center text-center transition-colors duration-300 ${darkMode ? 'bg-[#09090d] border-zinc-800/80' : 'bg-zinc-50 border-zinc-100'}`}>
             
             {/* Live Message Preview container */}
-            <div className={`w-full max-w-2xl mb-6 rounded-2xl p-4 border shadow-inner relative overflow-hidden text-left font-sans transition-colors duration-300 ${darkMode ? 'bg-[#0e1115] border-zinc-800' : 'bg-zinc-50 border-zinc-200'}`}>
-              <div className={`absolute top-0 left-0 right-0 px-3.5 py-1.5 flex items-center gap-2 text-xs font-bold shadow-md ${darkMode ? 'bg-[#128c7e]/80 text-white' : 'bg-emerald-600/90 text-white'}`}>
-                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div>
-                <span>Atithio Desk (Live Draft Preview)</span>
+            <div className={`w-full max-w-2xl mb-6 rounded-3xl border shadow-xl relative overflow-hidden text-left font-sans transition-all duration-300 ${darkMode ? 'bg-[#0b141a] border-zinc-800' : 'bg-[#efeae2] border-zinc-300'}`}>
+              
+              {/* WhatsApp Header bar */}
+              <div className={`px-4 py-3 flex items-center justify-between shadow-md ${darkMode ? 'bg-[#202c33] text-white' : 'bg-[#008069] text-white'}`}>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center font-bold text-white text-lg shadow-inner">
+                    A
+                  </div>
+                  <div>
+                    <h5 className="font-bold text-sm tracking-wide">Atithio Travel Desk</h5>
+                    <p className="text-[10px] text-emerald-100/90 flex items-center gap-1">
+                      <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse inline-block"></span>
+                      {t("Direct Assistant Online", "सहायक ऑनलाइन उपलब्ध")}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-4 text-white opacity-80 text-sm">
+                  <span>📞</span>
+                  <span>⋮</span>
+                </div>
               </div>
-              <div className="mt-7 flex justify-start">
-                <div className={`text-xs sm:text-sm p-3 rounded-2xl rounded-tl-none shadow-md max-w-[90%] relative border-l-4 border-emerald-500 transition-all ${darkMode ? 'bg-[#202c33] text-zinc-300' : 'bg-white text-zinc-700'}`}>
-                  <p className={`font-bold mb-1 ${darkMode ? 'text-emerald-400' : 'text-emerald-600'}`}>💬 {t("Live compiled WhatsApp text:", "लाइव संकलित व्हाट्सएप मैसेज:")}</p>
-                  <p className="leading-relaxed font-sans font-medium whitespace-pre-wrap">
-                    ATITHIO TRIP INQUIRY
+
+              {/* Chat Message Box Container */}
+              <div className="p-4 sm:p-6 min-h-[220px] flex flex-col justify-end">
+                <div className={`text-xs sm:text-sm p-4 rounded-2xl rounded-tr-none shadow-md max-w-[85%] ml-auto relative border-t-2 border-emerald-500 transition-all ${darkMode ? 'bg-[#005c4b] text-zinc-100' : 'bg-[#d9fdd3] text-zinc-800'}`}>
+                  <p className="font-bold mb-1.5 opacity-90 text-[10px] tracking-wider uppercase text-amber-505">💬 {t("Live Draft Message / लाइव ड्राफ्ट मैसेज:", "लाइव ड्राफ्ट मैसेज:")}</p>
+                  
+                  <div className="leading-relaxed font-mono whitespace-pre-wrap text-xs md:text-sm">
+                    <strong>*ATITHIO TRIP INQUIRY*</strong>
                     <br />
                     =========================
+                    <br />
+                    👤 TRAVELER    : {form.fullName ? form.fullName : `[ ${t("Enter Name", "नाम भरें")} ]`}
                     <br />
                     📍 DESTINATION : {form.destination ? form.destination : `[ ${t("Enter Destination", "स्थान भरें")} ]`}
                     <br />
@@ -1131,11 +1253,11 @@ export default function App() {
                     <br />
                     📅 CHECK-OUT   : {form.toDate || 'Flexible'}
                     <br />
-                    👥 ROOMS       : 1 Room(s)
+                    🔑 ROOMS       : {form.rooms} Room(s)
                     <br />
-                    👨‍👩‍👧 GUESTS      : {form.adults} Adults, {form.children > 0 ? `${form.children} Children` : 'No Kids'}
+                    👥 GUESTS      : {form.adults} Adults, {form.children > 0 ? `${form.children} Kids` : 'No Kids'}
                     <br />
-                    💰 BUDGET/NIGHT: {budgetRanges[form.budgetPerDay] || `₹${form.budgetPerDay}`} / day
+                    💰 BUDGET/NIGHT: {budgetRanges[form.budgetPerDay] || `₹${form.budgetPerDay}`}
                     {(() => {
                       const selectedPrefs = [
                         filters.hotel && "Hotel",
@@ -1170,7 +1292,13 @@ export default function App() {
                     =========================
                     <br />
                     Please send me the 3 lowest-priced verified options in this range!
-                  </p>
+                  </div>
+
+                  {/* WhatsApp blue ticks ticks */}
+                  <div className="text-right mt-1 text-[9px] opacity-60 flex items-center justify-end gap-1">
+                    <span>{new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+                    <span className="text-blue-500 font-bold">✓✓</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1365,7 +1493,7 @@ export default function App() {
       {/* INTERACTIVE PACKING CHECKLIST SECTION */}
       <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
         <div className={`rounded-3xl border p-6 md:p-10 transition-all ${
-          darkMode ? 'bg-gradient-to-br from-[#0e0e14] to-[#08080c] border-zinc-800' : 'bg-gradient-to-br from-amber-50/30 to-zinc-100 border-zinc-200'
+          darkMode ? 'bg-gradient-to-br from-[#0e0e14] to-[#08080c] border-zinc-800' : 'bg-gradient-to-br from-amber-5/30 to-zinc-100 border-zinc-200'
         }`}>
           <div className="text-center max-w-2xl mx-auto mb-10">
             <span className="text-4xl">🧳</span>
@@ -1448,7 +1576,7 @@ export default function App() {
                         {isChecked && <span className="text-xs font-bold">✓</span>}
                       </div>
                       <span className={`text-sm font-semibold transition-all ${
-                        isChecked ? 'line-through text-zinc-500' : darkMode ? 'text-zinc-200' : 'text-zinc-850'
+                        isChecked ? 'line-through text-zinc-550' : darkMode ? 'text-zinc-200' : 'text-zinc-800'
                       }`}>
                         {language === 'en' ? item.textEn : item.textHi}
                       </span>
@@ -1466,7 +1594,7 @@ export default function App() {
         <div className="max-w-5xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <h3 className={`text-3xl md:text-4xl font-serif font-bold mb-3 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("How Atithio Works", "Atithio कैसे काम करता है")}</h3>
-            <p className={`font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("No endless searching, no automated bots. Direct helpful human assisted booking.", "कोई अंतहीन उलझन नहीं, कोई ऑटोमैटिक रोबोटिक रिप्लाई नहीं। पक्की मानवीय सहायता।")}</p>
+            <p className={`font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>{t("No endless searching, no automated bots. Direct helpful human assisted booking.", "कोई अंतहीन उलझन नहीं, कोई ऑटोमैटिक रोबोटिक रिप्लाई नहीं। पक्की मानवीय सहायता।")}</p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 relative">
@@ -1474,21 +1602,21 @@ export default function App() {
               <span className="absolute -top-5 left-6 bg-gradient-to-br from-amber-500 to-yellow-600 text-zinc-950 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-lg">1</span>
               <div className="text-zinc-400 font-bold text-xs uppercase tracking-wider mb-2 mt-2">{t("TAKES 30 SECONDS", "30 सेकंड का समय")}</div>
               <h4 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("Share Preferences", "अपनी पसंद बताएं")}</h4>
-              <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Fill out your specific family requirements and budget parameters above and click WhatsApp connect.", "ऊपर अपनी जरूरतें और मनमुताबिक बजट दर्ज करें और व्हाट्सएप बटन दबाएं।")}</p>
+              <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-505'}`}>{t("Fill out your specific family requirements and budget parameters above and click WhatsApp connect.", "ऊपर अपनी जरूरतें और मनमुताबिक बजट दर्ज करें और व्हाट्सएप बटन दबाएं।")}</p>
             </div>
 
             <div className={`p-6 rounded-2xl shadow-sm relative border transition-colors duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-200/40'}`}>
               <span className="absolute -top-5 left-6 bg-gradient-to-br from-amber-500 to-yellow-600 text-zinc-950 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-lg">2</span>
               <div className="text-amber-500 font-bold text-xs uppercase tracking-wider mb-2 mt-2">{t("WITHIN FEW HOURS", "कुछ ही घंटों में")}</div>
               <h4 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("Receive Custom Options", "होटल विकल्प पाएं")}</h4>
-              <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Our destination helper filters clean local properties and delivers 3 best tailored hotel choices to your chat.", "हमारे लोकल एक्सपर्ट सबसे सुरक्षित और बेहतरीन 3 विकल्प आपके व्हाट्सएप पर भेजेंगे।")}</p>
+              <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-505'}`}>{t("Our destination helper filters clean local properties and delivers 3 best tailored hotel choices to your chat.", "हमारे लोकल एक्सपर्ट सबसे सुरक्षित और बेहतरीन 3 विकल्प आपके व्हाट्सएप पर भेजेंगे।")}</p>
             </div>
 
             <div className={`p-6 rounded-2xl shadow-sm relative border transition-colors duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-200/40'}`}>
               <span className="absolute -top-5 left-6 bg-gradient-to-br from-amber-500 to-yellow-600 text-zinc-950 w-10 h-10 rounded-xl flex items-center justify-center font-bold text-lg shadow-lg">3</span>
               <div className="text-zinc-400 font-bold text-xs uppercase tracking-wider mb-2 mt-2">{t("SEAMLESS BOOKING", "आसान बुकिंग")}</div>
               <h4 className={`text-lg font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("Pay Safely Direct", "सुरक्षित भुगतान करें")}</h4>
-              <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Select your preferred stay. Pay securely via our verified Atithio payment link with zero hidden platform fees and automatic room lock-in.", "पसंदीदा होटल चुनें और बिना किसी अतिरिक्त छिपे शुल्क के हमारे सुरक्षित अतिथियो भुगतान लिंक के माध्यम से तुरंत कमरा सुरक्षित करें।")}</p>
+              <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-505'}`}>{t("Select your preferred stay. Pay securely via our verified Atithio payment link with zero hidden platform fees and automatic room lock-in.", "पसंदीदा होटल चुनें और बिना किसी अतिरिक्त छिपे शुल्क के हमारे सुरक्षित अतिथियो भुगतान लिंक के माध्यम से तुरंत कमरा सुरक्षित करें।")}</p>
             </div>
           </div>
 
@@ -1498,7 +1626,7 @@ export default function App() {
               <h4 className={`text-xl md:text-2xl font-serif font-bold ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
                 {t("Your Seamless Path to Vacation", "आपकी आसान बुकिंग प्रक्रिया")}
               </h4>
-              <p className={`text-xs mt-1.5 font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
+              <p className={`text-xs mt-1.5 font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-505'}`}>
                 {t("We handle the complexities directly behind the scenes with zero middleman markup fees.", "हम बिना किसी अतिरिक्त छिपे शुल्कों के पूरी प्रक्रिया को पृष्ठभूमि में आसान बनाते हैं।")}
               </p>
             </div>
@@ -1541,7 +1669,7 @@ export default function App() {
       <section className="max-w-7xl mx-auto px-4 md:px-6 mb-24">
         <div className="text-center max-w-xl mx-auto mb-12">
           <h3 className={`text-3xl md:text-4xl font-serif font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("Popular Indian Escapes", "लोकप्रिय भारतीय गंतव्य")}</h3>
-          <p className={`font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>{t("Handpicked destinations loved extensively by Indian families and travelers alike.", "भारतीय परिवारों और यात्रियों द्वारा सबसे ज्यादा पसंद किए जाने वाले चुनिंदा स्थान।")}</p>
+          <p className={`font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-505'}`}>{t("Handpicked destinations loved extensively by Indian families and travelers alike.", "भारतीय परिवारों और यात्रियों द्वारा सबसे ज्यादा पसंद किए जाने वाले चुनिंदा स्थान।")}</p>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -1554,7 +1682,7 @@ export default function App() {
                 const element = document.getElementById('booking-form');
                 if (element) element.scrollIntoView({ behavior: 'smooth' });
               }}
-              className={`group rounded-2xl overflow-hidden border shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer ${
+              className={`group rounded-2xl overflow-hidden border shadow-md hover:shadow-2xl transition-all duration-305 cursor-pointer ${
                 darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-100'
               }`}
             >
@@ -1579,7 +1707,7 @@ export default function App() {
             <h3 className={`text-3xl md:text-4xl font-serif font-bold mt-3 mb-4 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
               {t("Why Choose Atithio?", "हम ही क्यों चुनें?")}
             </h3>
-            <p className={`font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-655'}`}>
+            <p className={`font-semibold ${darkMode ? 'text-zinc-400' : 'text-zinc-505'}`}>
               {t("We stand beside you as a true friend, ensuring your holidays are entirely stress-free and full of genuine comfort.", "हम एक सच्चे दोस्त की तरह आपके साथ खड़े हैं, ताकि आपका सफर बिना किसी तनाव और पूरी सुख-सुविधाओं के साथ पूरा हो।")}
             </p>
           </div>
@@ -1593,7 +1721,7 @@ export default function App() {
                 <h4 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
                   {t("Real Humans, No Confusing AI or Bots", "असली इंसानी मदद, कोई उलझाने वाले रोबोट्स नहीं")}
                 </h4>
-                <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
+                <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-505'}`}>
                   {t("No automated robotic replies or confusing multi-search websites with fake reviews. Our dedicated destination experts handle your planning and hotel screening headache entirely.", "कोई ऑटोमैटिक रोबोटिक जवाब या उलझाने वाली ढेरों वेबसाइट्स नहीं। आपकी यात्रा की योजना और होटल्स की बारीक से जांच करने का पूरा सिरदर्द हमारे असली विशेषज्ञ खुद लेते हैं।")}
                 </p>
               </div>
@@ -1601,12 +1729,12 @@ export default function App() {
 
             {/* Core Point 2: Vetted Options */}
             <div className={`p-8 rounded-3xl border shadow-md flex gap-5 hover:shadow-xl transition-all duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900 hover:border-zinc-800' : 'bg-white border-zinc-200/50 hover:shadow-md'}`}>
-              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 font-bold ${darkMode ? 'bg-amber-950/30 text-amber-400 border border-amber-900/30' : 'bg-amber-50 text-amber-655'}`}>🔍</div>
+              <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shrink-0 font-bold ${darkMode ? 'bg-amber-950/30 text-amber-400 border border-amber-900/30' : 'bg-amber-50 text-amber-500'}`}>🔍</div>
               <div>
                 <h4 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
                   {t("Handpicked & Carefully Reviewed Options", "पूरी तरह परखे और जांचे गए बेहतरीन विकल्प")}
                 </h4>
-                <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
+                <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-505'}`}>
                   {t("Get carefully hand-screened hotels that offer much better comfort, safe neighborhoods, and true value for your exact price point—none of the guesswork or fake app listings.", "अपने बजट में वो चुनिंदा होटल्स और रिसॉर्ट्स पाएं जिन्हें हमने खुद सुरक्षा और आराम के पैमानों पर परखा है।")}
                 </p>
               </div>
@@ -1619,7 +1747,7 @@ export default function App() {
                 <h4 className={`text-xl font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
                   {t("Direct & Safe Payments", "सीधे और सुरक्षित भुगतान")}
                 </h4>
-                <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
+                <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-505'}`}>
                   {t("Enjoy complete financial peace of mind. Pay securely via Atithio's official payment link with zero middleman holding risks and automatic room lock-in.", "पैसों की पूरी सुरक्षा। बिना किसी बिचौलिए या अनजाने प्लेटफॉर्म के जोखिम के, सीधे अतिथियो के आधिकारिक सुरक्षित भुगतान लिंक पर अपना पेमेंट करें और कमरा सुरक्षित करें।")}
                 </p>
               </div>
@@ -1633,21 +1761,21 @@ export default function App() {
       <section className="max-w-4xl mx-auto px-4 md:px-6 py-12 mb-16">
         <h3 className={`text-3xl md:text-4xl font-serif font-bold text-center mb-10 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>{t("Frequently Asked Questions", "अक्सर पूछे जाने वाले सवाल")}</h3>
         <div className="space-y-4">
-          <div className={`p-5 rounded-2xl border shadow-sm transition-all duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-200/60'}`}>
+          <div className={`p-5 rounded-2xl border shadow-sm transition-all duration-305 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-200/60'}`}>
             <strong className="text-base md:text-lg text-amber-500 font-bold block mb-2">❓ {t("How does booking payment execution work?", "पेमेंट का भुगतान कैसे होता है?")}</strong>
-            <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-650'}`}>
-              {t("For complete financial safety, you pay directly via our secure, white-labeled Atithio payment gateway link (supporting UPI, Credit/Debit Cards, NetBanking). The payment locks in your room instantly, and your official stay voucher is issued immediately under your name.", "पूरी सुरक्षा के लिए, आप सीधे हमारे सुरक्षित अतिथियो गेटवे लिंक (UPI, डेबिट/क्रेडिट कार्ड, नेटबैंकिंग) के माध्यम से भुगतान करते हैं। भुगतान पूरा होते ही आपका रूम तुरंत लॉक हो जाता है और आपका वाउचर तुरंत जारी हो जाता है।")}
+            <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
+              {t("For complete financial safety, you pay directly via our secure Atithio payment gateway link (supporting UPI, Credit/Debit Cards, NetBanking). The payment locks in your room instantly, and your official stay voucher is issued immediately under your name.", "पूरी सुरक्षा के लिए, आप सीधे हमारे सुरक्षित अतिथियो गेटवे लिंक (UPI, डेबिट/क्रेडिट कार्ड, नेटबैंकिंग) के माध्यम से भुगतान करते हैं। भुगतान पूरा होते ही आपका रूम तुरंत लॉक हो जाता है और आपका वाउचर तुरंत जारी हो जाता है।")}
             </p>
           </div>
-          <div className={`p-5 rounded-2xl border shadow-sm transition-all duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-200/60'}`}>
+          <div className={`p-5 rounded-2xl border shadow-sm transition-all duration-305 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-200/60'}`}>
             <strong className="text-base md:text-lg text-amber-500 font-bold block mb-2">❓ {t("Are there any hidden platform assistance fees?", "क्या इसके लिए कोई छिपी हुई फीस ली जाती है?")}</strong>
-            <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-655'}`}>
+            <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-500'}`}>
               {t("No, our assistance service is completely free of charge for travelers. We partner directly with property operators to secure customized perks for our community.", "नहीं, हमारी सहायता सेवा यात्रियों के लिए पूरी तरह से निःशुल्क है। हम होटल्स के साथ सीधे जुड़कर आपके लिए खास रियायतें तय करते हैं।")}
             </p>
           </div>
-          <div className={`p-5 rounded-2xl border shadow-sm transition-all duration-300 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-200/60'}`}>
+          <div className={`p-5 rounded-2xl border shadow-sm transition-all duration-305 ${darkMode ? 'bg-[#0c0c11] border-zinc-900' : 'bg-white border-zinc-200/60'}`}>
             <strong className="text-base md:text-lg text-amber-500 font-bold block mb-2">❓ {t("Can I call and speak to a real person directly?", "क्या मैं सीधे फोन पर बात कर सकता हूँ?")}</strong>
-            <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-655'}`}>
+            <p className={`text-sm leading-relaxed ${darkMode ? 'text-zinc-400' : 'text-zinc-505'}`}>
               {t("Yes! Between 9:00 AM and 7:00 PM daily, you will connect directly with real travel assistant curators on WhatsApp or calls, with no automated robots or complex chatbot loops.", "जी हाँ! रोज सुबह 9 बजे से शाम 7 बजे के बीच आप व्हाट्सएप या कॉल पर सीधे हमारे विशेषज्ञ मार्गदर्शक से बात कर सकते हैं। कोई रोबोटिक या परेशान करने वाले बॉट सिस्टम नहीं हैं।")}
             </p>
           </div>
@@ -1694,13 +1822,13 @@ export default function App() {
             onClick={() => setShowPreferenceReminder(false)}
           />
           
-          <div className={`relative rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden border transform transition-all p-6 md:p-8 ${darkMode ? 'bg-[#0f0f14] border-amber-500/20' : 'bg-white border-zinc-200'}`}>
+          <div className={`relative rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden border transform transition-all p-6 md:p-8 z-10 ${darkMode ? 'bg-[#0f0f14] border-amber-500/20' : 'bg-white border-zinc-200'}`}>
             <div className="text-center">
               <span className="text-5xl block mb-4">✨</span>
-              <h3 className={`text-2xl font-serif font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-850'}`}>
+              <h3 className={`text-2xl font-serif font-bold mb-2 ${darkMode ? 'text-white' : 'text-zinc-800'}`}>
                 {t("Enhance Your Travel Experience!", "अपनी यात्रा को और बेहतर बनाएं!")}
               </h3>
-              <p className={`text-sm leading-relaxed mb-6 font-medium ${darkMode ? 'text-zinc-400' : 'text-zinc-550'}`}>
+              <p className={`text-sm leading-relaxed mb-6 font-medium ${darkMode ? 'text-zinc-400' : 'text-zinc-555'}`}>
                 {t(
                   "You haven't selected any stay type, essential amenities, or meal plans yet. Adding these details helps our experts find the absolute perfect, family-safe match for your budget!",
                   "आपने अभी तक रहने का प्रकार, आवश्यक सुविधाएं या भोजन की पसंद नहीं चुनी है। इन्हें जोड़ने से हमारे विशेषज्ञ आपके बजट में सबसे उत्तम और सुरक्षित होटल ढूंढ पाएंगे!"
@@ -1741,7 +1869,7 @@ export default function App() {
             
             <button 
               type="button"
-              className={`absolute top-4 right-4 transition ${darkMode ? 'text-zinc-500 hover:text-zinc-300' : 'text-zinc-400 hover:text-zinc-600'}`}
+              className={`absolute top-4 right-4 transition ${darkMode ? 'text-zinc-505 hover:text-zinc-300' : 'text-zinc-400 hover:text-zinc-600'}`}
               onClick={() => setShowPreferenceReminder(false)}
               aria-label="Close"
             >
