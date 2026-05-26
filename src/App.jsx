@@ -1230,15 +1230,15 @@ export default function App() {
                   </div>
                 </div>
                 <div className="flex items-center gap-4 text-white opacity-80 text-sm">
-                  <span>📞</span>
-                  <span>⋮</span>
+                  <span></span>
+                  <span></span>
                 </div>
               </div>
 
               {/* Chat Message Box Container */}
               <div className="p-4 sm:p-6 min-h-[220px] flex flex-col justify-end">
                 <div className={`text-xs sm:text-sm p-4 rounded-2xl rounded-tr-none shadow-md max-w-[85%] ml-auto relative border-t-2 border-emerald-500 transition-all ${darkMode ? 'bg-[#005c4b] text-zinc-100' : 'bg-[#d9fdd3] text-zinc-800'}`}>
-                  <p className="font-bold mb-1.5 opacity-90 text-[10px] tracking-wider uppercase text-amber-505">💬 {t("Live Draft Message / लाइव ड्राफ्ट मैसेज:", "लाइव ड्राफ्ट मैसेज:")}</p>
+                  <p className="font-bold mb-1.5 opacity-90 text-[10px] tracking-wider uppercase text-amber-505">💬 {t("Draft Message / ड्राफ्ट मैसेज:", "लाइव ड्राफ्ट मैसेज:")}</p>
                   
                   <div className="leading-relaxed font-mono whitespace-pre-wrap text-xs md:text-sm">
                     <strong>*ATITHIO TRIP INQUIRY*</strong>
